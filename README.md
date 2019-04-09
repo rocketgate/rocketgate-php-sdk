@@ -1,3 +1,14 @@
 ![rocketgate-php-sdk](http://rocketgate.com/images/logo_rocketgate.png)
-# rocketgate-php-sdk
-RocketGate Gateway PHP SDK
+
+Rocketgate Gateway PHP SDK
+===========
+
+This library
+
+## To Install
+
+...
+
+## To Use
+
+For example:
