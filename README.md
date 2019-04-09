@@ -7,7 +7,11 @@ This library
 
 ## To Install
 
-...
+Install with composer:
+
+```sh
+composer require rocketgate/rocketgate-php-sdk
+```
 
 ## To Use
 
