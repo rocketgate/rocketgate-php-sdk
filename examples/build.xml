@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project default="main" basedir=".">
+   <property name="app.name"     value="Gateway-PHP-SDK-Examples-Docs"/>
+   <property name="app.version"  value="v6.3.0"/>
+   <property name="build.home"   value="${app.name}-${app.version}"/>
+   <property name="dist.base"    value="/Users/jason/Dropbox/RGDocs/Gateway"/>
+   <property name="dist.home"    value="${dist.base}/Gateway-PHP"/>
+	
+   <target name="main" description="Main target">
+        <echo>
+            Building the .tgz file.
+        </echo>
+   
+	<!-- Create build directories as needed -->
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${build.home}/docs"/>
+        <mkdir dir="${build.home}/libs"/>
+
+	<!-- Copy PHP files  -->
+        <copy todir="${build.home}/libs" verbose="true">
+           <fileset dir="${basedir}">
+              	<include name="Gateway*.php"/>
+               	<include name="Test*.php"/>
+           </fileset>
+        </copy>
+
+	<!-- Copy pdf docs  -->
+        <copy todir="${build.home}/docs" verbose="true">
+           <fileset dir="${dist.base}">
+               	<include name="GatewayDeclineReasonCodes*.pdf"/>
+           </fileset>
+           <fileset dir="${dist.home}">
+               	<include name="Gateway*.pdf"/>
+           </fileset>
+        </copy>
+
+	<!-- first make zip file for windoze -->
+        <zip destfile="${dist.home}/${app.name}-${app.version}.zip">
+           <zipfileset dir="." includes="${build.home}/**" />
+        </zip>
+
+	<!-- then make tar.gz file for unix 
+	<tar destfile="${dist.home}/${app.name}-${app.version}.tgz" compression="gzip">
+	   <tarfileset dir=".">
+	      <include name="${build.home}/**" />
+	   </tarfileset>
+	</tar>
+	-->
+
+	<!-- Clean up build dir -->
+	<delete dir="${build.home}" />
+
+   </target>
+</project>

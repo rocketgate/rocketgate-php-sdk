@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+  cli_php:
+    image: rg_client_php
+    build: .
+    volumes:
+      - .:/var/client/
