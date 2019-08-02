@@ -670,7 +670,7 @@ class GatewayService
 //
 //////////////////////////////////////////////////////////////////////
 //
-    function PerformCURLTransaction(string $host, GatewayRequest $request, GatewayResponse $response)
+    function PerformCURLTransaction($host, GatewayRequest $request, GatewayResponse $response)
     {
 //
 //	Reset the response object and turn the request into
