@@ -62,7 +62,7 @@ class GatewayService
 //
 //////////////////////////////////////////////////////////////////////
 //
-    public function __construct(bool $testMode = false)
+    public function __construct($testMode = false)
     {
 //
 //	Set the standard production destinations for the
