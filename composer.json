@@ -1,5 +1,5 @@
 {
-    "name": "rocketgate/sdk",
+    "name": "rocketgate-php-sdk",
     "description": "Client PHP",
     "license": "MIT",
     "autoload": {
