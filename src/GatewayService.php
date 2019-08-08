@@ -62,7 +62,7 @@ class GatewayService
 //
 //////////////////////////////////////////////////////////////////////
 //
-    public function __construct(bool $testMode = false)
+    public function __construct($testMode = false)
     {
 //
 //	Set the standard production destinations for the
@@ -670,7 +670,7 @@ class GatewayService
 //
 //////////////////////////////////////////////////////////////////////
 //
-    function PerformCURLTransaction(string $host, GatewayRequest $request, GatewayResponse $response)
+    function PerformCURLTransaction($host, GatewayRequest $request, GatewayResponse $response)
     {
 //
 //	Reset the response object and turn the request into

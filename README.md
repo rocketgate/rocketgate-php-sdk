@@ -10,7 +10,7 @@ This library
 Install with composer:
 
 ```sh
-composer require rocketgate/rocketgate-php-sdk
+composer require --update-no-dev rocketgate/rocketgate-php-sdk
 ```
 
 ## To Use
