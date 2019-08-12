@@ -7,7 +7,7 @@ use RocketGate\Sdk\GatewayChecksum;
 
 class GatewayChecksumTest extends TestCase
 {
-    public function testSetVersion()
+    public function testComplianceModifications()
     {
         GatewayChecksum::SetVersion();
         $this->assertNotContains(
