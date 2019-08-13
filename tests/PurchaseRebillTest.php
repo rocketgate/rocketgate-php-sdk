@@ -44,7 +44,7 @@ class PurchaseRebillTest extends BaseTestCase
         $this->request->Set(GatewayRequest::REBILL_FREQUENCY(), "MONTHLY"); // ongoing renewals monthly
         $this->request->Set(GatewayRequest::REBILL_AMOUNT(), "9.99");
 
-        $this->request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+         $this->request->Set(GatewayRequest::IPADDRESS(), '72.229.28.185');
 
         $this->request->Set(GatewayRequest::BILLING_ADDRESS(), "123 Main St");
         $this->request->Set(GatewayRequest::BILLING_CITY(), "Las Vegas");

@@ -49,7 +49,7 @@ class OneClickWithCardHashTest extends BaseTestCase
         $this->request->Set(GatewayRequest::CURRENCY(), "USD");
         $this->request->Set(GatewayRequest::AMOUNT(), "9.99");    // bill 9.99
 
-        $this->request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+         $this->request->Set(GatewayRequest::IPADDRESS(), '72.229.28.185');
 
         $this->request->Set(GatewayRequest::BILLING_ADDRESS(), "123 Main St");
         $this->request->Set(GatewayRequest::BILLING_CITY(), "Las Vegas");
@@ -89,7 +89,7 @@ class OneClickWithCardHashTest extends BaseTestCase
         $request = new GatewayRequest();
         $request->Set(GatewayRequest::MERCHANT_ID(), $this->merchantId);
         $request->Set(GatewayRequest::MERCHANT_PASSWORD(), $this->merchantPassword);
-        $request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+         $request->Set(GatewayRequest::IPADDRESS(), '72.229.28.185');
 
         $request->Set(GatewayRequest::MERCHANT_CUSTOMER_ID(), $this->customerId);
         $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $this->invoiceId);

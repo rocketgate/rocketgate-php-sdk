@@ -41,7 +41,7 @@ class AuthTicketTest extends BaseTestCase
         $this->request->Set(GatewayRequest::CURRENCY(), "USD");
         $this->request->Set(GatewayRequest::AMOUNT(), "9.99");    // bill 9.99 now
 
-        $this->request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+         $this->request->Set(GatewayRequest::IPADDRESS(), '72.229.28.185');
 
         $this->request->Set(GatewayRequest::BILLING_ADDRESS(), "123 Main St");
         $this->request->Set(GatewayRequest::BILLING_CITY(), "Las Vegas");
