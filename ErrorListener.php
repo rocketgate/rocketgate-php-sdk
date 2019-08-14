@@ -40,6 +40,7 @@ class ErrorListener implements TestListener
         if ($test instanceof BaseTestCase) {
             $response = $test->getResponse();
             print <<<OUTPUT
+
 //////////////////////////////////////////////////////////////////////
 // {$test->getTestName()} HAS FAILED
 // GUID: {$response->Get(GatewayResponse::TRANSACT_ID())}

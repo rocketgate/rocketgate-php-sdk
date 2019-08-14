@@ -14,7 +14,7 @@ class GatewayChecksumTest extends TestCase
             "m",
             GatewayChecksum::$versionNo,
             "Modified version. Current checksum " . GatewayChecksum::$checksum .
-            " has to match base " . GatewayChecksum::$baseChecksum . "."
+            " does not match base " . GatewayChecksum::$baseChecksum . "."
         );
     }
 }
