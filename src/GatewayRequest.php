@@ -109,6 +109,16 @@ class GatewayRequest extends GatewayParameterList
 //
 //////////////////////////////////////////////////////////////////////
 //
+    static function _3DSECURE_DF_REFERENCE_ID()
+    {
+        return "_3DSECURE_DF_REFERENCE_ID";
+    }
+
+    static function _3DSECURE_REDIRECT_URL()
+    {
+        return "_3DSECURE_REDIRECT_URL";
+    }
+
     static function VERSION_INDICATOR()
     {
         return "version";
