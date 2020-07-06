@@ -213,6 +213,11 @@ class GatewayRequest extends GatewayParameterList
     {
         return "cloneToCustomerID";
     }
+    
+    static function COF_FRAMEWORK()
+    {
+        return "cofFramework";
+    }
 
     static function CURRENCY()
     {
