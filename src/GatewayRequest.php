@@ -523,6 +523,41 @@ class GatewayRequest extends GatewayParameterList
     {
         return "ThreeDXID";
     }
+	
+    static function _3D_VERSION() 
+    { 
+        return "_3D_VERSION"; 
+    }
+	
+    static function _3DSECURE_THREE_DS_SERVER_TRANSACTION_ID() 
+    { 
+        return "_3DSECURE_THREE_DS_SERVER_TRANSACTION_ID"; 
+    }
+	
+    static function _3DSECURE_DS_TRANSACTION_ID() 
+    { 
+        return "_3DSECURE_DS_TRANSACTION_ID"; 
+    }	
+
+    static function _3DSECURE_ACS_TRANSACTION_ID() 
+    { 
+        return "_3DSECURE_ACS_TRANSACTION_ID"; 
+    }
+	
+    static function _3D_VERSTATUS() 
+    { 
+        return "_3D_VERSTATUS"; 
+    }
+	
+    static function _3D_PARESSTATUS() 
+    { 
+        return "_3D_PARESSTATUS"; 
+    }	
+
+    static function _3D_CAVV_ALGORITHM() 
+    { 
+        return "_3D_CAVV_ALGORITHM"; 
+    }	
 
     static function FAILED_SERVER()
     {
