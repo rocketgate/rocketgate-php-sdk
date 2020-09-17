@@ -108,6 +108,7 @@ $service->SetTestMode(TRUE);
 if ($service->PerformPurchase($request, $response)) {
   print "Purchase succeeded\n";
   print "GUID: " . $response->Get(GatewayResponse::TRANSACT_ID()) . "\n";
+  print "Transaction time: " . $response->Get(GatewayResponse::TRANSACTION_TIME()) . "\n";
 
 	
 	//
@@ -150,6 +151,7 @@ if ($service->PerformPurchase($request, $response)) {
   print "Purchase failed\n";
   print "GUID: " . $response->Get(GatewayResponse::TRANSACT_ID()) . "\n";
   print "Response Code: " .  $response->Get(GatewayResponse::RESPONSE_CODE()) . "\n";
+  print "Transaction time: " . $response->Get(GatewayResponse::TRANSACTION_TIME()) . "\n";
   print "Reason Code: " .  $response->Get(GatewayResponse::REASON_CODE()) . "\n";
   print "Exception: " .  $response->Get(GatewayResponse::EXCEPTION()) . "\n";
   print "Scrub: " .  $response->Get(GatewayResponse::SCRUB_RESULTS()) . "\n";
