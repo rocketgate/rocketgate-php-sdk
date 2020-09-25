@@ -435,6 +435,11 @@ class GatewayResponse extends GatewayParameterList
     {
         return "guidNo";
     }
+    
+    static function TRANSACTION_TIME() 
+    { 
+        return "transactionTime"; 
+    }
 
     static function SCRUB_RESULTS()
     {
