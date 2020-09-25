@@ -7,6 +7,9 @@ This library is __compatible__ with PHP 5.6, although we highly recommend
 to migrate your project to PHP 7.2 or greater to avoid security breaches 
 (refer to PHP Supported Versions [here](https://www.php.net/supported-versions.php)).
 
+This library supports Composer and Namespaces and thus is NOT backwards compatible with 
+our old (legacy) PHP sdks: https://github.com/rocketgate/rocketgate-php-legacy-sdk
+
 ## Installation using composer
 
 Install with composer (available on packagist.org):
