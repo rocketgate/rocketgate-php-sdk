@@ -34,7 +34,8 @@
  * and set the monthly rebill cycle starting today. 
  *
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

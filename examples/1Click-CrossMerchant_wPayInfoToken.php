@@ -30,7 +30,8 @@
  * Subsequently, the user wants to make another $8.99 purchase using the card on file (CardHash)
  * 
  */
- 
+ namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

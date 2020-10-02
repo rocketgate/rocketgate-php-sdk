@@ -29,7 +29,8 @@
  * Subsequently, Generate CrossSale for $1 4x day trial rebills $7.99/month
  * Requires Merchant Option set: PermitMultipleMemberships=true 
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

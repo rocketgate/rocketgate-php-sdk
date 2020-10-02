@@ -4,7 +4,7 @@ Rocketgate Gateway PHP SDK
 ===========
 
 This library is __compatible__ with PHP 5.6, although we highly recommend
-to migrate your project to PHP 7.2 or greater to avoid security breaches 
+to migrate your project to PHP 7.2 or greater, to avoid security breaches 
 (refer to PHP Supported Versions [here](https://www.php.net/supported-versions.php)).
 
 This library supports Composer and Namespaces and thus is NOT backwards compatible with 
@@ -18,41 +18,73 @@ Install with composer (available on packagist.org):
 composer require --update-no-dev rocketgate/sdk
 ```
 
+## Installation without composer
+
+Create a vendor folder (or use your project's external dependencies folder):
+```sh
+mkdir -p vendor/rocketgate
+```
+
+Clone into that folder
+```sh
+git clone https://github.com/rocketgate/rocketgate-php-sdk.git vendor/rocketgate
+```
+
+Add classes to your project autoloader or manually (as shown below). 
+```php
+<?php
+
+require "vendor/rocketgate/src/GatewayChecksum.php";
+require "vendor/rocketgate/src/GatewayCodes.php";
+require "vendor/rocketgate/src/GatewayParameterList.php";
+require "vendor/rocketgate/src/GatewayRequest.php";
+require "vendor/rocketgate/src/GatewayResponse.php";
+require "vendor/rocketgate/src/GatewayService.php";
+
+use RocketGate\Sdk\GatewayRequest;
+use RocketGate\Sdk\GatewayResponse;
+use RocketGate\Sdk\GatewayService;
+
+$request  = new GatewayRequest();
+$response = new GatewayResponse();
+$service  = new GatewayService();
+
+$request->Set(GatewayRequest::MERCHANT_ID(), "1");
+$request->Set(GatewayRequest::MERCHANT_PASSWORD(), "testpassword");
+
+// [...]
+```
+
 ## Usage
 
 Integration examples with Rocketgate Gateway are placed under `/tests` folder.  
 
 ## Run full test suite (without RG docker container)
 
-To run tests PHP >=7.0 is required. 
-
-```shell script
+```sh
 $ sh vendor/rocketgate/sdk/startup.sh
 ```
 
-Startup script `startup.sh` installs composer PHP dependencies and run complete test suite.
-
 ## Run full test suite (with RG docker container)
-
-To run tests PHP >=7.0 is required.
 
 We recommend using both [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) and 
 [Docker Compose](https://docs.docker.com/compose/install/) in order to run full test suite.
 
 1. Start docker container.
  
-```shell script
+```sh
 $ docker-compose up -d
 ```
 The command above might take longer at first execution because all PHP Docker container 
 dependencies will be downloaded and installed.
 
 2. Run `startup.sh` script.
-```shell script
+```sh
 docker exec -it $(docker-compose ps -q --filter name=cli_php) bash startup.sh
 ```
 
 ## Important notes
+- To run tests PHP >=7.0 is required.
 - Startup script `startup.sh` installs composer PHP dependencies and run complete test suite.
 - Output should look like this:
   ```
