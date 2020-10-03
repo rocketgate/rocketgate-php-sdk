@@ -28,7 +28,8 @@
  * Example $9.99 USD monthly subscription purchase.
  * Subsequently, Check the status of the subscription
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

@@ -28,7 +28,8 @@
  * Example $9.99 USD monthly subscription purchase.
  * Subsequently, the subscription is set to cancel at the end of the month.
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

@@ -28,7 +28,8 @@
  * Example $29.99 USD non-recurring purchase
  * Subsequently, modify to a USD $19.95 monthly.. effective on it's next rebill date.
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

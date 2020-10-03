@@ -23,6 +23,8 @@
  * whether or not advised of the possibility of damage, regardless of the theory of liability.
  * 
  */
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;
