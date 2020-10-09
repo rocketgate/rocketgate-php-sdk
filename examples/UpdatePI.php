@@ -28,7 +28,8 @@
  * Example $1.00 USD monthly subscription purchase.
  * Subsequently, Update Personal Information
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

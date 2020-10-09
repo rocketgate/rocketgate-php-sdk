@@ -32,7 +32,8 @@
  * The example code below will run a pro-rated transaction now (for example 3.25)
  * and update the future rebill amounts to $19.95.
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

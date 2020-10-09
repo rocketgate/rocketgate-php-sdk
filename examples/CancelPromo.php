@@ -29,7 +29,8 @@
  * Subsequently, for example as a cancel promo, the subscription
  * is modified to a USD $25.95 quarterly effective on it's next rebill date.
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;

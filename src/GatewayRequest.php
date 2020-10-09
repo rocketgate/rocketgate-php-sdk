@@ -213,6 +213,11 @@ class GatewayRequest extends GatewayParameterList
     {
         return "cloneToCustomerID";
     }
+    
+    static function COF_FRAMEWORK()
+    {
+        return "cofFramework";
+    }
 
     static function CURRENCY()
     {
@@ -518,6 +523,41 @@ class GatewayRequest extends GatewayParameterList
     {
         return "ThreeDXID";
     }
+	
+    static function _3D_VERSION() 
+    { 
+        return "THREEDVERSION"; 
+    }
+	
+    static function _3DSECURE_THREE_DS_SERVER_TRANSACTION_ID() 
+    { 
+        return "_3DSECURE_THREE_DS_SERVER_TRANSACTION_ID"; 
+    }
+	
+    static function _3DSECURE_DS_TRANSACTION_ID() 
+    { 
+        return "_3DSECURE_DS_TRANSACTION_ID"; 
+    }	
+
+    static function _3DSECURE_ACS_TRANSACTION_ID() 
+    { 
+        return "_3DSECURE_ACS_TRANSACTION_ID"; 
+    }
+	
+    static function _3D_VERSTATUS() 
+    { 
+        return "THREEDVERSTATUS"; 
+    }
+	
+    static function _3D_PARESSTATUS() 
+    { 
+        return "THREEDPARESSTATUS"; 
+    }	
+
+    static function _3D_CAVV_ALGORITHM() 
+    { 
+        return "THREEDCAVVALGORITHM"; 
+    }	
 
     static function FAILED_SERVER()
     {

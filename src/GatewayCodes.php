@@ -117,6 +117,7 @@ class GatewayCodes {
     const REASON_TRIAL_ABUSE                      = 222;
     const REASON_3DSECURE_BYPASS                  = 223;
     const REASON_NEWCARD_NODEVICE                 = 224;
+    const REASON_3DSECURE_INITIATION              = 225;
 
     const REASON_DNS_FAILURE               = 300;
     const REASON_UNABLE_TO_CONNECT         = 301;
