@@ -131,9 +131,9 @@ class GatewayResponse extends GatewayParameterList
         return "_3DSECURE_STEP_UP_URL";
     }
 
-    static function _3DSECURE_STEPUP_JWT()
+    static function _3DSECURE_STEP_UP_JWT()
     {
-        return "_3DSECURE_STEPUP_JWT";
+        return "_3DSECURE_STEP_UP_JWT";
     }
 
     static function _3DSECURE_VERSION()
