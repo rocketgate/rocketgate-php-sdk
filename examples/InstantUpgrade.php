@@ -83,7 +83,7 @@ $request->Set(GatewayRequest::CVV2(), "999");
 $request->Set(GatewayRequest::CUSTOMER_FIRSTNAME(), "Joe");
 $request->Set(GatewayRequest::CUSTOMER_LASTNAME(), "PHPTester");
 $request->Set(GatewayRequest::EMAIL(), "phptest@fakedomain.com");
-$request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+$request->Set(GatewayRequest::IPADDRESS(), $_SERVER["REMOTE_ADDR"] ?? '');
 
 $request->Set(GatewayRequest::BILLING_ADDRESS(), "123 Main St");
 $request->Set(GatewayRequest::BILLING_CITY(), "Las Vegas");
@@ -132,7 +132,7 @@ if ($service->PerformPurchase($request, $response)) {
 	  $request = new GatewayRequest(); 
 	  $request->Set(GatewayRequest::MERCHANT_ID(), $merchant_id);
 	  $request->Set(GatewayRequest::MERCHANT_PASSWORD(), $merchant_password);  
-	  $request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+	  $request->Set(GatewayRequest::IPADDRESS(), $_SERVER["REMOTE_ADDR"] ?? '');
 	  
 	  $request->Set(GatewayRequest::MERCHANT_CUSTOMER_ID(), $cust_id);
 	  $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $inv_id);
