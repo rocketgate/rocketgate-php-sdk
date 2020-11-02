@@ -61,7 +61,7 @@ $request->Set(GatewayRequest::BILLING_STATE(), "NV");
 $request->Set(GatewayRequest::BILLING_ZIPCODE(), "89141");
 $request->Set(GatewayRequest::BILLING_COUNTRY(), "US");
 $request->Set(GatewayRequest::EMAIL(), "phptest@fakedomain.com");
-//$request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+//$request->Set(GatewayRequest::IPADDRESS(), $_SERVER["REMOTE_ADDR"] ?? '');
 $request->Set(GatewayRequest::IPADDRESS(), "10.10.10.10");
 
 //
