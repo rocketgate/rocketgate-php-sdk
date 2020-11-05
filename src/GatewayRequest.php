@@ -299,6 +299,11 @@ class GatewayRequest extends GatewayParameterList
         return "merchantAccount";
     }
 
+    static function PREFERRED_MERCHANT_ACCOUNT()
+    {
+        return "preferredMerchantAccount";
+    }
+
     static function MERCHANT_CUSTOMER_ID()
     {
         return "merchantCustomerID";
