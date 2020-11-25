@@ -49,7 +49,7 @@
      $this->request->Set(GatewayRequest::CURRENCY(), "USD");
      $this->request->Set(GatewayRequest::AMOUNT(), "9.99");    // bill 9.99 now
 
-     $this->request->Set(GatewayRequest::CARDNO(), "4000000000000002");
+     $this->request->Set(GatewayRequest::CARDNO(), "4111111111111111");
      $this->request->Set(GatewayRequest::EXPIRE_MONTH(), "01");
      $this->request->Set(GatewayRequest::EXPIRE_YEAR(), "2030");
      $this->request->Set(GatewayRequest::CVV2(), "999");
@@ -63,7 +63,7 @@
      $this->request->Set(GatewayRequest::BILLING_STATE(), "NV");
      $this->request->Set(GatewayRequest::BILLING_ZIPCODE(), "89141");
      $this->request->Set(GatewayRequest::BILLING_COUNTRY(), "US");
-     $this->request->Set(GatewayRequest::MERCHANT_ACCOUNT(), "59");
+     $this->request->Set(GatewayRequest::MERCHANT_ACCOUNT(), "59"); // 3DS 1.0 MID.
 
      // Risk/Scrub Request Setting
      $this->request->Set(GatewayRequest::SCRUB(), "IGNORE");
