@@ -866,7 +866,7 @@ class GatewayService
 //
 //////////////////////////////////////////////////////////////////////
 //
-    public function GetLatestResponseCode() : int
+    public function GetLatestResponseCode()
     {
         return $this->rocketGateLatestResponseCode;
     }
@@ -877,7 +877,7 @@ class GatewayService
 //
 //////////////////////////////////////////////////////////////////////
 //
-    public function GetLatestExecutionTime() : float
+    public function GetLatestExecutionTime()
     {
         return $this->rocketGateLatestExecutionTime;
     }
@@ -888,7 +888,7 @@ class GatewayService
 //
 //////////////////////////////////////////////////////////////////////
 //
-    function GetLatestConnectionTime() : float
+    function GetLatestConnectionTime()
     {
         return $this->rocketGateLatestConnectionTime;
     }
