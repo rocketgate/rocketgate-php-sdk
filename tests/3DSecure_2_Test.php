@@ -58,7 +58,7 @@
      $this->request->Set(GatewayRequest::CURRENCY(), "USD");
      $this->request->Set(GatewayRequest::AMOUNT(), "9.99");    // bill 9.99 now
 
-     $this->request->Set(GatewayRequest::CARDNO(), "4000000000001091");
+     $this->request->Set(GatewayRequest::CARDNO(), "4000000000001091"); // This card will trigger a 3DS 2.0 stepUp in the TestProcessor
      $this->request->Set(GatewayRequest::EXPIRE_MONTH(), "01");
      $this->request->Set(GatewayRequest::EXPIRE_YEAR(), "2030");
      $this->request->Set(GatewayRequest::CVV2(), "999");
