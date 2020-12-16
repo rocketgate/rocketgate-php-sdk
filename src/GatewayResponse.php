@@ -455,4 +455,9 @@ class GatewayResponse extends GatewayParameterList
     {
         return "approvedCurrency";
     }
+    
+    static function RETRIEVAL_ID()
+    {
+       return "retrievalNo";
+    }
 }
