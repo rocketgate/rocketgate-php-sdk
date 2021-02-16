@@ -23,6 +23,8 @@
  * whether or not advised of the possibility of damage, regardless of the theory of liability.
  * 
  */
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;
@@ -58,7 +60,7 @@ $request->Set(GatewayRequest::CVV2(), "999");
 $request->Set(GatewayRequest::CUSTOMER_FIRSTNAME(), "Joe");
 $request->Set(GatewayRequest::CUSTOMER_LASTNAME(), "PHPTester");
 $request->Set(GatewayRequest::EMAIL(), "phptest@fakedomain.com");
-$request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+$request->Set(GatewayRequest::IPADDRESS(), $_SERVER["REMOTE_ADDR"] ?? '');
 
 // $request->Set(GatewayRequest::AFFILIATE(), '1234');
 

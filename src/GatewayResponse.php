@@ -131,9 +131,9 @@ class GatewayResponse extends GatewayParameterList
         return "_3DSECURE_STEP_UP_URL";
     }
 
-    static function _3DSECURE_STEPUP_JWT()
+    static function _3DSECURE_STEP_UP_JWT()
     {
-        return "_3DSECURE_STEPUP_JWT";
+        return "_3DSECURE_STEP_UP_JWT";
     }
 
     static function _3DSECURE_VERSION()
@@ -435,6 +435,11 @@ class GatewayResponse extends GatewayParameterList
     {
         return "guidNo";
     }
+    
+    static function TRANSACTION_TIME() 
+    { 
+        return "transactionTime"; 
+    }
 
     static function SCRUB_RESULTS()
     {
@@ -449,5 +454,10 @@ class GatewayResponse extends GatewayParameterList
     static function SETTLED_CURRENCY()
     {
         return "approvedCurrency";
+    }
+    
+    static function RETRIEVAL_ID()
+    {
+       return "retrievalNo";
     }
 }

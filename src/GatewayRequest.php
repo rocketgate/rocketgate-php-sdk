@@ -299,6 +299,11 @@ class GatewayRequest extends GatewayParameterList
         return "merchantAccount";
     }
 
+    static function PREFERRED_MERCHANT_ACCOUNT()
+    {
+        return "preferredMerchantAccount";
+    }
+
     static function MERCHANT_CUSTOMER_ID()
     {
         return "merchantCustomerID";
@@ -526,7 +531,7 @@ class GatewayRequest extends GatewayParameterList
 	
     static function _3D_VERSION() 
     { 
-        return "_3D_VERSION"; 
+        return "THREEDVERSION"; 
     }
 	
     static function _3DSECURE_THREE_DS_SERVER_TRANSACTION_ID() 
@@ -546,17 +551,17 @@ class GatewayRequest extends GatewayParameterList
 	
     static function _3D_VERSTATUS() 
     { 
-        return "_3D_VERSTATUS"; 
+        return "THREEDVERSTATUS"; 
     }
 	
     static function _3D_PARESSTATUS() 
     { 
-        return "_3D_PARESSTATUS"; 
+        return "THREEDPARESSTATUS"; 
     }	
 
     static function _3D_CAVV_ALGORITHM() 
     { 
-        return "_3D_CAVV_ALGORITHM"; 
+        return "THREEDCAVVALGORITHM"; 
     }	
 
     static function FAILED_SERVER()

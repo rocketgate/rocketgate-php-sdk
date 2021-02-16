@@ -29,7 +29,8 @@
  * Subsequently, for example as a cancel promo, the subscription
  * is modified to a USD $25.95 quarterly effective on it's next rebill date.
  */
- 
+namespace RocketGate\examples;
+
 require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;
@@ -75,7 +76,7 @@ $request->Set(GatewayRequest::CVV2(), "999");
 $request->Set(GatewayRequest::CUSTOMER_FIRSTNAME(), "Joe");
 $request->Set(GatewayRequest::CUSTOMER_LASTNAME(), "PHPTester");
 $request->Set(GatewayRequest::EMAIL(), "phptest@fakedomain.com");
-$request->Set(GatewayRequest::IPADDRESS(), $_SERVER['REMOTE_ADDR']);
+$request->Set(GatewayRequest::IPADDRESS(), $_SERVER["REMOTE_ADDR"] ?? '');
 
 $request->Set(GatewayRequest::BILLING_ADDRESS(), "123 Main St");
 $request->Set(GatewayRequest::BILLING_CITY(), "Las Vegas");
