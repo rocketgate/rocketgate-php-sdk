@@ -534,6 +534,18 @@ class GatewayRequest extends GatewayParameterList
         return "THREEDVERSION"; 
     }
 	
+	/*
+	Whether or not to request a challenge step-up flow from the ACS
+	01 - No preference
+	02 - No challenge requested
+	03 - Challenge requested (3DS Requestor Preference)
+	04 - Challenge requested (Mandate)
+	*/
+	static function _3DSECURE_CHALLENGE_MANDATED_INDICATOR()
+	{
+		return "_3DSECURE_CHALLENGE_MANDATED_INDICATOR";
+	}
+	
     static function _3DSECURE_THREE_DS_SERVER_TRANSACTION_ID() 
     { 
         return "_3DSECURE_THREE_DS_SERVER_TRANSACTION_ID"; 
