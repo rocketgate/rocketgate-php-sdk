@@ -213,7 +213,7 @@ class GatewayRequest extends GatewayParameterList
     {
         return "cloneToCustomerID";
     }
-    
+
     static function COF_FRAMEWORK()
     {
         return "cofFramework";
@@ -402,6 +402,16 @@ class GatewayRequest extends GatewayParameterList
     static function REFERENCE_GUID()
     {
         return "referenceGUID";
+    }
+
+    static function REFERENCE_SCHEME_TRANSACTION_ID()
+    {
+        return "schemeTranId";
+    }
+
+    static function REFERENCE_SCHEME_SETTLEMENT_DATE()
+    {
+        return "schemeSettleDate";
     }
 
     static function REFERRAL_NO()
