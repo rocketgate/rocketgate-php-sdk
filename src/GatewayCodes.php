@@ -118,7 +118,9 @@ class GatewayCodes {
     const REASON_3DSECURE_BYPASS                  = 223;
     const REASON_NEWCARD_NODEVICE                 = 224;
     const REASON_3DSECURE_INITIATION              = 225;
-
+	const REASON_3DSECURE_FRICTIONLESS_FAILED_AUTH = 227;
+	const REASON_3DSECURE_SCA_REQUIRED            = 228;
+	
     const REASON_DNS_FAILURE               = 300;
     const REASON_UNABLE_TO_CONNECT         = 301;
     const REASON_REQUEST_XMIT_ERROR        = 302;
@@ -200,4 +202,6 @@ class GatewayCodes {
     const REASON_INVALID_PAYINFO_TRANSACT_ID = 453;
     const REASON_INVALID_CAPTURE_DAYS        = 454;
     const REASON_INVALID_SUBMERCHANT_ID      = 455;
+    const REASON_INVALID_COF_FRAMEWORK       = 458;
+    const REASON_INVALID_REFERENCE_SCHEME_TRANSACTION = 459;
 }

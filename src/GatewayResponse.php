@@ -460,4 +460,14 @@ class GatewayResponse extends GatewayParameterList
     {
        return "retrievalNo";
     }
+
+    static function SCHEME_TRANSACTION_ID()
+    {
+        return "schemeTransactionID";
+    }
+
+    static function SCHEME_SETTLEMENT_DATE()
+    {
+        return "schemeSettlementDate";
+    }
 }
