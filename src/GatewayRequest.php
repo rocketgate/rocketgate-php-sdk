@@ -551,6 +551,12 @@ class GatewayRequest extends GatewayParameterList
 	03 - Challenge requested (3DS Requestor Preference)
 	04 - Challenge requested (Mandate)
 	*/
+	static function _3DSECURE_LOOKUP_CHALLENGE_INDICATOR()
+	{
+		return "_3DSECURE_LOOKUP_CHALLENGE_INDICATOR";
+	}
+	
+	//This is  used to transmit whether or not a challenge was attempted to the ACS (TRUE/FALSE)
 	static function _3DSECURE_CHALLENGE_MANDATED_INDICATOR()
 	{
 		return "_3DSECURE_CHALLENGE_MANDATED_INDICATOR";
