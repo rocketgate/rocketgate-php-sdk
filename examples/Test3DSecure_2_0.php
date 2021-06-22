@@ -91,6 +91,13 @@ $request->Set(GatewayRequest::USE_3D_SECURE(), "TRUE");
 $request->Set(GatewayRequest::BROWSER_USER_AGENT(), "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36");
 $request->Set(GatewayRequest::BROWSER_ACCEPT_HEADER(), "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
 
+$request->Set(GatewayRequest::BROWSER_JAVA_ENABLED(), "TRUE");
+$request->Set(GatewayRequest::BROWSER_LANGUAGE(), "en-CA");
+$request->Set(GatewayRequest::BROWSER_COLOR_DEPTH(), "32");
+$request->Set(GatewayRequest::BROWSER_SCREEN_HEIGHT(), "1080");
+$request->Set(GatewayRequest::BROWSER_SCREEN_WIDTH(), "1920");
+$request->Set(GatewayRequest::BROWSER_TIME_ZONE(), "-240");
+
 //
 //	Setup test parameters in the service and request.
 //

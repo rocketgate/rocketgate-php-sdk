@@ -590,7 +590,37 @@ class GatewayRequest extends GatewayParameterList
     static function _3D_CAVV_ALGORITHM() 
     { 
         return "THREEDCAVVALGORITHM"; 
-    }	
+    }
+
+    static function BROWSER_JAVA_ENABLED()
+    {
+        return "BrowserJavaEnabled";
+    }
+
+    static function BROWSER_LANGUAGE()
+    {
+        return "BrowserLanguage";
+    }
+
+    static function BROWSER_COLOR_DEPTH()
+    {
+        return "BrowserColorDepth";
+    }
+
+    static function BROWSER_SCREEN_HEIGHT()
+    {
+        return "BrowserScreenHeight";
+    }
+
+    static function BROWSER_SCREEN_WIDTH()
+    {
+        return "BrowserScreenWidth";
+    }
+
+    static function BROWSER_TIME_ZONE()
+    {
+        return "BrowserTimeZone";
+    }
 
     static function FAILED_SERVER()
     {
