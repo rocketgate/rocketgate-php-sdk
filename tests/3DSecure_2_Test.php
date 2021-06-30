@@ -122,8 +122,6 @@
  $this->request->Set(GatewayRequest::MERCHANT_ID(), $this->merchantId);
  $this->request->Set(GatewayRequest::MERCHANT_PASSWORD(), $this->merchantPassword);
 
-       $this->service->SetPortNo("443");
-       $this->request->Set(GatewayRequest::GATEWAY_SERVER(), "local.rocketgate.com");
 
  $this->request->Set(GatewayRequest::CVV2(), "999");
 
