@@ -84,6 +84,14 @@
      $this->request->Set(GatewayRequest::BROWSER_USER_AGENT(), "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36");
      $this->request->Set(GatewayRequest::BROWSER_ACCEPT_HEADER(), "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
 
+     $this->request->Set(GatewayRequest::BROWSER_JAVA_ENABLED(), "TRUE");
+     $this->request->Set(GatewayRequest::BROWSER_LANGUAGE(), "en-CA");
+     $this->request->Set(GatewayRequest::BROWSER_COLOR_DEPTH(), "32");
+     $this->request->Set(GatewayRequest::BROWSER_SCREEN_HEIGHT(), "1080");
+     $this->request->Set(GatewayRequest::BROWSER_SCREEN_WIDTH(), "1920");
+     $this->request->Set(GatewayRequest::BROWSER_TIME_ZONE(), "-240");
+
+
      //
      //	Perform the BIN intelligence transaction
      //
@@ -113,6 +121,7 @@
  $this->request = new GatewayRequest();
  $this->request->Set(GatewayRequest::MERCHANT_ID(), $this->merchantId);
  $this->request->Set(GatewayRequest::MERCHANT_PASSWORD(), $this->merchantPassword);
+
 
  $this->request->Set(GatewayRequest::CVV2(), "999");
 
