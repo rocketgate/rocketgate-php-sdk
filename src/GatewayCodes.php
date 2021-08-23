@@ -91,6 +91,7 @@ class GatewayCodes {
     const REASON_PREVIOUS_HARD_DECLINE       = 161;
     const REASON_MERCHACCT_LIMIT             = 162;
     const REASON_DECLINED_CAVV_AUTOVOID      = 163;
+    const REASON_BANK_INVALID_TRANSACTION    = 165;
 
     const REASON_RISK_FAIL                        = 200;
     const REASON_CUSTOMER_BLOCKED                 = 201;
