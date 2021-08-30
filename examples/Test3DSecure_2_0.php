@@ -50,7 +50,6 @@ $service = new GatewayService();
 //
 //	Setup the Auth-Only request.
 //
-$request->Set(GatewayRequest::GATEWAY_SERVER(), "local.rocketgate.com");
 
 $request->Set(GatewayRequest::MERCHANT_ID(), "1");
 $request->Set(GatewayRequest::MERCHANT_PASSWORD(), "testpassword");
