@@ -86,6 +86,9 @@ if ($service->PerformAuthOnly($request, $response)) {
   print "Auth-Only succeeded\n";
   print "Response Code: " .  $response->Get(GatewayResponse::RESPONSE_CODE()) . "\n";
   print "Reason Code: " .  $response->Get(GatewayResponse::REASON_CODE()) . "\n";
+  print "Reason Code Name: " .  $response->Get(GatewayResponse::REASON_CODE_NAME()) . "\n";
+  print "Merchant Reason Code Description: " .  $response->Get(GatewayResponse::MERCHANT_REASON_CODE_DESCRIPTION()) . "\n";
+  print "Cardholder Reason Code Description: " .  $response->Get(GatewayResponse::CARDHOLDER_REASON_CODE_DESCRIPTION()) . "\n";
   print "Auth No: " . $response->Get(GatewayResponse::AUTH_NO()) . "\n";
   print "AVS: " . $response->Get(GatewayResponse::AVS_RESPONSE()) . "\n";
   print "CVV2: " . $response->Get(GatewayResponse::CVV2_CODE()) . "\n";
@@ -103,6 +106,12 @@ if ($service->PerformAuthOnly($request, $response)) {
 	$response->Get(GatewayResponse::RESPONSE_CODE()) . "\n";
   print "Reason Code: " .
 	$response->Get(GatewayResponse::REASON_CODE()) . "\n";
+  print "Reason Code Name: " .
+    $response->Get(GatewayResponse::REASON_CODE_NAME()) . "\n";
+  print "Merchant Reason Code Description: " .
+    $response->Get(GatewayResponse::MERCHANT_REASON_CODE_DESCRIPTION()) . "\n";
+  print "Cardholder Reason Code Description: " .
+      $response->Get(GatewayResponse::CARDHOLDER_REASON_CODE_DESCRIPTION()) . "\n";
   print "Exception: " .
 	$response->Get(GatewayResponse::EXCEPTION()) . "\n";
   print "Scrub: " .

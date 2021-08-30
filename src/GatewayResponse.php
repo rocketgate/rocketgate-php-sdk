@@ -396,6 +396,21 @@ class GatewayResponse extends GatewayParameterList
         return "reasonCode";
     }
 
+    static function REASON_CODE_NAME()
+    {
+        return "reasonCodeName";
+    }
+
+    static function MERCHANT_REASON_CODE_DESCRIPTION()
+    {
+        return "merchantReasonCodeDescription";
+    }
+
+    static function CARDHOLDER_REASON_CODE_DESCRIPTION()
+    {
+        return "cardholderReasonCodeDescription";
+    }
+
     static function REBILL_AMOUNT()
     {
         return "rebillAmount";
