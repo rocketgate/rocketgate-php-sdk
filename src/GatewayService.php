@@ -284,6 +284,20 @@ class GatewayService
         }
         return $this->PerformTransaction($request, $response);
     }
+	
+//////////////////////////////////////////////////////////////////////
+//
+//	BuildPaymentLink() - Create an embeddable RG hosted payment link 
+//
+//////////////////////////////////////////////////////////////////////
+//	
+  function BuildPaymentLink($request, $response): bool
+  {
+    $request->Set("gatewayServlet", "/hostedpage/servlet/BuildPaymentLinkSubmit");
+    $this->PerformTransaction($request, $response);
+    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes__RESPONSE_SUCCESS &&
+        $response->Get(GatewayResponse::PAYMENT_LINK_URL()) != NULL);
+  }
 
 
 //////////////////////////////////////////////////////////////////////
