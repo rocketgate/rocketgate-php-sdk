@@ -485,4 +485,8 @@ class GatewayResponse extends GatewayParameterList
     {
         return "schemeSettlementDate";
     }
+	static function PAYMENT_LINK_URL() 
+	{ 
+		return "PAYMENT_LINK_URL"; 
+	}
 }

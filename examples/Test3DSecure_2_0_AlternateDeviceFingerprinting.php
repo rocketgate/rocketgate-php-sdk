@@ -118,8 +118,15 @@ print "  Device Fingerprinting JWT: " . $response->Get(GatewayResponse::_3DSECUR
 print "  Exception: " .  $response->Get(GatewayResponse::EXCEPTION()) . "\n";
 
 // Recycle the first request and add two new fields
-$request->Set(GatewayRequest::_3DSECURE_DF_REFERENCE_ID(), "fake");
+//$request->Set(GatewayRequest::_3DSECURE_DF_REFERENCE_ID(), "fake");
 $request->Set(GatewayRequest::_3DSECURE_REDIRECT_URL(), "fake");
+
+$request->Set(GatewayRequest::BROWSER_JAVA_ENABLED(), "TRUE");
+$request->Set(GatewayRequest::BROWSER_LANGUAGE(), "en-CA");
+$request->Set(GatewayRequest::BROWSER_COLOR_DEPTH(), "32");
+$request->Set(GatewayRequest::BROWSER_SCREEN_HEIGHT(), "1080");
+$request->Set(GatewayRequest::BROWSER_SCREEN_WIDTH(), "1920");
+$request->Set(GatewayRequest::BROWSER_TIME_ZONE(), "-240");
 
 //	Step 2: Perform the Lookup transaction.
 //
