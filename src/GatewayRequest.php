@@ -683,4 +683,14 @@ class GatewayRequest extends GatewayParameterList
     {
         return "gatewayReadTimeout";
     }
+
+    static function FAILURE_URL()
+    {
+        return "FAILUREURL";
+    }
+
+    static function SUCCESS_URL()
+    {
+        return "SUCCESSURL";
+    }
 }
