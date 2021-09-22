@@ -153,8 +153,6 @@ if ($service->PerformPurchase($request, $response)) {
   //
   $request = new GatewayRequest();
 
-  $request->Set(GatewayRequest::GATEWAY_SERVER(), "local.rocketgate.com");
-
   $request->Set(GatewayRequest::MERCHANT_ID(), "1");
   $request->Set(GatewayRequest::MERCHANT_PASSWORD(), "testpassword");
 
