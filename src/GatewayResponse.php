@@ -391,6 +391,11 @@ class GatewayResponse extends GatewayParameterList
         return "PAREQ";
     }
 
+    static function PROCESSOR_3DS()
+    {
+        return "PROCESSOR3DS";
+    }
+
     static function REASON_CODE()
     {
         return "reasonCode";

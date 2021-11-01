@@ -364,6 +364,11 @@ class GatewayRequest extends GatewayParameterList
         return "payInfoTransactID";
     }
 
+    static function PROCESSOR_3DS()
+    {
+        return "PROCESSOR3DS";
+    }
+
     static function REBILL_FREQUENCY()
     {
         return "rebillFrequency";
