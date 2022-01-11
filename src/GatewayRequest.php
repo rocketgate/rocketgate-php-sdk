@@ -698,4 +698,9 @@ class GatewayRequest extends GatewayParameterList
     {
         return "SUCCESSURL";
     }
+
+    static function MERCHANT_CASCADED_AUTH()
+    {
+        return "MERCHANTCASCADEDAUTH";
+    }
 }
