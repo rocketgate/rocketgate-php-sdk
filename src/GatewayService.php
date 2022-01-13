@@ -34,8 +34,6 @@ namespace RocketGate\Sdk;
 ////////////////////////////////////////////////////////////////////////////////
 //
 
-use phpDocumentor\Reflection\Types\Boolean;
-
 GatewayChecksum::SetVersion();
 
 
@@ -297,7 +295,7 @@ class GatewayService
   {
     $request->Set("gatewayServlet", "/hostedpage/servlet/BuildPaymentLinkSubmit");
     $this->PerformTransaction($request, $response);
-    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == 0 &&
+    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::REASON_SUCCESS &&
         $response->Get(GatewayResponse::PAYMENT_LINK_URL()) != NULL);
   }
 
