@@ -291,11 +291,11 @@ class GatewayService
 //
 //////////////////////////////////////////////////////////////////////
 //	
-  function BuildPaymentLink($request, $response): bool
+  function BuildPaymentLink($request, $response)
   {
     $request->Set("gatewayServlet", "/hostedpage/servlet/BuildPaymentLinkSubmit");
     $this->PerformTransaction($request, $response);
-    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes__RESPONSE_SUCCESS &&
+    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::REASON_SUCCESS &&
         $response->Get(GatewayResponse::PAYMENT_LINK_URL()) != NULL);
   }
 
