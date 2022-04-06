@@ -83,7 +83,25 @@ class GatewayResponse extends GatewayParameterList
 //	Parse the input string.  If there is an error,
 //	note it in the response.
 //
-        if (xml_parse_into_struct($parser, $xmlString, $vals, $index) == 0) {
+        $parseError = xml_parse_into_struct($parser, $xmlString, $vals, $index) == 0;
+
+        if ($parseError) {
+            $xmlError = xml_get_error_code($parser);
+
+            // Re-parse if encoding is actually ISO-8859-1 (vs UTF-8 as claimed)
+            if ($xmlError === XML_ERROR_JUNK_AFTER_DOC_ELEMENT ||
+                $xmlError === XML_ERROR_INCORRECT_ENCODING
+            ) {
+                xml_parser_free($parser);// Release the parser
+
+                $parser = xml_parser_create('');
+                xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
+
+                $parseError = xml_parse_into_struct($parser, utf8_encode($xmlString), $vals, $index) == 0;
+            }
+        }
+
+        if ($parseError) {
             $this->Set(GatewayResponse::EXCEPTION(),
                 xml_error_string(xml_get_error_code($parser)));
             $this->SetResults(GatewayCodes::RESPONSE_REQUEST_ERROR,
