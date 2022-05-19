@@ -11,8 +11,8 @@ namespace RocketGate\Sdk;
 class GatewayChecksum
 {
     public static $checksum = "";
-    public static $baseChecksum = "df47df699e9689127d1e4c72185421a4";
-    public static $versionNo = "P7.25";
+    public static $baseChecksum = "8fa42ae283e62a3c2c8caa0cf3cb476d";
+    public static $versionNo = "P7.26";
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -30,7 +30,7 @@ class GatewayChecksum
             md5_file($dirName . "/GatewayCodes.php");
         GatewayChecksum::$checksum = md5($baseString);
         if (GatewayChecksum::$checksum != GatewayChecksum::$baseChecksum) {
-            GatewayChecksum::$versionNo = "P7.25m";
+            GatewayChecksum::$versionNo = "P7.26m";
         }
     }
 }

@@ -476,6 +476,11 @@ class GatewayResponse extends GatewayParameterList
         return "schemeSettlementDate";
     }
 
+    static function MERCHANT_ADVICE_CODE()
+    {
+        return "merchantAdviceCode";
+    }
+
 	static function PAYMENT_LINK_URL() 
 	{ 
 		return "PAYMENT_LINK_URL"; 
