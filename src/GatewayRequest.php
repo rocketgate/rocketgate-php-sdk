@@ -409,6 +409,11 @@ class GatewayRequest extends GatewayParameterList
         return "REBILLRESCHEDULE";
     }
 
+    static function REBILL_REACTIVATE()
+    {
+        return "REBILLREACTIVATE";
+    }
+
     static function REFERENCE_GUID()
     {
         return "referenceGUID";
