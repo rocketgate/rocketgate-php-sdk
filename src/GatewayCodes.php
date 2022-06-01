@@ -91,6 +91,9 @@ class GatewayCodes {
     const REASON_PREVIOUS_HARD_DECLINE       = 161;
     const REASON_MERCHACCT_LIMIT             = 162;
     const REASON_DECLINED_CAVV_AUTOVOID      = 163;
+    const REASON_BANK_INVALID_TRANSACTION    = 165;
+    const REASON_CVV2_REQUIRED               = 167;
+    const REASON_INVALID_TAX_ID              = 169;
 
     const REASON_RISK_FAIL                        = 200;
     const REASON_CUSTOMER_BLOCKED                 = 201;
@@ -118,6 +121,8 @@ class GatewayCodes {
     const REASON_3DSECURE_BYPASS                  = 223;
     const REASON_NEWCARD_NODEVICE                 = 224;
     const REASON_3DSECURE_INITIATION              = 225;
+	const REASON_3DSECURE_FRICTIONLESS_FAILED_AUTH = 227;
+	const REASON_3DSECURE_SCA_REQUIRED            = 228;
 
     const REASON_DNS_FAILURE               = 300;
     const REASON_UNABLE_TO_CONNECT         = 301;

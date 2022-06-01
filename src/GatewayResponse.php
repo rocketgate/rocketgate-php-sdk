@@ -86,7 +86,7 @@ class GatewayResponse extends GatewayParameterList
         if (xml_parse_into_struct($parser, $xmlString, $vals, $index) == 0) {
             $this->Set(GatewayResponse::EXCEPTION(),
                 xml_error_string(xml_get_error_code($parser)));
-            $this->SetResults(GatewayCodes::RESPONSE_SYSTEM_ERROR,
+            $this->SetResults(GatewayCodes::RESPONSE_REQUEST_ERROR,
                 GatewayCodes::REASON_XML_ERROR);
             xml_parser_free($parser);// Release the parser
             return;  // And we're done
@@ -391,6 +391,11 @@ class GatewayResponse extends GatewayParameterList
         return "PAREQ";
     }
 
+    static function PROCESSOR_3DS()
+    {
+        return "PROCESSOR3DS";
+    }
+
     static function REASON_CODE()
     {
         return "reasonCode";
@@ -455,4 +460,90 @@ class GatewayResponse extends GatewayParameterList
     {
         return "approvedCurrency";
     }
+    
+    static function RETRIEVAL_ID()
+    {
+       return "retrievalNo";
+    }
+
+    static function SCHEME_TRANSACTION_ID()
+    {
+        return "schemeTransactionID";
+    }
+
+    static function SCHEME_SETTLEMENT_DATE()
+    {
+        return "schemeSettlementDate";
+    }
+
+	static function PAYMENT_LINK_URL() 
+	{ 
+		return "PAYMENT_LINK_URL"; 
+	}
+
+	static function PARES()
+    {
+        return "PARES";
+    }
+
+    static function _3DSECURE_DS_TRANSACTION_ID()
+    {
+        return "_3DSECURE_DS_TRANSACTION_ID";
+    }
+
+    static function _3DSECURE_PARESSTATUS()
+    {
+        return "_3DSECURE_PARESSTATUS";
+    }
+
+    static function _3DSECURE_CAVV_UCAF()
+    {
+        return "_3DSECURE_CAVV_UCAF";
+    }
+
+    static function _3DSECURE_CAVV_ALGORITHM()
+    {
+        return "_3DSECURE_CAVV_ALGORITHM";
+    }
+
+    static function _3DSECURE_LOOKUP_SIGNATURE()
+    {
+        return "_3DSECURE_LOOKUP_SIGNATURE";
+    }
+
+    static function _3DSECURE_XID()
+    {
+        return "_3DSECURE_XID";
+    }
+
+    static function _3DSECURE_ACS_TRANSACTION_ID()
+    {
+        return "_3DSECURE_ACS_TRANSACTION_ID";
+    }
+
+    static function _3DSECURE_THREE_DS_SERVER_TRANSACTION_ID()
+    {
+        return "_3DSECURE_THREE_DS_SERVER_TRANSACTION_ID";
+    }
+
+    static function _3DSECURE_LOOKUP_CHALLENGE_INDICATOR()
+    {
+        return "_3DSECURE_LOOKUP_CHALLENGE_INDICATOR";
+    }
+
+    static function _3DSECURE_CHALLENGE_MANDATED_INDICATOR()
+    {
+        return "_3DSECURE_CHALLENGE_MANDATED_INDICATOR";
+    }
+
+    static function _3DSECURE_VERSTATUS()
+    {
+        return "_3DSECURE_VERSTATUS";
+    }
+
+    static function _3DSECURE_LOOKUP_REFERENCE_GUID()
+    {
+        return "_3DSECURE_LOOKUP_REFERENCE_GUID";
+    }
+
 }

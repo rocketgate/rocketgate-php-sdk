@@ -213,7 +213,7 @@ class GatewayRequest extends GatewayParameterList
     {
         return "cloneToCustomerID";
     }
-    
+
     static function COF_FRAMEWORK()
     {
         return "cofFramework";
@@ -299,6 +299,11 @@ class GatewayRequest extends GatewayParameterList
         return "merchantAccount";
     }
 
+    static function PREFERRED_MERCHANT_ACCOUNT()
+    {
+        return "preferredMerchantAccount";
+    }
+
     static function MERCHANT_CUSTOMER_ID()
     {
         return "merchantCustomerID";
@@ -359,6 +364,11 @@ class GatewayRequest extends GatewayParameterList
         return "payInfoTransactID";
     }
 
+    static function PROCESSOR_3DS()
+    {
+        return "PROCESSOR3DS";
+    }
+
     static function REBILL_FREQUENCY()
     {
         return "rebillFrequency";
@@ -394,9 +404,24 @@ class GatewayRequest extends GatewayParameterList
         return "rebillResume";
     }
 
+    static function REBILL_RESCHEDULE()
+    {
+        return "REBILLRESCHEDULE";
+    }
+
     static function REFERENCE_GUID()
     {
         return "referenceGUID";
+    }
+
+    static function REFERENCE_SCHEME_TRANSACTION_ID()
+    {
+        return "schemeTranId";
+    }
+
+    static function REFERENCE_SCHEME_SETTLEMENT_DATE()
+    {
+        return "schemeSettleDate";
     }
 
     static function REFERRAL_NO()
@@ -529,6 +554,24 @@ class GatewayRequest extends GatewayParameterList
         return "THREEDVERSION"; 
     }
 	
+	/*
+	Whether or not to request a challenge step-up flow from the ACS
+	01 - No preference
+	02 - No challenge requested
+	03 - Challenge requested (3DS Requestor Preference)
+	04 - Challenge requested (Mandate)
+	*/
+	static function _3DSECURE_LOOKUP_CHALLENGE_INDICATOR()
+	{
+		return "_3DSECURE_LOOKUP_CHALLENGE_INDICATOR";
+	}
+	
+	//This is  used to transmit whether or not a challenge was attempted to the ACS (TRUE/FALSE)
+	static function _3DSECURE_CHALLENGE_MANDATED_INDICATOR()
+	{
+		return "_3DSECURE_CHALLENGE_MANDATED_INDICATOR";
+	}
+	
     static function _3DSECURE_THREE_DS_SERVER_TRANSACTION_ID() 
     { 
         return "_3DSECURE_THREE_DS_SERVER_TRANSACTION_ID"; 
@@ -557,7 +600,37 @@ class GatewayRequest extends GatewayParameterList
     static function _3D_CAVV_ALGORITHM() 
     { 
         return "THREEDCAVVALGORITHM"; 
-    }	
+    }
+
+    static function BROWSER_JAVA_ENABLED()
+    {
+        return "BrowserJavaEnabled";
+    }
+
+    static function BROWSER_LANGUAGE()
+    {
+        return "BrowserLanguage";
+    }
+
+    static function BROWSER_COLOR_DEPTH()
+    {
+        return "BrowserColorDepth";
+    }
+
+    static function BROWSER_SCREEN_HEIGHT()
+    {
+        return "BrowserScreenHeight";
+    }
+
+    static function BROWSER_SCREEN_WIDTH()
+    {
+        return "BrowserScreenWidth";
+    }
+
+    static function BROWSER_TIME_ZONE()
+    {
+        return "BrowserTimeZone";
+    }
 
     static function FAILED_SERVER()
     {
@@ -619,5 +692,20 @@ class GatewayRequest extends GatewayParameterList
     static function GATEWAY_READ_TIMEOUT()
     {
         return "gatewayReadTimeout";
+    }
+
+    static function FAILURE_URL()
+    {
+        return "FAILUREURL";
+    }
+
+    static function SUCCESS_URL()
+    {
+        return "SUCCESSURL";
+    }
+
+    static function MERCHANT_CASCADED_AUTH()
+    {
+        return "MERCHANTCASCADEDAUTH";
     }
 }
