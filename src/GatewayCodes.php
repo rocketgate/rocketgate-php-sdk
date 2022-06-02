@@ -123,7 +123,7 @@ class GatewayCodes {
     const REASON_3DSECURE_INITIATION              = 225;
 	const REASON_3DSECURE_FRICTIONLESS_FAILED_AUTH = 227;
 	const REASON_3DSECURE_SCA_REQUIRED            = 228;
-	
+
     const REASON_DNS_FAILURE               = 300;
     const REASON_UNABLE_TO_CONNECT         = 301;
     const REASON_REQUEST_XMIT_ERROR        = 302;
@@ -207,4 +207,5 @@ class GatewayCodes {
     const REASON_INVALID_SUBMERCHANT_ID      = 455;
     const REASON_INVALID_COF_FRAMEWORK       = 458;
     const REASON_INVALID_REFERENCE_SCHEME_TRANSACTION = 459;
+    const REASON_INVALID_CUSTOMER_ADDRESS    = 460;
 }
