@@ -18,7 +18,12 @@
         "ext-curl": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5",
-        "suin/phpcs-psr4-sniff": "^2.0"
+        "phpunit/phpunit": "^8",
+        "suin/phpcs-psr4-sniff": "^3.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

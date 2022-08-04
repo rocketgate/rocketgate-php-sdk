@@ -15,7 +15,7 @@ our old (legacy) PHP sdks: https://github.com/rocketgate/rocketgate-php-legacy-s
 Install with composer (available on packagist.org):
 
 ```sh
-composer require --update-no-dev rocketgate/sdk
+composer update
 ```
 
 ## Installation without composer
@@ -84,7 +84,7 @@ docker exec -it $(docker-compose ps -q --filter name=cli_php) bash startup.sh
 ```
 
 ## Important notes
-- To run tests PHP >=7.0 is required.
+- To run tests PHP >=8.0 is required.
 - Startup script `startup.sh` installs composer PHP dependencies and run complete test suite.
 - Output should look like this:
   ```
@@ -93,9 +93,9 @@ docker exec -it $(docker-compose ps -q --filter name=cli_php) bash startup.sh
   Installing dependencies (including require-dev) from lock file
   Nothing to install or update
   Generating autoload files
-  PHPUnit 6.5.14 by Sebastian Bergmann and contributors.
+  PHPUnit 8.5.28 by Sebastian Bergmann and contributors.
   
-  Runtime:       PHP 7.2.14 with Xdebug 2.6.1
+  Runtime:       PHP 8.1.9 with Xdebug 3.1.5
   Configuration: /var/client/phpunit.xml
   
   ..........................                                        26 / 26 (100%)
