@@ -3,19 +3,26 @@
 Rocketgate Gateway PHP SDK
 ===========
 
-This library is __compatible__ with PHP 5.6, although we highly recommend
-to migrate your project to PHP 7.2 or greater, to avoid security breaches 
+This library is compatible with PHP 8.0 or greater 
 (refer to PHP Supported Versions [here](https://www.php.net/supported-versions.php)).
 
 This library supports Composer and Namespaces and thus is NOT backwards compatible with 
 our old (legacy) PHP sdks: https://github.com/rocketgate/rocketgate-php-legacy-sdk
+
+## Project structure
+/examples - contains sample usages of the Gateway SDK for a variety of purchase scenarios to assist with your integration
+
+/src - contains core implementation of the Gateway SDK
+
+/tests - contains integration examples with Rocketgate Gateway that can be run with phpunit as an integration test suite
+
 
 ## Installation using composer
 
 Install with composer (available on packagist.org):
 
 ```sh
-composer update
+composer require --update-no-dev rocketgate/sdk
 ```
 
 ## Installation without composer
@@ -60,9 +67,26 @@ $request->Set(GatewayRequest::MERCHANT_PASSWORD(), "testpassword");
 Integration examples with Rocketgate Gateway are placed under `/tests` folder.  
 
 ## Run full test suite (without RG docker container)
-
+From Bash shell
 ```sh
 $ sh vendor/rocketgate/sdk/startup.sh
+```
+
+Manually from sdk folder (/vendor/rocketgate/sdk)
+```sh
+$ ../../bin/phpunit
+```
+
+## Run individual tests
+From sdk folder (/vendor/rocketgate/sdk)
+```sh
+$ ../../bin/phpunit ./tests/AuthOnlyTest.php
+```
+
+## Run individual example scripts
+From sdk folder (requires php executable on system $PATH)
+```sh
+$ php ./examples/Purchase.php
 ```
 
 ## Run full test suite (with RG docker container)
@@ -73,7 +97,7 @@ We recommend using both [Docker](https://docs.docker.com/install/linux/docker-ce
 1. Start docker container.
  
 ```sh
-$ docker-compose up -d
+docker-compose up -d
 ```
 The command above might take longer at first execution because all PHP Docker container 
 dependencies will be downloaded and installed.
