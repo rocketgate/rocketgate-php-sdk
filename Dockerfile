@@ -1,4 +1,4 @@
-FROM php:8.1.9-cli
+FROM php:8.0-cli
 
 RUN mkdir -p /var/client/
 WORKDIR /var/client/
