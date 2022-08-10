@@ -74,19 +74,19 @@ $ sh vendor/rocketgate/sdk/startup.sh
 
 Manually from sdk folder (/vendor/rocketgate/sdk)
 ```sh
-$ ../../bin/phpunit
+$ ./vendor/bin/phpunit
 ```
 
 ## Run individual tests
 From sdk folder (/vendor/rocketgate/sdk)
 ```sh
-$ ../../bin/phpunit ./tests/AuthOnlyTest.php
+$ ./vendor/bin/phpunit ./tests/AuthOnlyTest.php
 ```
 
 ## Run individual example scripts
-From sdk folder (requires php executable on system $PATH)
+From examples folder  (requires php executable on system $PATH)
 ```sh
-$ php ./examples/Purchase.php
+$ php ./Purchase.php
 ```
 
 ## Run full test suite (with RG docker container)
