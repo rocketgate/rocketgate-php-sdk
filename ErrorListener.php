@@ -35,7 +35,7 @@ class ErrorListener implements TestListener
 {
     use TestListenerDefaultImplementation;
 
-    public function addFailure(Test $test, AssertionFailedError $e, $time)
+    public function addFailure(Test $test, AssertionFailedError $e, $time) : void
     {
         if ($test instanceof BaseTestCase) {
             $response = $test->getResponse();

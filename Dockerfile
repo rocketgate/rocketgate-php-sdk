@@ -1,4 +1,4 @@
-FROM php:7.2-cli
+FROM php:8.0-cli
 
 RUN mkdir -p /var/client/
 WORKDIR /var/client/
@@ -17,7 +17,7 @@ RUN pecl install zip\
     && docker-php-ext-enable zip
 
 # Error log
-RUN echo "error_log = /var/log/php_errors.log" >> $PHP_INI_DIR/php.ini \\
+RUN echo "error_log = /var/log/php_errors.log" >> $PHP_INI_DIR/php.ini \
     && touch /var/log/php_errors.log
 
 # Run tail to keep tty available
