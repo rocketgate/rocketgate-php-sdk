@@ -11,8 +11,8 @@ namespace RocketGate\Sdk;
 class GatewayChecksum
 {
     public static $checksum = "";
-    public static $baseChecksum = "0768ad22de7968cf705633bb61297c13";
-    public static $versionNo = "P8.0";
+    public static $baseChecksum = "2317383ab360d498c3abae7e3d0d4709";
+    public static $versionNo = "P9.0";
 
 //////////////////////////////////////////////////////////////////////
 //
