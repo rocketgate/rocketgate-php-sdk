@@ -551,4 +551,14 @@ class GatewayResponse extends GatewayParameterList
         return "_3DSECURE_LOOKUP_REFERENCE_GUID";
     }
 
+    static function UDF01()
+    {
+        return "UDF01";
+    }
+
+    static function UDF02()
+    {
+        return "UDF02";
+    }
+
 }
