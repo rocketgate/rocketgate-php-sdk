@@ -714,17 +714,17 @@ class GatewayRequest extends GatewayParameterList
         return "MERCHANTCASCADEDAUTH";
     }
 
-    static function STYLE()
+    static function STYLE_SHEET()
     {
         return "style";
     }
 
-    static function STYLE2()
+    static function STYLE_SHEET2()
     {
         return "style2";
     }
 
-    static function STYLE3()
+    static function STYLE_SHEET3()
     {
         return "style3";
     }
