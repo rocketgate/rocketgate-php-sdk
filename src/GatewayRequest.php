@@ -728,4 +728,9 @@ class GatewayRequest extends GatewayParameterList
     {
         return "style3";
     }
+
+    static function TRANSLATIONS()
+    {
+        return "translations";
+    }
 }
