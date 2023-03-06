@@ -409,6 +409,11 @@ class GatewayRequest extends GatewayParameterList
         return "REBILLRESCHEDULE";
     }
 
+    static function REBILL_REACTIVATE()
+    {
+        return "REBILLREACTIVATE";
+    }
+
     static function REFERENCE_GUID()
     {
         return "referenceGUID";
@@ -707,6 +712,26 @@ class GatewayRequest extends GatewayParameterList
     static function MERCHANT_CASCADED_AUTH()
     {
         return "MERCHANTCASCADEDAUTH";
+    }
+
+    static function STYLE_SHEET()
+    {
+        return "style";
+    }
+
+    static function STYLE_SHEET2()
+    {
+        return "style2";
+    }
+
+    static function STYLE_SHEET3()
+    {
+        return "style3";
+    }
+
+    static function TRANSLATIONS()
+    {
+        return "translations";
     }
     static function ALLOW_CARD_DEBIT_CREDIT()
     {

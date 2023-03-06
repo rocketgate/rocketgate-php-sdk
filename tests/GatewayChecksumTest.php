@@ -10,7 +10,7 @@ class GatewayChecksumTest extends TestCase
     public function testComplianceModifications()
     {
         GatewayChecksum::SetVersion();
-        $this->assertNotContains(
+        $this->assertStringNotContainsString(
             "m",
             GatewayChecksum::$versionNo,
             "Modified version. Current checksum " . GatewayChecksum::$checksum .
