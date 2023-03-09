@@ -733,4 +733,12 @@ class GatewayRequest extends GatewayParameterList
     {
         return "translations";
     }
+    static function ALLOW_CARD_DEBIT_CREDIT()
+    {
+        return "ALLOW_CARD_DEBIT_CREDIT";
+    }
+    static function SHOW_PAYMENT_FORM()
+    {
+        return "SHOW_PAYMENT_FORM";
+    }
 }
