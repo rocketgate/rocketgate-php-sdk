@@ -524,6 +524,11 @@ class GatewayRequest extends GatewayParameterList
         return "xsellMerchantID";
     }
 
+    static function XSELL_MERCHANT_ACCOUNT()
+    {
+        return "xsellMerchantAccount";
+    }
+
     static function XSELL_CUSTOMER_ID()
     {
         return "xsellCustomerID";
