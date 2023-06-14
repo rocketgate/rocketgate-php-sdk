@@ -429,7 +429,9 @@ class GatewayService
             if ($request->Get("gatewayServer") == null) {
                 $request->Set("gatewayServer", $urlBits['host']);
             }
-            $request->Set("gatewayProtocol", $urlBits['scheme']);
+            if (array_key_exists("scheme", $urlBits)) {
+                $request->Set("gatewayProtocol", $urlBits['scheme']);
+            }
             if (array_key_exists("port", $urlBits)) {
                 $request->Set("gatewayPortNo", $urlBits['port']);
             }
@@ -562,7 +564,9 @@ class GatewayService
             if ($request->Get("gatewayServer") == null) {
                 $request->Set("gatewayServer", $urlBits['host']);
             }
-            $request->Set("gatewayProtocol", $urlBits['scheme']);
+            if (array_key_exists("scheme", $urlBits)) {
+                $request->Set("gatewayProtocol", $urlBits['scheme']);
+            }
             if (array_key_exists("port", $urlBits)) {
                 $request->Set("gatewayPortNo", $urlBits['port']);
             }
