@@ -295,7 +295,7 @@ class GatewayService
   {
     $request->Set("gatewayServlet", "/hostedpage/servlet/BuildPaymentLinkSubmit");
     $this->PerformTransaction($request, $response);
-    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::REASON_SUCCESS &&
+    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::RESPONSE_SUCCESS &&
         $response->Get(GatewayResponse::PAYMENT_LINK_URL()) != NULL);
   }
 
