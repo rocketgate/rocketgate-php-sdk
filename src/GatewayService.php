@@ -56,6 +56,11 @@ class GatewayService
     private $rocketGateLatestExecutionTime = 0.0;  // Latest request execution time
     private $rocketGateLatestConnectionTime = 0.0; // Latest request connection time
 
+//
+// Optional curl callback function before curl_exec()
+//
+    private $curlCallback;
+
 //////////////////////////////////////////////////////////////////////
 //
 //	GatewayService() - Constructor for class.
@@ -402,6 +407,18 @@ class GatewayService
         $this->rocketGateReadTimeout = $timeout;// Number of seconds
     }
 
+//////////////////////////////////////////////////////////////////////
+//
+//	SetCurlCallback() - Set optional curl callback
+//			 that will allow to manipulate
+//			 with CURL instance before curl_exec().
+//
+//////////////////////////////////////////////////////////////////////
+//
+    function SetCurlCallback($callback)
+    {
+        $this->curlCallback = $callback;
+    }
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -818,17 +835,27 @@ class GatewayService
         curl_setopt($handle, CURLOPT_HTTPHEADER, Array("Content-Type: text/xml"));
 //////////////////////////////////////////////////////////////////////
 
+
+//
+//	Apply optional curl callback if available
+//
+        if (is_callable($this->curlCallback)) {
+            $handle = call_user_func($this->curlCallback, $handle);
+        }
+
 //
 //	Execute the operation.
 //
         $results = curl_exec($handle);// Execute the operation
+//
+//	Save current CURL info fields
+//
+        $this->rocketGateLatestConnectionTime = curl_getinfo($handle, CURLINFO_CONNECT_TIME);
+        $this->rocketGateLatestExecutionTime  = curl_getinfo($handle, CURLINFO_TOTAL_TIME);
+        $this->rocketGateLatestResponseCode   = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+
         if (!($results)) {// Did it fail?
             $errorCode = curl_errno($handle);// Get the error code
-            if (!$errorCode) {
-                $this->rocketGateLatestConnectionTime = curl_getinfo($handle, CURLINFO_CONNECT_TIME);
-                $this->rocketGateLatestExecutionTime  = curl_getinfo($handle, CURLINFO_TOTAL_TIME);
-                $this->rocketGateLatestResponseCode   = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-            }
             $errorString = curl_error($handle);// Get the error text
             curl_close($handle);// Done with handle
 
