@@ -847,15 +847,13 @@ class GatewayService
 //	Execute the operation.
 //
         $results = curl_exec($handle);// Execute the operation
-//
-//	Save current CURL info fields
-//
-        $this->rocketGateLatestConnectionTime = curl_getinfo($handle, CURLINFO_CONNECT_TIME);
-        $this->rocketGateLatestExecutionTime  = curl_getinfo($handle, CURLINFO_TOTAL_TIME);
-        $this->rocketGateLatestResponseCode   = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
         if (!($results)) {// Did it fail?
             $errorCode = curl_errno($handle);// Get the error code
+            if (!$errorCode) {
+                $this->rocketGateLatestConnectionTime = curl_getinfo($handle, CURLINFO_CONNECT_TIME);
+                $this->rocketGateLatestExecutionTime  = curl_getinfo($handle, CURLINFO_TOTAL_TIME);
+                $this->rocketGateLatestResponseCode   = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+            }
             $errorString = curl_error($handle);// Get the error text
             curl_close($handle);// Done with handle
 
