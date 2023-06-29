@@ -295,7 +295,7 @@ class GatewayService
   {
     if($request->Get(GatewayRequest::EMBEDDED_FIELDS_TOKEN()) != null) {
         $embeddedFieldsToken = $request->Get(GatewayRequest::EMBEDDED_FIELDS_TOKEN());
-        $gatewayURL = str_replace("EmbeddedFieldsProxy", "BuildPaymentLink", $embeddedFieldsToken);
+        $gatewayURL = str_replace("EmbeddedFieldsProxy", "BuildPaymentLinkSubmit", $embeddedFieldsToken);
         $request->Set(GatewayRequest::GATEWAY_URL(), $gatewayURL);
     } else {
         $request->Set(GatewayRequest::GATEWAY_SERVLET(), "/hostedpage/servlet/BuildPaymentLinkSubmit");
