@@ -298,7 +298,7 @@ class GatewayService
         $gatewayURL = str_replace("EmbeddedFieldsProxy", "BuildPaymentLink", $embeddedFieldsToken);
         $request->Set(GatewayRequest::GATEWAY_URL(), $gatewayURL);
     } else {
-        $request->Set(GatewayRequest::GATEWAY_SERVLET(), "/hostedpage/servlet/BuildPaymentLinkSubmit");   
+        $request->Set(GatewayRequest::GATEWAY_SERVLET(), "/hostedpage/servlet/BuildPaymentLinkSubmit");
     }
     $this->PerformTransaction($request, $response);
     return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::REASON_SUCCESS &&
