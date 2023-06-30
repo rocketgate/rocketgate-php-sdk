@@ -298,7 +298,13 @@ class GatewayService
 //	
   function BuildPaymentLink($request, $response)
   {
-    $request->Set("gatewayServlet", "/hostedpage/servlet/BuildPaymentLinkSubmit");
+    if($request->Get(GatewayRequest::EMBEDDED_FIELDS_TOKEN()) != null) {
+        $embeddedFieldsToken = $request->Get(GatewayRequest::EMBEDDED_FIELDS_TOKEN());
+        $gatewayURL = str_replace("EmbeddedFieldsProxy", "BuildPaymentLinkSubmit", $embeddedFieldsToken);
+        $request->Set(GatewayRequest::GATEWAY_URL(), $gatewayURL);
+    } else {
+        $request->Set(GatewayRequest::GATEWAY_SERVLET(), "/hostedpage/servlet/BuildPaymentLinkSubmit");
+    }
     $this->PerformTransaction($request, $response);
     return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::RESPONSE_SUCCESS &&
         $response->Get(GatewayResponse::PAYMENT_LINK_URL()) != NULL);
