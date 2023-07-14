@@ -769,4 +769,9 @@ class GatewayRequest extends GatewayParameterList
     {
         return "GOOGLEPAYTOKEN";
     }
+
+    static function ONCLICK_LOGO_URL()
+    {
+        return "onclickLogoURL";
+    }
 }
