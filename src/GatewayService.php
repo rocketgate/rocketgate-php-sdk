@@ -714,7 +714,6 @@ class GatewayService
 //	a string that can be transmitted.
 //
         $response->Reset();// Clear old contents
-        $requestBytes = $request->ToXMLString();// Change to XML request
 
 //
 //	Gather override attibutes used for the connection URL.
@@ -798,41 +797,9 @@ class GatewayService
 //	Setup the call to the URL.
 //
         curl_setopt($handle, CURLOPT_POST, true);
-        curl_setopt($handle, CURLOPT_POSTFIELDS, $requestBytes);
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($handle, CURLOPT_URL, $url);
         curl_setopt($handle, CURLOPT_FAILONERROR, true);
-
-//////////////////////////////////////////////////////////////////////
-//
-//	04-30-2013	darcy
-//
-//	Updated user agent.
-//
-//	12-20-2011	darcy
-//
-//	Updated user agent.
-//
-//	08-25-2011	darcy
-//
-//	Updated user agent.
-//
-//	05-31-2009	darcy
-//
-//	Updated the user agent.
-//
-//	04-27-2009	darcy
-//
-//	Set the user-agent.
-//
-//    curl_setopt($handle, CURLOPT_USERAGENT, "RG PHP Client 2.0");
-//    curl_setopt($handle, CURLOPT_USERAGENT, "RG PHP Client 2.1");
-//    curl_setopt($handle, CURLOPT_USERAGENT, "RG PHP Client 3.0");
-//
-//  12-11-2017	Jason	Set the user-agent dynamically
-        curl_setopt($handle, CURLOPT_USERAGENT, "RG PHP Client " . GatewayChecksum::$versionNo);
-//
-//////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -841,18 +808,52 @@ class GatewayService
         curl_setopt($handle, CURLOPT_HTTPHEADER, Array("Content-Type: text/xml"));
 //////////////////////////////////////////////////////////////////////
 
+        curl_setopt($handle, CURLOPT_HEADER, true);
 
 //
 //	Apply optional curl callback if available
 //
         if (is_callable($this->curlCallback)) {
+            // indicate in version that a user function has been used
+            $request->Set(GatewayRequest::VERSION_INDICATOR(),
+                GatewayChecksum::$versionNo. "c");
+
+            // generate and populate request to curl object with the new version
+            $requestBytes = $request->ToXMLString();// Change to XML request
+            curl_setopt($handle, CURLOPT_USERAGENT, "RG PHP Client " . GatewayChecksum::$versionNo . "c");
+            curl_setopt($handle, CURLOPT_POSTFIELDS, $requestBytes);
+
+            // call curl callback
             $handle = call_user_func($this->curlCallback, $handle);
+        } else {
+            $requestBytes = $request->ToXMLString();// Change to XML request
+
+            curl_setopt($handle, CURLOPT_USERAGENT, "RG PHP Client " . GatewayChecksum::$versionNo);
+            curl_setopt($handle, CURLOPT_POSTFIELDS, $requestBytes);
         }
 
 //
 //	Execute the operation.
 //
-        $results = curl_exec($handle);// Execute the operation
+        $curlResponse = curl_exec($handle);
+
+        // read results and headers
+        $header_size = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
+        $header = substr($curlResponse, 0, $header_size);
+        $results = substr($curlResponse, $header_size);
+        $response->set(GatewayResponse::CURL_HEADERS(), $header);
+
+        // populate response with transaction duration
+        if ($request->Get(GatewayRequest::TRANSACTION_TYPE()) == "CC_CONFIRM") {
+            $response->set(GatewayResponse::CURL_CONNECTION_TIME(),
+                curl_getinfo($handle, CURLINFO_CONNECT_TIME) + $response->get(GatewayResponse::CURL_CONNECTION_TIME()));
+            $response->set(GatewayResponse::CURL_EXECUTION_TIME(),
+                curl_getinfo($handle, CURLINFO_TOTAL_TIME) + $response->get(GatewayResponse::CURL_EXECUTION_TIME()));
+        } else {
+            $response->set(GatewayResponse::CURL_CONNECTION_TIME(), curl_getinfo($handle, CURLINFO_CONNECT_TIME));
+            $response->set(GatewayResponse::CURL_EXECUTION_TIME(), curl_getinfo($handle, CURLINFO_TOTAL_TIME));
+        }
+
         if (!($results)) {// Did it fail?
             $errorCode = curl_errno($handle);// Get the error code
             if (!$errorCode) {

@@ -266,6 +266,21 @@ class GatewayResponse extends GatewayParameterList
         return "cavvResponse";
     }
 
+    static function CURL_HEADERS()
+    {
+        return "curlHeaders";
+    }
+
+    static function CURL_CONNECTION_TIME()
+    {
+        return "curlConnectionTime";
+    }
+
+    static function CURL_EXECUTION_TIME()
+    {
+        return "curlExecutionTime";
+    }
+
     static function CUSTOMER_FIRSTNAME()
     {
         return "customerFirstName";
