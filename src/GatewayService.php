@@ -666,9 +666,20 @@ class GatewayService
 //	original server for confirmation.
 //
         $confirmResponse = new GatewayResponse();// Need a new response object
+
+        // clone execution time for culmulative duration
+        $confirmResponse.Set(GatewayResponse::CURL_CONNECTION_TIME(),
+            $response.Get(GatewayResponse::CURL_CONNECTION_TIME()));
+        $confirmResponse.Set(GatewayResponse::CURL_EXECUTION_TIME(),
+            $response.Get(GatewayResponse::CURL_EXECUTION_TIME()));
+
         $request->Set(GatewayRequest::TRANSACTION_TYPE(), "CC_CONFIRM");
         $request->Set(GatewayRequest::REFERENCE_GUID(), $confirmGUID);
         if ($this->PerformTargetedTransaction($request, $confirmResponse)) {
+            $response.Set(GatewayResponse::CURL_CONNECTION_TIME(),
+                $confirmResponse.Get(GatewayResponse::CURL_CONNECTION_TIME()));
+            $response.Set(GatewayResponse::CURL_EXECUTION_TIME(),
+                $confirmResponse.Get(GatewayResponse::CURL_EXECUTION_TIME()));
             return true;
         }
 
@@ -681,6 +692,10 @@ class GatewayService
         if ($confirmResponse->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::RESPONSE_SYSTEM_ERROR) {
             sleep(2);  // Short delay
             if ($this->PerformTargetedTransaction($request, $confirmResponse)) {
+                $response.Set(GatewayResponse::CURL_CONNECTION_TIME(),
+                    $confirmResponse.Get(GatewayResponse::CURL_CONNECTION_TIME()));
+                $response.Set(GatewayResponse::CURL_EXECUTION_TIME(),
+                    $confirmResponse.Get(GatewayResponse::CURL_EXECUTION_TIME()));
                 return true;
             }
         }
@@ -696,6 +711,10 @@ class GatewayService
             $confirmResponse->Get(GatewayResponse::REASON_CODE()));
         $response->Set(GatewayResponse::EXCEPTION(),
             $confirmResponse->Get(GatewayResponse::EXCEPTION()));
+        $response.Set(GatewayResponse::CURL_CONNECTION_TIME(),
+            $confirmResponse.Get(GatewayResponse::CURL_CONNECTION_TIME()));
+        $response.Set(GatewayResponse::CURL_EXECUTION_TIME(),
+            $confirmResponse.Get(GatewayResponse::CURL_EXECUTION_TIME()));
         return false;// And quit
     }
 
