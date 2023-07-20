@@ -769,4 +769,9 @@ class GatewayRequest extends GatewayParameterList
     {
         return "GOOGLEPAYTOKEN";
     }
+
+    static function LANGUAGE()
+    {
+        return "LANGUAGE";
+    }
 }
