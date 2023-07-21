@@ -56,6 +56,11 @@ class GatewayService
     private $rocketGateLatestExecutionTime = 0.0;  // Latest request execution time
     private $rocketGateLatestConnectionTime = 0.0; // Latest request connection time
 
+//
+// Optional curl callback function before curl_exec()
+//
+    private $curlCallback;
+
 //////////////////////////////////////////////////////////////////////
 //
 //	GatewayService() - Constructor for class.
@@ -301,7 +306,7 @@ class GatewayService
         $request->Set(GatewayRequest::GATEWAY_SERVLET(), "/hostedpage/servlet/BuildPaymentLinkSubmit");
     }
     $this->PerformTransaction($request, $response);
-    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::REASON_SUCCESS &&
+    return ($response->Get(GatewayResponse::RESPONSE_CODE()) == GatewayCodes::RESPONSE_SUCCESS &&
         $response->Get(GatewayResponse::PAYMENT_LINK_URL()) != NULL);
   }
 
@@ -408,6 +413,18 @@ class GatewayService
         $this->rocketGateReadTimeout = $timeout;// Number of seconds
     }
 
+//////////////////////////////////////////////////////////////////////
+//
+//	SetCurlCallback() - Set optional curl callback
+//			 that will allow to manipulate
+//			 with CURL instance before curl_exec().
+//
+//////////////////////////////////////////////////////////////////////
+//
+    function SetCurlCallback($callback)
+    {
+        $this->curlCallback = $callback;
+    }
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -823,6 +840,14 @@ class GatewayService
 //
         curl_setopt($handle, CURLOPT_HTTPHEADER, Array("Content-Type: text/xml"));
 //////////////////////////////////////////////////////////////////////
+
+
+//
+//	Apply optional curl callback if available
+//
+        if (is_callable($this->curlCallback)) {
+            $handle = call_user_func($this->curlCallback, $handle);
+        }
 
 //
 //	Execute the operation.
