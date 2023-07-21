@@ -772,6 +772,6 @@ class GatewayRequest extends GatewayParameterList
 
     static function ONCLICK_LOGO_URL()
     {
-        return "onclickLogoURL";
+        return "onClickLogoURL";
     }
 }
