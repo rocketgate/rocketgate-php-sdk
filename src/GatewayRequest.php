@@ -770,6 +770,11 @@ class GatewayRequest extends GatewayParameterList
         return "GOOGLEPAYTOKEN";
     }
 
+    static function LANGUAGE()
+    {
+        return "LANGUAGE";
+    }
+
     static function ONCLICK_LOGO_URL()
     {
         return "onClickLogoURL";
