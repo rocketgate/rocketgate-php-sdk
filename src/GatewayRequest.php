@@ -774,4 +774,9 @@ class GatewayRequest extends GatewayParameterList
     {
         return "LANGUAGE";
     }
+
+    static function ONCLICK_LOGO_URL()
+    {
+        return "onClickLogoURL";
+    }
 }
