@@ -524,6 +524,11 @@ class GatewayRequest extends GatewayParameterList
         return "xsellMerchantID";
     }
 
+    static function XSELL_MERCHANT_ACCOUNT()
+    {
+        return "xsellMerchantAccount";
+    }
+
     static function XSELL_CUSTOMER_ID()
     {
         return "xsellCustomerID";
@@ -576,6 +581,22 @@ class GatewayRequest extends GatewayParameterList
 	{
 		return "_3DSECURE_CHALLENGE_MANDATED_INDICATOR";
 	}
+
+    /**
+     * An override field that a merchant can pass in to set the challenge window size to display to the end cardholder.
+     * The ACS will reply with content that is formatted appropriately to this window size to allow for the best user experience.
+     * The sizes are width x height in pixels of the window displayed in the cardholder browser window.
+     * The possible values are:
+     * 01 (250x400)
+     * 02 (390x400)
+     * 03 (500x600)
+     * 04 (600x400)
+     * 05 (Full page)
+     */
+    static function _3DSECURE_ACS_WINDOW_SIZE()
+    {
+        return "_3DSECURE_ACS_WINDOW_SIZE";
+    }
 	
     static function _3DSECURE_THREE_DS_SERVER_TRANSACTION_ID() 
     { 
@@ -747,5 +768,15 @@ class GatewayRequest extends GatewayParameterList
     static function GOOGLE_PAY_TOKEN()
     {
         return "GOOGLEPAYTOKEN";
+    }
+
+    static function LANGUAGE()
+    {
+        return "LANGUAGE";
+    }
+
+    static function ONCLICK_LOGO_URL()
+    {
+        return "onClickLogoURL";
     }
 }
