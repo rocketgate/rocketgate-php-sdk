@@ -440,9 +440,12 @@ class GatewayService
 //
         $fullURL = $request->Get("gatewayURL");
         if ($fullURL == null) {
-            $fullURL = $request->Get("embeddedFieldsToken");
+            if($request->Get(GatewayRequest::PAYMENT_LINK_TOKEN()) != null) {
+                $fullURL = $request->Get(GatewayRequest::PAYMENT_LINK_TOKEN());
+            } else if($request->Get(GatewayRequest::EMBEDDED_FIELDS_TOKEN()) != null) {
+                $fullURL = $request->Get(GatewayRequest::EMBEDDED_FIELDS_TOKEN());
+            }
         }
-
 //
 //	If an override is in use, split it into
 //	its individual elements.
@@ -575,7 +578,11 @@ class GatewayService
 //
         $fullURL = $request->Get("gatewayURL");
         if ($fullURL == null) {
-            $fullURL = $request->Get("embeddedFieldsToken");
+            if($request->Get(GatewayRequest::PAYMENT_LINK_TOKEN()) != null) {
+                $fullURL = $request->Get(GatewayRequest::PAYMENT_LINK_TOKEN());
+            } else if($request->Get(GatewayRequest::EMBEDDED_FIELDS_TOKEN()) != null) {
+                $fullURL = $request->Get(GatewayRequest::EMBEDDED_FIELDS_TOKEN());
+            }
         }
 
 //

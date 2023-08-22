@@ -779,4 +779,10 @@ class GatewayRequest extends GatewayParameterList
     {
         return "onClickLogoURL";
     }
+
+    static function PAYMENT_LINK_TOKEN()
+    {
+        return "PAYMENTLINKTOKEN";
+    }
+
 }
