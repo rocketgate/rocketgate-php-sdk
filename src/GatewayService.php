@@ -433,6 +433,20 @@ class GatewayService
 
 //////////////////////////////////////////////////////////////////////
 //
+//	SetCurlResponseCallback() - Set optional curl response callback
+//			 that will allow to manipulate
+//			 with CURL instance after curl_exec().
+//
+//////////////////////////////////////////////////////////////////////
+//
+    function SetCurlResponseCallback($callback)
+    {
+        $this->curlCallback = $callback;
+    }
+
+
+//////////////////////////////////////////////////////////////////////
+//
 //	PerformTransaction() - Perform the transaction outlined
 //			       in a GatewayRequest.
 //
@@ -873,7 +887,7 @@ class GatewayService
 //
         $results = curl_exec($handle);// Execute the operation
 //
-//  Apply optional curlResponseCallback with 3 parameters (curlHeader, httpResults, sdkRequest) if available
+//  Apply optional curlResponseCallback with 3 parameters (curlHandler, httpResults, sdkRequest) if available
 //
         if (is_callable($this->curlResponseCallback)) {
             $results = call_user_func($this->curlResponseCallback, $handle, $results, $request);
