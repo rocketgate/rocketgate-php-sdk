@@ -61,6 +61,11 @@ class GatewayService
 //
     private $curlCallback;
 
+//
+// Optional curl response callback function after curl_exec()
+//
+    private $curlResponseCallback;
+
 //////////////////////////////////////////////////////////////////////
 //
 //	GatewayService() - Constructor for class.
@@ -720,6 +725,14 @@ class GatewayService
 //	a string that can be transmitted.
 //
         $response->Reset();// Clear old contents
+//
+// indicate in version that a user function has been used
+//
+        if (is_callable($this->curlCallback) || is_callable($this->curlResponseCallback)) {
+            $request->Set(GatewayRequest::VERSION_INDICATOR(),
+                GatewayChecksum::$versionNo. "c");
+        }
+
         $requestBytes = $request->ToXMLString();// Change to XML request
 
 //
@@ -859,6 +872,13 @@ class GatewayService
 //	Execute the operation.
 //
         $results = curl_exec($handle);// Execute the operation
+//
+//  Apply optional curlResponseCallback with 3 parameters (curlHeader, httpResults, sdkRequest) if available
+//
+        if (is_callable($this->curlResponseCallback)) {
+            $results = call_user_func($this->curlResponseCallback, $handle, $results, $request);
+        }
+
         if (!($results)) {// Did it fail?
             $errorCode = curl_errno($handle);// Get the error code
             if (!$errorCode) {
