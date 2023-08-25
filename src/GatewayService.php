@@ -441,7 +441,7 @@ class GatewayService
 //
     function SetCurlResponseCallback($callback)
     {
-        $this->curlCallback = $callback;
+        $this->curlResponseCallback = $callback;
     }
 
 
