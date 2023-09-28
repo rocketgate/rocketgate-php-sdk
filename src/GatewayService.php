@@ -886,11 +886,15 @@ class GatewayService
 //	Execute the operation.
 //
         $results = curl_exec($handle);// Execute the operation
+
+        $header_size = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
+        $results_header = substr($results, 0, $header_size);
+        $results_body = substr($results, $header_size);
 //
-//  Apply optional curlResponseCallback with 3 parameters (curlHandler, httpResults, sdkRequest) if available
+//  Apply optional curlResponseCallback if available
 //
         if (is_callable($this->curlResponseCallback)) {
-            $results = call_user_func($this->curlResponseCallback, $handle, $results, $request);
+            call_user_func($this->curlResponseCallback, $handle, $request, $response, $results_header, $results_body);
         }
 
         if (!($results)) {// Did it fail?
