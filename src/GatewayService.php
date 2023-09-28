@@ -734,6 +734,8 @@ class GatewayService
 //
     function PerformCURLTransaction($host, GatewayRequest $request, GatewayResponse $response)
     {
+
+        $results_headers = [];
 //
 //	Reset the response object and turn the request into
 //	a string that can be transmitted.
@@ -880,6 +882,20 @@ class GatewayService
 //
         if (is_callable($this->curlCallback)) {
             $handle = call_user_func($this->curlCallback, $handle);
+
+            curl_setopt($handle, CURLOPT_HEADERFUNCTION,
+                function($curl, $header) use (&$results_headers)
+                {
+                    $len = strlen($header);
+                    $header = explode(':', $header, 2);
+                    if (count($header) < 2) // ignore invalid headers
+                        return $len;
+
+                    $results_headers[strtolower(trim($header[0]))][] = trim($header[1]);
+
+                    return $len;
+                }
+            );
         }
 
 //
@@ -887,14 +903,11 @@ class GatewayService
 //
         $results = curl_exec($handle);// Execute the operation
 
-        $header_size = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
-        $results_header = substr($results, 0, $header_size);
-        $results_body = substr($results, $header_size);
 //
 //  Apply optional curlResponseCallback if available
 //
         if (is_callable($this->curlResponseCallback)) {
-            call_user_func($this->curlResponseCallback, $handle, $request, $response, $results_header, $results_body);
+            call_user_func($this->curlResponseCallback, $handle, $request, $response, $results_headers, $results);
         }
 
         if (!($results)) {// Did it fail?
