@@ -61,6 +61,11 @@ class GatewayService
 //
     private $curlCallback;
 
+//
+// Optional curl response callback function after curl_exec()
+//
+    private $curlResponseCallback;
+
 //////////////////////////////////////////////////////////////////////
 //
 //	GatewayService() - Constructor for class.
@@ -428,6 +433,20 @@ class GatewayService
 
 //////////////////////////////////////////////////////////////////////
 //
+//	SetCurlResponseCallback() - Set optional curl response callback
+//			 that will allow to manipulate
+//			 with CURL instance after curl_exec().
+//
+//////////////////////////////////////////////////////////////////////
+//
+    function SetCurlResponseCallback($callback)
+    {
+        $this->curlResponseCallback = $callback;
+    }
+
+
+//////////////////////////////////////////////////////////////////////
+//
 //	PerformTransaction() - Perform the transaction outlined
 //			       in a GatewayRequest.
 //
@@ -715,11 +734,21 @@ class GatewayService
 //
     function PerformCURLTransaction($host, GatewayRequest $request, GatewayResponse $response)
     {
+
+        $results_headers = [];
 //
 //	Reset the response object and turn the request into
 //	a string that can be transmitted.
 //
         $response->Reset();// Clear old contents
+//
+// indicate in version that a user function has been used
+//
+        if (is_callable($this->curlCallback) || is_callable($this->curlResponseCallback)) {
+            $request->Set(GatewayRequest::VERSION_INDICATOR(),
+                GatewayChecksum::$versionNo. "c");
+        }
+
         $requestBytes = $request->ToXMLString();// Change to XML request
 
 //
@@ -853,12 +882,34 @@ class GatewayService
 //
         if (is_callable($this->curlCallback)) {
             $handle = call_user_func($this->curlCallback, $handle);
+
+            curl_setopt($handle, CURLOPT_HEADERFUNCTION,
+                function($curl, $header) use (&$results_headers)
+                {
+                    $len = strlen($header);
+                    $header = explode(':', $header, 2);
+                    if (count($header) < 2) // ignore invalid headers
+                        return $len;
+
+                    $results_headers[strtolower(trim($header[0]))][] = trim($header[1]);
+
+                    return $len;
+                }
+            );
         }
 
 //
 //	Execute the operation.
 //
         $results = curl_exec($handle);// Execute the operation
+
+//
+//  Apply optional curlResponseCallback if available
+//
+        if (is_callable($this->curlResponseCallback)) {
+            call_user_func($this->curlResponseCallback, $handle, $request, $response, $results_headers, $results);
+        }
+
         if (!($results)) {// Did it fail?
             $errorCode = curl_errno($handle);// Get the error code
             if (!$errorCode) {
