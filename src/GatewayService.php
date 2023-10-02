@@ -61,6 +61,16 @@ class GatewayService
 //
     private $curlCallback;
 
+//
+// Optional curl response callback function after curl_exec()
+//
+    private $curlResponseCallback;
+
+//
+// Optional response headers
+//
+    private $responseHeaders;
+
 //////////////////////////////////////////////////////////////////////
 //
 //	GatewayService() - Constructor for class.
@@ -428,6 +438,32 @@ class GatewayService
 
 //////////////////////////////////////////////////////////////////////
 //
+//	SetCurlResponseCallback() - Set optional curl response callback
+//			 that will allow to manipulate
+//			 with CURL instance after curl_exec().
+//
+//////////////////////////////////////////////////////////////////////
+//
+    function SetCurlResponseCallback($callback)
+    {
+        $this->curlResponseCallback = $callback;
+    }
+
+//////////////////////////////////////////////////////////////////////
+//
+//	SetResponseHeaders() - Set optional response headers flag that
+//			 enable response_headers argument in curlResponseCallback function
+//
+//////////////////////////////////////////////////////////////////////
+//
+    function SetResponseHeaders($responseHeadersFlag)
+    {
+        $this->responseHeaders = $responseHeadersFlag;
+    }
+
+
+//////////////////////////////////////////////////////////////////////
+//
 //	PerformTransaction() - Perform the transaction outlined
 //			       in a GatewayRequest.
 //
@@ -720,6 +756,13 @@ class GatewayService
 //	a string that can be transmitted.
 //
         $response->Reset();// Clear old contents
+//
+// indicate in version that a user function has been used
+//
+        if (is_callable($this->curlCallback) || is_callable($this->curlResponseCallback)) {
+            $request->Set(GatewayRequest::VERSION_INDICATOR(),
+                GatewayChecksum::$versionNo. "c");
+        }
         $requestBytes = $request->ToXMLString();// Change to XML request
 
 //
@@ -855,10 +898,32 @@ class GatewayService
             $handle = call_user_func($this->curlCallback, $handle);
         }
 
+// By default we don't enable results headers
+        $results_headers = false;
+
+// We enable response headers if is requested
+        if ($this->$responseHeaders) {
+           curl_setopt($handle, CURLOPT_HEADER, true);
+        }
 //
 //	Execute the operation.
 //
         $results = curl_exec($handle);// Execute the operation
+
+// Extract headers and alter $results if we enable response headers
+
+        if ($results && $this->$responseHeaders) {
+           $header_size = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
+           $results_headers = = substr($results, 0, $header_size);
+           $results = substr($results, $header_size);
+        }
+
+//
+//  Apply optional curlResponseCallback if available
+//
+        if (is_callable($this->curlResponseCallback)) {
+            call_user_func($this->curlResponseCallback, $handle, $results, $request, $response, $results_headers);
+        }
 //
 //	Save current CURL info fields
 //
