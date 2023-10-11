@@ -66,11 +66,6 @@ class GatewayService
 //
     private $curlResponseCallback;
 
-//
-// Optional response headers
-//
-    private $responseHeaders;
-
 //////////////////////////////////////////////////////////////////////
 //
 //	GatewayService() - Constructor for class.
@@ -448,19 +443,6 @@ class GatewayService
     {
         $this->curlResponseCallback = $callback;
     }
-
-//////////////////////////////////////////////////////////////////////
-//
-//	SetResponseHeaders() - Set optional response headers flag that
-//			 enable response_headers argument in curlResponseCallback function
-//
-//////////////////////////////////////////////////////////////////////
-//
-    function SetResponseHeaders($responseHeadersFlag)
-    {
-        $this->responseHeaders = $responseHeadersFlag;
-    }
-
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -898,30 +880,27 @@ class GatewayService
             $handle = call_user_func($this->curlCallback, $handle);
         }
 
-// By default we don't enable results headers
-        $results_headers = false;
 
-// We enable response headers if is requested
-        if ($this->$responseHeaders) {
-           curl_setopt($handle, CURLOPT_HEADER, true);
-        }
+// We enable response headers for later split from response
+        curl_setopt($handle, CURLOPT_HEADER, true);
+
 //
 //	Execute the operation.
 //
         $results = curl_exec($handle);// Execute the operation
 
 // Extract headers and alter $results if we enable response headers
-        if ($results && $this->$responseHeaders) {
+        if ($results) {
            $header_size = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
-           $results_headers = = substr($results, 0, $header_size);
-           $results = substr($results, $header_size);
+           $headers = substr($results, 0, $header_size);
+           $body = substr($results, $header_size);
         }
 
 //
 //  Apply optional curlResponseCallback if available
 //
         if (is_callable($this->curlResponseCallback)) {
-            call_user_func($this->curlResponseCallback, $handle, $results, $request, $response, $results_headers);
+            call_user_func($this->curlResponseCallback, $handle, $body, $request, $response, $headers);
         }
 
         if (!($results)) {// Did it fail?
@@ -971,7 +950,7 @@ class GatewayService
 //	object.
 //
         curl_close($handle);// Done with handle
-        $response->SetFromXML($results);// Set response
+        $response->SetFromXML($body);// Set response
         return $response->Get(GatewayResponse::RESPONSE_CODE());
     }
 
