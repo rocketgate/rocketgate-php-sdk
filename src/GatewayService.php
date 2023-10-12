@@ -896,6 +896,10 @@ class GatewayService
 //
         $results = curl_exec($handle);// Execute the operation
 
+// initialize the variables
+        $headers = false;
+        $body = false;
+
 // Extract headers and alter $results if we enable response headers
         if ($results) {
            $header_size = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
