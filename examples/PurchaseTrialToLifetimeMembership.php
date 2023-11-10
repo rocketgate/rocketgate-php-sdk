@@ -66,6 +66,8 @@ $request->Set(GatewayRequest::CUSTOMER_FIRSTNAME(), "Joe");
 $request->Set(GatewayRequest::CUSTOMER_LASTNAME(), "PHPTester");
 $request->Set(GatewayRequest::EMAIL(), "phptest@fakedomain.com");
 
+$request->Set(GatewayRequest::REFERRER_URL(), "https://local.rocketmerchant.com/php-sdk");
+
 $request->Set(GatewayRequest::BILLING_ADDRESS(), "123 Main St");
 $request->Set(GatewayRequest::BILLING_CITY(), "Las Vegas");
 $request->Set(GatewayRequest::BILLING_STATE(), "NV");

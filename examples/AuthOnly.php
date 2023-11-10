@@ -57,6 +57,8 @@ $request->Set(GatewayRequest::EXPIRE_MONTH(), "02");
 $request->Set(GatewayRequest::EXPIRE_YEAR(), "2010");
 $request->Set(GatewayRequest::CVV2(), "999");
 
+$request->Set(GatewayRequest::REFERRER_URL(), "https://local.rocketmerchant.com/php-sdk");
+
 $request->Set(GatewayRequest::CUSTOMER_FIRSTNAME(), "Joe");
 $request->Set(GatewayRequest::CUSTOMER_LASTNAME(), "PHPTester");
 $request->Set(GatewayRequest::EMAIL(), "phptest@fakedomain.com");

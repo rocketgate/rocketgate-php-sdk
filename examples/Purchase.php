@@ -62,6 +62,8 @@ $request->Set(GatewayRequest::CUSTOMER_LASTNAME(), "PHPTester");
 $request->Set(GatewayRequest::EMAIL(), "phptest@fakedomain.com");
 $request->Set(GatewayRequest::IPADDRESS(), $_SERVER["REMOTE_ADDR"] ?? '');
 
+$request->Set(GatewayRequest::REFERRER_URL(), "https://local.rocketmerchant.com/php-sdk");
+
 // $request->Set(GatewayRequest::AFFILIATE(), '1234');
 
 $request->Set(GatewayRequest::BILLING_ADDRESS(), "123 Main St");
