@@ -787,7 +787,7 @@ class GatewayRequest extends GatewayParameterList
 
     static function REFERRER_URL()
     {
-        return "REFERRERURL";
+        return "referrerURL";
     }
 
 }
