@@ -10,9 +10,9 @@ namespace RocketGate\Sdk;
 
 class GatewayChecksum
 {
-    private const VERSION = "P8.14";
+    private const VERSION = "P8.15";
     public static $checksum = "";
-    public static $baseChecksum = "40fbe28e2fb89bed66cc0e5eddc1499a";
+    public static $baseChecksum = "40221c257eb198e0b11ea7e8083327b9";
     public static $versionNo = GatewayChecksum::VERSION;
 
 //////////////////////////////////////////////////////////////////////
