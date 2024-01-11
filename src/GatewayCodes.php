@@ -172,7 +172,6 @@ class GatewayCodes {
     const REASON_INVALID_CUSTDATA_LENGTH     = 412;
     const REASON_INVALID_EXTDATA_LENGTH      = 413;
     const REASON_INVALID_CUSTOMER_ID         = 414;
-    const REASON_INVALID_REFERRER_URL         = 415;
     const REASON_INVALID_CURRENCY            = 418;
     const REASON_INCOMPATIBLE_CURRENCY       = 419;
     const REASON_INVALID_REBILL_ARGS         = 420;
