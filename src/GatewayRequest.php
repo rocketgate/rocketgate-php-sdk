@@ -785,4 +785,9 @@ class GatewayRequest extends GatewayParameterList
         return "PAYMENTLINKTOKEN";
     }
 
+    static function REFERRER_URL()
+    {
+        return "referrerURL";
+    }
+
 }
