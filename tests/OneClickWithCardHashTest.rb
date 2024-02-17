@@ -22,18 +22,27 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 # 
 
+#
+# Example Scenario:
+# $9.99 USD purchase.
+# Subsequently, the user wants to make another $8.99 purchase using the card on file (CardHash)
+#
+
 require_relative 'BaseTestCase'
 module RocketGate
 
 
-class LookupTest < BaseTestCase
+class OneClickWithCardHashTest < BaseTestCase
     def get_test_name
-        "LookupTest"
+        "CardHashTest"
     end
 
     def test_success
+# 9.99/month subscription
         @request.Set(GatewayRequest::CURRENCY, "USD")
-        @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99 now
+        @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99
+
+         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
@@ -41,38 +50,49 @@ class LookupTest < BaseTestCase
         @request.Set(GatewayRequest::BILLING_ZIPCODE, "89141")
         @request.Set(GatewayRequest::BILLING_COUNTRY, "US")
 
+
 # Risk/Scrub Request Setting
         @request.Set(GatewayRequest::SCRUB, "IGNORE")
         @request.Set(GatewayRequest::CVV2_CHECK, "IGNORE")
         @request.Set(GatewayRequest::AVS_CHECK, "IGNORE")
 
+
+
 #
-#	Perform the Auth-Only transaction.
+#	Perform the Purchase transaction.
 #
         assert_equal(true, 
-            @service.PerformAuthOnly(@request, @response),
-            "Perform Auth Only"
+            @service.PerformPurchase(@request, @response),
+            "First purchase for one-click"
         )
 
 
-# Run additional purchase using  MERCHANT_INVOICE_ID
+#
+#      Get the CardHash so we can run the next transaction without needing to store the credit card #.
+#
+        string card_hash = @response.Get(GatewayResponse::CARD_HASH)
+
+
+# Run additional purchase using card_hash
 #
 #  This would normally be two separate processes,
 #  but for example's sake is in one process (thus we clear and set a new GatewayRequest object)
-#  The key values required is MERCHANT_INVOICE_ID.
+#  The key values required are MERCHANT_CUSTOMER_ID and MERCHANT_INVOICE_ID AND CARD_HASH.
 #
         request = GatewayRequest.new
         request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
         request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
+         request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
 
+        request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
         request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
+        request.Set(GatewayRequest::CARD_HASH, card_hash)
 
-#
-#	Perform the lookup transaction.
-#
+        request.Set(GatewayRequest::AMOUNT, "8.99")
+
         assert_equal(true, 
-            @service.PerformLookup(request, @response),
-            "Perform Lookup"
+            @service.PerformPurchase(request, @response),
+            "1Click Purchase"
         )
     end
 end

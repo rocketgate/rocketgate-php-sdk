@@ -26,14 +26,16 @@ require_relative 'BaseTestCase'
 module RocketGate
 
 
-class LookupTest < BaseTestCase
+class AuthTicketTest < BaseTestCase
     def get_test_name
-        "LookupTest"
+        "AuthTicketTest"
     end
 
     def test_success
         @request.Set(GatewayRequest::CURRENCY, "USD")
         @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99 now
+
+         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
@@ -54,25 +56,18 @@ class LookupTest < BaseTestCase
             "Perform Auth Only"
         )
 
-
-# Run additional purchase using  MERCHANT_INVOICE_ID
 #
-#  This would normally be two separate processes,
-#  but for example's sake is in one process (thus we clear and set a new GatewayRequest object)
-#  The key values required is MERCHANT_INVOICE_ID.
+#	Setup the ticket request.
 #
-        request = GatewayRequest.new
-        request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
-        request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
-
-        request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
+        @request.Set(GatewayRequest::TRANSACT_ID,
+            @response.Get(GatewayResponse::TRANSACT_ID))
 
 #
-#	Perform the lookup transaction.
+#	Perform the Ticket transaction.
 #
         assert_equal(true, 
-            @service.PerformLookup(request, @response),
-            "Perform Lookup"
+            @service.PerformTicket(@request, @response),
+            "Perform Ticket"
         )
     end
 end

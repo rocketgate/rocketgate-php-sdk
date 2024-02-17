@@ -22,18 +22,26 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 # 
 
+#
+# Example $9.99 USD monthly subscription purchase.
+# Subsequently, the subscription is set to cancel at the end of the month.
+
 require_relative 'BaseTestCase'
 module RocketGate
 
 
-class LookupTest < BaseTestCase
+class CancelTest < BaseTestCase
     def get_test_name
-        "LookupTest"
+        "CancelTest"
     end
 
     def test_success
+# 9.99/month subscription
         @request.Set(GatewayRequest::CURRENCY, "USD")
         @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99 now
+        @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
+
+        @request.Set(GatewayRequest::USERNAME, "phptest_user")
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
@@ -41,38 +49,37 @@ class LookupTest < BaseTestCase
         @request.Set(GatewayRequest::BILLING_ZIPCODE, "89141")
         @request.Set(GatewayRequest::BILLING_COUNTRY, "US")
 
+
 # Risk/Scrub Request Setting
         @request.Set(GatewayRequest::SCRUB, "IGNORE")
         @request.Set(GatewayRequest::CVV2_CHECK, "IGNORE")
         @request.Set(GatewayRequest::AVS_CHECK, "IGNORE")
 
+
 #
-#	Perform the Auth-Only transaction.
+#	Perform the Purchase transaction.
 #
         assert_equal(true, 
-            @service.PerformAuthOnly(@request, @response),
-            "Perform Auth Only"
+            @service.PerformPurchase(@request, @response),
+            "Perform Purchase"
         )
 
-
-# Run additional purchase using  MERCHANT_INVOICE_ID
-#
-#  This would normally be two separate processes,
-#  but for example's sake is in one process (thus we clear and set a new GatewayRequest object)
-#  The key values required is MERCHANT_INVOICE_ID.
-#
+        # CANCEL MEMBERSHIP
+        #
+        #  This would normally be two separate processes,
+        #  but for example's sake is in one process (thus we clear and set a new GatewayRequest object)
+        #  The key values required are MERCHANT_CUSTOMER_ID and MERCHANT_INVOICE_ID.
+        #
         request = GatewayRequest.new
         request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
         request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
 
+        request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
         request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
 
-#
-#	Perform the lookup transaction.
-#
         assert_equal(true, 
-            @service.PerformLookup(request, @response),
-            "Perform Lookup"
+            @service.PerformRebillCancel(request, @response),
+            "Perform Rebill Cancel"
         )
     end
 end

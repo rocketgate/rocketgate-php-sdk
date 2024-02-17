@@ -22,18 +22,34 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 # 
 
+#
+# Example Scenario:
+# $1.99 3-day trial which renews to $9.99/month subscription.
+# After 1 day the user wants to upgrade immediatly to the full $9.99 subscription
+#
+# The example code below will upgrade the membership immediatly,
+# stop the trial period, bill the user $9.99,
+# and set the monthly rebill cycle starting today.
+#
+
 require_relative 'BaseTestCase'
 module RocketGate
 
 
-class LookupTest < BaseTestCase
+class InstantUpgradeTest < BaseTestCase
     def get_test_name
-        "LookupTest"
+        "InstantUpgradeTest"
     end
 
     def test_success
+# 9.99/month subscription
         @request.Set(GatewayRequest::CURRENCY, "USD")
-        @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99 now
+        @request.Set(GatewayRequest::AMOUNT, "1.99");    # bill 1.99 now
+        @request.Set(GatewayRequest::REBILL_START, "3"); # renew in 3 days
+        @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
+        @request.Set(GatewayRequest::REBILL_AMOUNT, "9.99")
+
+         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
@@ -47,32 +63,34 @@ class LookupTest < BaseTestCase
         @request.Set(GatewayRequest::AVS_CHECK, "IGNORE")
 
 #
-#	Perform the Auth-Only transaction.
+#	Perform the Purchase transaction.
 #
         assert_equal(true, 
-            @service.PerformAuthOnly(@request, @response),
-            "Perform Auth Only"
+            @service.PerformPurchase(@request, @response),
+            "Perform Purchase"
         )
 
-
-# Run additional purchase using  MERCHANT_INVOICE_ID
+# UPGRADE MEMBERSHIP
 #
 #  This would normally be two separate processes,
 #  but for example's sake is in one process (thus we clear and set a new GatewayRequest object)
-#  The key values required is MERCHANT_INVOICE_ID.
+#  The key values required are MERCHANT_CUSTOMER_ID and MERCHANT_INVOICE_ID.
 #
         request = GatewayRequest.new
         request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
         request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
+         request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
 
+        request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
         request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
 
-#
-#	Perform the lookup transaction.
-#
+        request.Set(GatewayRequest::AMOUNT, "9.99");        # bill 9.99 now
+        request.Set(GatewayRequest::REBILL_START,
+            "AUTO");  # automatically set next rebill date = today + frequency.
+
         assert_equal(true, 
-            @service.PerformLookup(request, @response),
-            "Perform Lookup"
+            @service.PerformRebillUpdate(request, @response),
+            "Perform Rebill Update"
         )
     end
 end

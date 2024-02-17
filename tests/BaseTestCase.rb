@@ -35,13 +35,13 @@ module RocketGate
       t = Time.now.to_i.to_s
 
       @customerId = t + '.RubyTest'
-      @invoiceId = t + '.' + getTestName
+      @invoiceId = t + '.' + get_test_name
 
       @request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
       @request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
     end
 
-    def getTestName
+    def get_test_name
       raise 'implement'
     end
   end

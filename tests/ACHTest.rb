@@ -26,53 +26,54 @@ require_relative 'BaseTestCase'
 module RocketGate
 
 
-class LookupTest < BaseTestCase
+class ACHTest < BaseTestCase
     def get_test_name
-        "LookupTest"
+        "ACHTest"
     end
 
     def test_success
-        @request.Set(GatewayRequest::CURRENCY, "USD")
-        @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99 now
-
+#
+#	Provide information about the customer.
+#
+        @request.Set(GatewayRequest::CUSTOMER_FIRSTNAME, "Joe")
+        @request.Set(GatewayRequest::CUSTOMER_LASTNAME, "PHPTester")
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
         @request.Set(GatewayRequest::BILLING_STATE, "NV")
         @request.Set(GatewayRequest::BILLING_ZIPCODE, "89141")
         @request.Set(GatewayRequest::BILLING_COUNTRY, "US")
+        @request.Set(GatewayRequest::IPADDRESS, "10.10.10.10")
+
+#
+#	Provide information about the purchase.
+#
+        @request.Set(GatewayRequest::AMOUNT, "9.99")
+
+#
+#	Provide information about the bank account.
+#
+#	Notes:  Accounts default to 'checking account'.  If the
+#		account is a savings account, set the SAVINGS_ACCOUNT
+#		parameter to TRUE.
+#
+#		SBW requires the last four digits of the customer's
+#		Social Security Number.  This is sent in the SS_NUMBER
+#		parameter.
+#
+        @request.Set(GatewayRequest::ROUTING_NO, "999999999")
+        @request.Set(GatewayRequest::ACCOUNT_NO, "112233")
+        @request.Set(GatewayRequest::SAVINGS_ACCOUNT, "TRUE")
+        @request.Set(GatewayRequest::SS_NUMBER, "1111")
 
 # Risk/Scrub Request Setting
         @request.Set(GatewayRequest::SCRUB, "IGNORE")
-        @request.Set(GatewayRequest::CVV2_CHECK, "IGNORE")
-        @request.Set(GatewayRequest::AVS_CHECK, "IGNORE")
 
 #
-#	Perform the Auth-Only transaction.
+#	Perform the Purchase transaction.
 #
         assert_equal(true, 
-            @service.PerformAuthOnly(@request, @response),
-            "Perform Auth Only"
-        )
-
-
-# Run additional purchase using  MERCHANT_INVOICE_ID
-#
-#  This would normally be two separate processes,
-#  but for example's sake is in one process (thus we clear and set a new GatewayRequest object)
-#  The key values required is MERCHANT_INVOICE_ID.
-#
-        request = GatewayRequest.new
-        request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
-        request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
-
-        request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
-
-#
-#	Perform the lookup transaction.
-#
-        assert_equal(true, 
-            @service.PerformLookup(request, @response),
-            "Perform Lookup"
+            @service.PerformPurchase(@request, @response),
+            "Perform Purchase"
         )
     end
 end
