@@ -33,7 +33,7 @@ class PurchaseTest < BaseTestCase
 
     def test_success
         @request.Set(GatewayRequest::AMOUNT, "9.99")
-         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         @request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")

@@ -45,7 +45,7 @@ class ProRatedUpgradeTest < BaseTestCase
         @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99 now
         @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
 
-         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         @request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
@@ -78,7 +78,7 @@ class ProRatedUpgradeTest < BaseTestCase
         request = GatewayRequest.new
         request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
         request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
-         request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
         request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)

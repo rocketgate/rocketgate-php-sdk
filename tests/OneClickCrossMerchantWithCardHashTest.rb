@@ -32,8 +32,8 @@ class OneClickCrossMerchantWithCardHashTest < BaseTestCase
     end
 
     def test_success
-		string merchant_id_1c = "1256059862"
-		string merchant_password_1c = "LLSgMD8tSkVkZED3"
+		merchant_id_1c = "1256059862"
+		merchant_password_1c = "LLSgMD8tSkVkZED3"
 
 # Example join on Site 1
 		@request.Set(GatewayRequest::MERCHANT_SITE_ID, 1)
@@ -70,8 +70,8 @@ class OneClickCrossMerchantWithCardHashTest < BaseTestCase
 # Run additional purchase using card_hash
 		request.Set(GatewayRequest::CARD_HASH, @response.Get(GatewayResponse::CARD_HASH))
 
-		request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId + "1CTEST")
-		request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId + "1CTEST")
+		request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId << '1CTEST')
+		request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId << '1CTEST')
 
 # Example 1-click on Site 2
 		request.Set(GatewayRequest::MERCHANT_SITE_ID, 2)

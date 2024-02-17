@@ -33,8 +33,8 @@ module RocketGate
 
     def test_success
      time = Time.now.to_i.to_s
-     string cust_id = time + ".PHPTest'
-     string inv_id =  time + ".3DSTestiNov24'
+     cust_id = time << '.PHPTest'
+     inv_id =  time << '.3DSTestiNov24'
 
 
      @request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, cust_id)
@@ -74,7 +74,7 @@ module RocketGate
      #
      @service.PerformPurchase(@request, @response)
 
-     string reason_code = @response.Get(GatewayResponse::REASON_CODE); # reason code 202 is expected
+     reason_code = @response.Get(GatewayResponse::REASON_CODE); # reason code 202 is expected
      assert_equal(true, ( reason_code == 202),
      "Perform 3D Lookup"
 
@@ -93,7 +93,7 @@ module RocketGate
 
    # In a real transaction this would include the PARES returned from the Authentication
    # On dev we send through the SimulatedPARES + TRANSACT_ID
-   string pares = "SimulatedPARES" + @response.Get(GatewayResponse::TRANSACT_ID)
+   pares = "SimulatedPARES" << @response.Get(GatewayResponse::TRANSACT_ID)
    @request.Set(GatewayRequest::PARES, pares )
 
    # Risk/Scrub Request Setting

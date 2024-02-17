@@ -49,7 +49,7 @@ class InstantUpgradeTest < BaseTestCase
         @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
         @request.Set(GatewayRequest::REBILL_AMOUNT, "9.99")
 
-         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         @request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
@@ -79,7 +79,7 @@ class InstantUpgradeTest < BaseTestCase
         request = GatewayRequest.new
         request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
         request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
-         request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
         request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)

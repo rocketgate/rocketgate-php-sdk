@@ -39,7 +39,7 @@ class PurchaseRebillTest < BaseTestCase
         @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
         @request.Set(GatewayRequest::REBILL_AMOUNT, "9.99")
 
-         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         @request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")

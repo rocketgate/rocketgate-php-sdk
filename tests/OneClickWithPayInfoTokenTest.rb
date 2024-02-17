@@ -67,7 +67,7 @@ class OneClickWithPayInfoTokenTest < BaseTestCase
         #
         #      Get the PayInfo Token so we can run the next transaction without needing to store the credit card #.
         #
-        string payinfo_transact_id = @response.Get(GatewayResponse::TRANSACT_ID)
+        payinfo_transact_id = @response.Get(GatewayResponse::TRANSACT_ID)
 
 
         # Run additional purchase using card_hash

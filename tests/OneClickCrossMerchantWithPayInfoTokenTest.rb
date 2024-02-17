@@ -37,8 +37,8 @@ class OneClickCrossMerchantWithPayInfoTokenTest < BaseTestCase
     end
 
     def test_success
-        string merchant_id_1c = "1256059862"
-        string merchant_password_1c = "LLSgMD8tSkVkZED3"
+        merchant_id_1c = "1256059862"
+        merchant_password_1c = "LLSgMD8tSkVkZED3"
 
 # Example join on Site 1
         @request.Set(GatewayRequest::MERCHANT_SITE_ID, 1)
@@ -71,7 +71,7 @@ class OneClickCrossMerchantWithPayInfoTokenTest < BaseTestCase
 #
 #      Get the PayInfo Token so we can run the next transaction without needing to store the credit card #.
 #
-        string payinfo_transact_id = @response.Get(GatewayResponse::TRANSACT_ID)
+        payinfo_transact_id = @response.Get(GatewayResponse::TRANSACT_ID)
 
 # Run additional purchase using card_hash
 #
@@ -88,8 +88,8 @@ class OneClickCrossMerchantWithPayInfoTokenTest < BaseTestCase
 
         request.Set(GatewayRequest::PAYINFO_TRANSACT_ID, payinfo_transact_id)
 
-        request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId + "1CTEST")
-        request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId + "1CTEST")
+        request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId << '1CTEST')
+        request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId << '1CTEST')
 
 # Example 1-click on Site 2
         request.Set(GatewayRequest::MERCHANT_SITE_ID, 2)

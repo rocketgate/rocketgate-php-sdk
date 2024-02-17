@@ -37,7 +37,7 @@ class CancelPromoTest < BaseTestCase
         @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99 now
         @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
 
-         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         @request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")

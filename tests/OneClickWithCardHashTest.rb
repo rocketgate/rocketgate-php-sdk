@@ -42,7 +42,7 @@ class OneClickWithCardHashTest < BaseTestCase
         @request.Set(GatewayRequest::CURRENCY, "USD")
         @request.Set(GatewayRequest::AMOUNT, "9.99");    # bill 9.99
 
-         @request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         @request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
@@ -70,7 +70,7 @@ class OneClickWithCardHashTest < BaseTestCase
 #
 #      Get the CardHash so we can run the next transaction without needing to store the credit card #.
 #
-        string card_hash = @response.Get(GatewayResponse::CARD_HASH)
+        card_hash = @response.Get(GatewayResponse::CARD_HASH)
 
 
 # Run additional purchase using card_hash
@@ -82,7 +82,7 @@ class OneClickWithCardHashTest < BaseTestCase
         request = GatewayRequest.new
         request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
         request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
-         request.Set(GatewayRequest::IPADDRESS, "72.229.28.185")
+         request.Set(GatewayRequest::IPADDRESS, '72.229.28.185')
 
         request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
         request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
