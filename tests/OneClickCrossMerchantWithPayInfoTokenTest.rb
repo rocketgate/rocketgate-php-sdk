@@ -88,8 +88,8 @@ class OneClickCrossMerchantWithPayInfoTokenTest < BaseTestCase
 
         request.Set(GatewayRequest::PAYINFO_TRANSACT_ID, payinfo_transact_id)
 
-        request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId << '1CTEST')
-        request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId << '1CTEST')
+        request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId + '1CTEST')
+        request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId + '1CTEST')
 
 # Example 1-click on Site 2
         request.Set(GatewayRequest::MERCHANT_SITE_ID, 2)

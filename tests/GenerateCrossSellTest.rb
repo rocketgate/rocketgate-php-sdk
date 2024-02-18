@@ -64,7 +64,7 @@ class GenerateCrossSellTest < BaseTestCase
         request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
 
         # Different invoice id for xsell.
-        request.Set(GatewayRequest::MERCHANT_INVOICE_ID, Time.now.to_i.to_s << '.TestGenerateXsell')
+        request.Set(GatewayRequest::MERCHANT_INVOICE_ID, Time.now.to_i.to_s + '.TestGenerateXsell')
 
         # 1.00 Test
         request.Set(GatewayRequest::CURRENCY, "USD")

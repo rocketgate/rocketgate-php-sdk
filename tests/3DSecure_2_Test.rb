@@ -44,8 +44,8 @@ module RocketGate
 
     def test_success
      time = Time.now.to_i.to_s
-     cust_id = time << '.PHPTest'
-     inv_id =  time << '.3DSTest'
+     cust_id = time + '.PHPTest'
+     inv_id =  time + '.3DSTest'
 
 
      @request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, cust_id)
@@ -126,7 +126,7 @@ module RocketGate
 
  # In a real transaction this would include the PARES returned from the Authentication
  # On dev we send through the SimulatedPARES + TRANSACT_ID
- pares = "SimulatedPARES" << @response.Get(GatewayResponse::TRANSACT_ID)
+ pares = "SimulatedPARES" + @response.Get(GatewayResponse::TRANSACT_ID)
  @request.Set(GatewayRequest::PARES, pares )
 
  # Risk/Scrub Request Setting
