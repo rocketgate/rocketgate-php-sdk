@@ -75,7 +75,7 @@ class RebillStatusTest < BaseTestCase
             "Check rebill status"
         )
 
-        assert_nil(
+        assert_equal('',
             @response.Get(GatewayResponse::REBILL_END_DATE),
             "Active user and rebill set"
         )

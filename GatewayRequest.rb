@@ -101,10 +101,10 @@ module RocketGate
     XSELL_MERCHANT_ID = "xsellMerchantID"
     XSELL_CUSTOMER_ID = "xsellCustomerID"
     XSELL_REFERENCE_XACT = "xsellReferenceXact"
-    _3D_CHECK = "ThreeDCheck"
-    _3D_ECI = "ThreeDECI"
-    _3D_CAVV_UCAF = "ThreeDCavvUcaf"
-    _3D_XID = "ThreeDXID"
+    THREED_CHECK = "ThreeDCheck"
+    THREED_ECI = "ThreeDECI"
+    THREED_CAVV_UCAF = "ThreeDCavvUcaf"
+    THREED_XID = "ThreeDXID"
     FAILED_SERVER = "failedServer"
     FAILED_GUID = "failedGUID"
     FAILED_RESPONSE_CODE = "failedResponseCode"
@@ -118,9 +118,17 @@ module RocketGate
     ACCOUNT_NO = "accountNo"
     SS_NUMBER = "ssNumber"
 
-    _3DSECURE_DF_REFERENCE_ID = "_3DSECURE_DF_REFERENCE_ID"
+    THREEDSECURE_DF_REFERENCE_ID = "_3DSECURE_DF_REFERENCE_ID"
 
-    _3DSECURE_REDIRECT_URL = "_3DSECURE_REDIRECT_URL"
+    THREEDSECURE_REDIRECT_URL = "_3DSECURE_REDIRECT_URL"
+
+    BROWSER_JAVA_ENABLED = "BrowserJavaEnabled"
+    BROWSER_LANGUAGE = "BrowserLanguage"
+    BROWSER_COLOR_DEPTH = "BrowserColorDepth"
+    BROWSER_SCREEN_HEIGHT = "BrowserScreenHeight"
+    BROWSER_SCREEN_WIDTH = "BrowserScreenWidth"
+    BROWSER_TIME_ZONE = "BrowserTimeZone"
+
 
 ######################################################################
 #

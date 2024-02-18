@@ -77,7 +77,7 @@ module RocketGate
 
      # Request 3DS
      @request.Set(GatewayRequest::USE_3D_SECURE, "TRUE")
-     @request.Set(GatewayRequest::_3DSECURE_REDIRECT_URL, "https:#fake_url.com")
+     @request.Set(GatewayRequest::THREEDSECURE_REDIRECT_URL, "https:#fake_url.com")
      @request.Set(GatewayRequest::BROWSER_USER_AGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36")
      @request.Set(GatewayRequest::BROWSER_ACCEPT_HEADER, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
 
@@ -87,13 +87,13 @@ module RocketGate
      #
      @service.PerformPurchase(@request, @response)
      reason_code = @response.Get(GatewayResponse::REASON_CODE)
-     assert_equal(true, (reason_code == 225),
+     assert_equal(true, (reason_code == '225'),
      "Perform BIN intelligence"
    )
 
    # Recycle the first request and add new fields
-   @request.Set(GatewayRequest::_3DSECURE_DF_REFERENCE_ID, "fake")
-   @request.Set(GatewayRequest::_3DSECURE_REDIRECT_URL, "fake")
+   @request.Set(GatewayRequest::THREEDSECURE_DF_REFERENCE_ID, "fake")
+   @request.Set(GatewayRequest::THREEDSECURE_REDIRECT_URL, "fake")
 
    @request.Set(GatewayRequest::BROWSER_JAVA_ENABLED, "TRUE")
    @request.Set(GatewayRequest::BROWSER_LANGUAGE, "en-CA")
@@ -108,7 +108,7 @@ module RocketGate
    @service.PerformPurchase(@request, @response)
 
    reason_code = @response.Get(GatewayResponse::REASON_CODE)
-   assert_equal(true, (reason_code == 202),
+   assert_equal(true, (reason_code == '202'),
    "Perform 3D Lookup"
  )
 

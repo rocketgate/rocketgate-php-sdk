@@ -75,7 +75,7 @@ module RocketGate
      @service.PerformPurchase(@request, @response)
 
      reason_code = @response.Get(GatewayResponse::REASON_CODE); # reason code 202 is expected
-     assert_equal(true, ( reason_code == 202),
+     assert_equal(true, ( reason_code == '202'),
      "Perform 3D Lookup"
 
    )
