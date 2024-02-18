@@ -664,6 +664,16 @@ module RocketGate
         results = self.PerformTransaction(request, response)
       end
     end
+######################################################################
+#
+#	PerformCardUpload() - Upload card data to the servers.
+#
+######################################################################
+#
+    def PerformCardUpload(request, response)
+      request.Set(GatewayRequest::TRANSACTION_TYPE, "CARDUPLOAD")
+      self.PerformTransaction(request, response)
+    end
 #
   end
 end
