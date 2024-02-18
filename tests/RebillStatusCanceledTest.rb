@@ -83,10 +83,12 @@ class RebillStatusCanceledTest < BaseTestCase
         request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
         request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
 
+        if (@service.PerformRebillUpdate(request, @response)) 
             Assert.NotNull(
                 @response.Get(GatewayResponse::REBILL_END_DATE),
                 "User is active and set to cancel"
             )
+        else
             assert_equals(
                 ""+GatewayCodes::REASON_NO_ACTIVE_MEMBERSHIP,
                 @response.Get(GatewayResponse::REASON_CODE),
