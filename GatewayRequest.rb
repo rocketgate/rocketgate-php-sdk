@@ -113,6 +113,14 @@ module RocketGate
     GATEWAY_CONNECT_TIMEOUT = "gatewayConnectTimeout"
     GATEWAY_READ_TIMEOUT = "gatewayReadTimeout"
 
+    ROUTING_NO = "routingNo"
+    SAVINGS_ACCOUNT = "savingsAccount"
+    ACCOUNT_NO = "accountNo"
+    SS_NUMBER = "ssNumber"
+
+    _3DSECURE_DF_REFERENCE_ID = "_3DSECURE_DF_REFERENCE_ID"
+
+    _3DSECURE_REDIRECT_URL = "_3DSECURE_REDIRECT_URL"
 
 ######################################################################
 #

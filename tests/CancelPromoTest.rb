@@ -67,7 +67,7 @@ class CancelPromoTest < BaseTestCase
 #  Modify from 9.99/month to 29.95/quarter
 #
 
-        @request = new GatewayRequest
+        @request = GatewayRequest.new
         @request.Set(GatewayRequest::MERCHANT_ID, @merchantId)
         @request.Set(GatewayRequest::MERCHANT_PASSWORD, @merchantPassword)
 
