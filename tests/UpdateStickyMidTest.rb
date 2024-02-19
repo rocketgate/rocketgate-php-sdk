@@ -37,8 +37,8 @@ class UpdateStickyMidTest < BaseTestCase
         @request.Set(GatewayRequest::AMOUNT, "1.00");    # bill 1.00 now
         @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
 
-        @request.Set(GatewayRequest::USERNAME, "phptest_user")
-        @request.Set(GatewayRequest::CUSTOMER_PASSWORD, "phptest_pass")
+        @request.Set(GatewayRequest::USERNAME, "rubytest_user")
+        @request.Set(GatewayRequest::CUSTOMER_PASSWORD, "rubytest_pass")
 
 #
 #	Perform the Purchase transaction.

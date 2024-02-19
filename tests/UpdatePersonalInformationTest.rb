@@ -37,8 +37,8 @@ class UpdatePersonalInformationTest < BaseTestCase
         @request.Set(GatewayRequest::AMOUNT, "1.00");    # bill 1.00 now
         @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
 
-        @request.Set(GatewayRequest::USERNAME, "phptest_user")
-        @request.Set(GatewayRequest::CUSTOMER_PASSWORD, "phptest_pass")
+        @request.Set(GatewayRequest::USERNAME, "rubytest_user")
+        @request.Set(GatewayRequest::CUSTOMER_PASSWORD, "rubytest_pass")
 
 #
 #	Perform the Purchase transaction.
@@ -63,9 +63,9 @@ class UpdatePersonalInformationTest < BaseTestCase
         request.Set(GatewayRequest::MERCHANT_CUSTOMER_ID, @customerId)
         request.Set(GatewayRequest::MERCHANT_INVOICE_ID, @invoiceId)
 
-        request.Set(GatewayRequest::EMAIL, "phptest_updated@fakedomain.com")
-        request.Set(GatewayRequest::USERNAME, "phptest_user_updated")
-        request.Set(GatewayRequest::CUSTOMER_PASSWORD, "phptest_pass_updated")
+        request.Set(GatewayRequest::EMAIL, "rubytest_updated@fakedomain.com")
+        request.Set(GatewayRequest::USERNAME, "rubytest_user_updated")
+        request.Set(GatewayRequest::CUSTOMER_PASSWORD, "rubytest_pass_updated")
 
         assert_equal(true, 
             @service.PerformRebillUpdate(request, @response),

@@ -39,8 +39,8 @@ class GenerateCrossSellTest < BaseTestCase
         @request.Set(GatewayRequest::REBILL_AMOUNT, "9.99");          # Rebill at 9.99
         @request.Set(GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
 
-        @request.Set(GatewayRequest::USERNAME, "phptest_user")
-        @request.Set(GatewayRequest::CUSTOMER_PASSWORD, "phptest_pass")
+        @request.Set(GatewayRequest::USERNAME, "rubytest_user")
+        @request.Set(GatewayRequest::CUSTOMER_PASSWORD, "rubytest_pass")
 
 #
 #	Perform the Purchase transaction.

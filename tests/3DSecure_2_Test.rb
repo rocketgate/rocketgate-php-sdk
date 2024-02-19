@@ -44,7 +44,7 @@ module RocketGate
 
     def test_success
      time = Time.now.to_i.to_s
-     cust_id = time + '.PHPTest'
+     cust_id = time + '.RubyTest'
      inv_id =  time + '.3DSTest'
 
 
@@ -60,8 +60,8 @@ module RocketGate
      @request.Set(GatewayRequest::CVV2, "999")
 
      @request.Set(GatewayRequest::CUSTOMER_FIRSTNAME, "Joe")
-     @request.Set(GatewayRequest::CUSTOMER_LASTNAME, "PHPTester")
-     @request.Set(GatewayRequest::EMAIL, "phptest@fakedomain.com")
+     @request.Set(GatewayRequest::CUSTOMER_LASTNAME, "RubyTester")
+     @request.Set(GatewayRequest::EMAIL, "rubytest@fakedomain.com")
 
      @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
      @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")

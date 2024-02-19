@@ -36,7 +36,7 @@ class ACHTest < BaseTestCase
 #	Provide information about the customer.
 #
         @request.Set(GatewayRequest::CUSTOMER_FIRSTNAME, "Joe")
-        @request.Set(GatewayRequest::CUSTOMER_LASTNAME, "PHPTester")
+        @request.Set(GatewayRequest::CUSTOMER_LASTNAME, "RubyTester")
         @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
         @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
         @request.Set(GatewayRequest::BILLING_STATE, "NV")
