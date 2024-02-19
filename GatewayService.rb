@@ -24,6 +24,7 @@
 
 require "net/http"
 require "net/https"
+require "resolv"
 require File.dirname(__FILE__) + '/GatewayRequest'
 require File.dirname(__FILE__) + '/GatewayResponse'
 
@@ -46,6 +47,8 @@ module RocketGate
     LIVE_HOST = "gateway.rocketgate.com"
     LIVE_HOST_16 = "gateway-16.rocketgate.com"
     LIVE_HOST_17 = "gateway-17.rocketgate.com"
+    LIVE_HOST_16_IP = "69.20.127.91"
+    LIVE_HOST_17_IP = "72.32.126.131"
     TEST_HOST = "dev-gateway.rocketgate.com"
 
     ######################################################################
@@ -292,6 +295,19 @@ module RocketGate
         serverName = [serverName] # Use this name
       else
         serverName = @rocketGateHost # Use default list
+        if LIVE_HOST == @rocketGateDNS # Lookup the hostname in DNS
+          host_list = Resolv.getaddresses(LIVE_HOST)
+          if host_list != nil and !host_list.empty? # resolve successful
+            serverName = []
+            host_list.each do |host|
+              if LIVE_HOST_16_IP == host
+                serverName << LIVE_HOST_16
+              elsif LIVE_HOST_17_IP == host
+                serverName << LIVE_HOST_17
+              end
+            end
+          end
+        end
       end
 
       #
@@ -349,7 +365,7 @@ module RocketGate
                     response.Get(GatewayResponse::REASON_CODE))
         request.Set(GatewayRequest::FAILED_GUID,
                     response.Get(GatewayResponse::TRANSACT_ID))
-        index = index + 1 # Next index
+        index += 1 # Next index
       end
     end
 
