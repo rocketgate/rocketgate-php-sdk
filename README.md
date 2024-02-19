@@ -1,6 +1,6 @@
 ![rocketgate-ruby-sdk](http://rocketgate.com/images/logo_rocketgate.png)
 
-Rocketgate Gateway Ruby SDK
+RocketGate Gateway Ruby SDK
 ===========
 
 The Ruby Software Development Kit and Test Scripts
@@ -14,4 +14,11 @@ Docs related to this repository are located at:
 3. GatewayResponse: https://help.rocketgate.com/support/solutions/articles/28000018236-gatewayresponse
 4. GatewayResponse Error / Decline Codes: https://help.rocketgate.com/support/solutions/articles/28000018169-gatewayresponse-error-decline-codes
 
+## Running unit tests
+  
+Unit tests will run against DEV environment
+
+```shell
+ruby tests/runall.rb
+```
 
