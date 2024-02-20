@@ -98,16 +98,14 @@ if ($service->PerformAuthOnly($request, $response)) {
 
     // For example/testing, we set the order id and customer as the unix timestamp as a convienent sequencing value
     // appending a test name to the order id to facilitate some clarity when reviewing the tests
-    $time += 1;
     $request->Set(GatewayRequest::MERCHANT_CUSTOMER_ID(), $time . '.PHPTest');
+    
+    $time += 1;
     $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $time . '.GenerateXSellFromOrig');
 
     $request->Set(GatewayRequest::AMOUNT(), "3.00");
     $request->Set(GatewayRequest::CURRENCY(), "USD");
-    $request->Set(GatewayRequest::CARDNO(), "4111111111111111");
-    $request->Set(GatewayRequest::EXPIRE_MONTH(), "02");
-    $request->Set(GatewayRequest::EXPIRE_YEAR(), "2010");
-    $request->Set(GatewayRequest::CVV2(), "999");
+    $request->Set(GatewayRequest::CARD_HASH(), $response->Get(GatewayResponse::CARD_HASH()));
 
     $request->Set(GatewayRequest::CUSTOMER_FIRSTNAME(), "Joe");
     $request->Set(GatewayRequest::CUSTOMER_LASTNAME(), "PHPTester");
@@ -122,7 +120,6 @@ if ($service->PerformAuthOnly($request, $response)) {
 
     // Risk/Scrub Request Setting
     $request->Set(GatewayRequest::SCRUB(), "IGNORE");
-    $request->Set(GatewayRequest::CVV2_CHECK(), "IGNORE");
     $request->Set(GatewayRequest::AVS_CHECK(), "IGNORE");
 
     //Set necessary parameters required for RocketGate to port previous transaction's scheme transactionId and settlementDate
