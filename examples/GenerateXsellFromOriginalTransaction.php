@@ -26,11 +26,6 @@
 namespace RocketGate\examples;
 
 require '../vendor/autoload.php';
-require "../src/GatewayCodes.php";
-require "../src/GatewayParameterList.php";
-require "../src/GatewayRequest.php";
-require "../src/GatewayResponse.php";
-require "../src/GatewayService.php";
 
 use RocketGate\Sdk\GatewayRequest;
 use RocketGate\Sdk\GatewayResponse;
@@ -58,10 +53,8 @@ $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $time . '.GenerateXSellFrom
 $request->Set(GatewayRequest::AMOUNT(), "9.99");
 $request->Set(GatewayRequest::CURRENCY(), "USD");
 $request->Set(GatewayRequest::CARDNO(), "4111111111111111");
-$request->Set(GatewayRequest::CARDNO(), "5555555555554444");
 $request->Set(GatewayRequest::EXPIRE_MONTH(), "02");
 $request->Set(GatewayRequest::EXPIRE_YEAR(), "2010");
-$request->Set(GatewayRequest::EXPIRE_YEAR(), "2030");
 $request->Set(GatewayRequest::CVV2(), "999");
 
 $request->Set(GatewayRequest::CUSTOMER_FIRSTNAME(), "Joe");
@@ -86,11 +79,6 @@ $request->Set(GatewayRequest::AVS_CHECK(), "IGNORE");
 //
 $service->SetTestMode(TRUE);
 
-
-$request->Set("gatewayServer", "local.rocketgate.com");
-$request->Set("gatewayProtocol", "https");
-$request->Set("port", "8443");
-
 //
 //	Perform an Auth-Only transaction.
 //
@@ -111,7 +99,7 @@ if ($service->PerformAuthOnly($request, $response)) {
     // For example/testing, we set the order id and customer as the unix timestamp as a convienent sequencing value
     // appending a test name to the order id to facilitate some clarity when reviewing the tests
     $request->Set(GatewayRequest::MERCHANT_CUSTOMER_ID(), $time . '.PHPTest');
-    
+
     $time += 1;
     $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $time . '.GenerateXSellFromOrig');
 
@@ -139,34 +127,30 @@ if ($service->PerformAuthOnly($request, $response)) {
     $request->Set(GatewayRequest::BILLING_TYPE(), "T");
     $request->Set(GatewayRequest::REFERENCE_SCHEME_TRANSACTION_ID(), $response->Get(GatewayResponse::SCHEME_TRANSACTION_ID()));
     $request->Set(GatewayRequest::REFERENCE_SCHEME_SETTLEMENT_DATE(), $response->Get(GatewayResponse::SCHEME_SETTLEMENT_DATE()));
-    
+
     $response = new GatewayResponse();
 
-    $request->Set("gatewayServer", "local.rocketgate.com");
-    $request->Set("gatewayProtocol", "https");
-    $request->Set("port", "8443");
-    
     if ($service->PerformAuthOnly($request, $response)) {
 
-         if($request->Get(GatewayRequest::REFERENCE_SCHEME_TRANSACTION_ID()) == null || $response->Get(GatewayResponse::SCHEME_TRANSACTION_ID()) == $request->Get(GatewayRequest::REFERENCE_SCHEME_TRANSACTION_ID())){
-             $areSchemeTransactionIdSame = "true";
-         }else{
-             $areSchemeTransactionIdSame = "false";
-         }
+        if($request->Get(GatewayRequest::REFERENCE_SCHEME_TRANSACTION_ID()) == null || $response->Get(GatewayResponse::SCHEME_TRANSACTION_ID()) == $request->Get(GatewayRequest::REFERENCE_SCHEME_TRANSACTION_ID())){
+            $areSchemeTransactionIdSame = "true";
+        }else{
+            $areSchemeTransactionIdSame = "false";
+        }
 
         if($request->Get(GatewayRequest::REFERENCE_SCHEME_SETTLEMENT_DATE()) == null || $response->Get(GatewayResponse::SCHEME_SETTLEMENT_DATE()) == $request->Get(GatewayRequest::REFERENCE_SCHEME_SETTLEMENT_DATE())){
             $areSchemeSettlementDateSame = "true";
         }else{
             $areSchemeSettlementDateSame = "false";
         }
-        
+
         print "Xsell transaction succeeded\n";
         print "Response Code: " .  $response->Get(GatewayResponse::RESPONSE_CODE()) . "\n";
         print "Reason Code: " .  $response->Get(GatewayResponse::REASON_CODE()) . "\n";
         print "Request & Response Scheme transactionIds are the same? " . $areSchemeTransactionIdSame . "\n";
         print "Request & Response Scheme settlementDates are the same? " . $areSchemeSettlementDateSame . "\n";
     }else{
-        print "Xsell tranaction failed\n";
+        print "Xsell transaction failed\n";
         print "GUID: " . $response->Get(GatewayResponse::TRANSACT_ID()) . "\n";
         print "Transaction time: " . $response->Get(GatewayResponse::TRANSACTION_TIME()) . "\n";
         print "Response Code: " . $response->Get(GatewayResponse::RESPONSE_CODE()) . "\n";
