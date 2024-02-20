@@ -26,6 +26,11 @@
 namespace RocketGate\examples;
 
 require '../vendor/autoload.php';
+require "../src/GatewayCodes.php";
+require "../src/GatewayParameterList.php";
+require "../src/GatewayRequest.php";
+require "../src/GatewayResponse.php";
+require "../src/GatewayService.php";
 
 use RocketGate\Sdk\GatewayRequest;
 use RocketGate\Sdk\GatewayResponse;
@@ -53,8 +58,10 @@ $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $time . '.GenerateXSellFrom
 $request->Set(GatewayRequest::AMOUNT(), "9.99");
 $request->Set(GatewayRequest::CURRENCY(), "USD");
 $request->Set(GatewayRequest::CARDNO(), "4111111111111111");
+$request->Set(GatewayRequest::CARDNO(), "5555555555554444");
 $request->Set(GatewayRequest::EXPIRE_MONTH(), "02");
 $request->Set(GatewayRequest::EXPIRE_YEAR(), "2010");
+$request->Set(GatewayRequest::EXPIRE_YEAR(), "2030");
 $request->Set(GatewayRequest::CVV2(), "999");
 
 $request->Set(GatewayRequest::CUSTOMER_FIRSTNAME(), "Joe");
@@ -78,6 +85,11 @@ $request->Set(GatewayRequest::AVS_CHECK(), "IGNORE");
 //	Setup test parameters in the service and request.
 //
 $service->SetTestMode(TRUE);
+
+
+$request->Set("gatewayServer", "local.rocketgate.com");
+$request->Set("gatewayProtocol", "https");
+$request->Set("port", "8443");
 
 //
 //	Perform an Auth-Only transaction.
@@ -129,6 +141,10 @@ if ($service->PerformAuthOnly($request, $response)) {
     $request->Set(GatewayRequest::REFERENCE_SCHEME_SETTLEMENT_DATE(), $response->Get(GatewayResponse::SCHEME_SETTLEMENT_DATE()));
     
     $response = new GatewayResponse();
+
+    $request->Set("gatewayServer", "local.rocketgate.com");
+    $request->Set("gatewayProtocol", "https");
+    $request->Set("port", "8443");
     
     if ($service->PerformAuthOnly($request, $response)) {
 
@@ -138,7 +154,7 @@ if ($service->PerformAuthOnly($request, $response)) {
              $areSchemeTransactionIdSame = "false";
          }
 
-        if($request->Get(GatewayRequest::REFERENCE_SCHEME_SETTLEMENT_DATE()) == null || $response->Get(GatewayResponse::SCHEME_TRANSACTION_ID()) == $request->Get(GatewayRequest::REFERENCE_SCHEME_SETTLEMENT_DATE())){
+        if($request->Get(GatewayRequest::REFERENCE_SCHEME_SETTLEMENT_DATE()) == null || $response->Get(GatewayResponse::SCHEME_SETTLEMENT_DATE()) == $request->Get(GatewayRequest::REFERENCE_SCHEME_SETTLEMENT_DATE())){
             $areSchemeSettlementDateSame = "true";
         }else{
             $areSchemeSettlementDateSame = "false";
