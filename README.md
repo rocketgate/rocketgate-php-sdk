@@ -14,11 +14,13 @@ Docs related to this repository are located at:
 3. GatewayResponse: https://help.rocketgate.com/support/solutions/articles/28000018236-gatewayresponse
 4. GatewayResponse Error / Decline Codes: https://help.rocketgate.com/support/solutions/articles/28000018169-gatewayresponse-error-decline-codes
 
-## Running unit tests
-  
-Unit tests will run against DEV environment
+## Project structure
+- `/examples` - contains sample usages of the Gateway SDK for a variety of purchase scenarios to assist with your integration
+- `/tests` - contains integration examples with RocketGate Gateway that can be run with ruby as an integration test suite
+- `/` - contains core implementation of the Gateway SDK (`GatewayRequest.rb`, `GatewayResponse.rb`, `GatewayService.rb`)
 
+## Running integration tests
+  
 ```shell
 ruby tests/runall.rb
 ```
-
