@@ -22,28 +22,19 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 #
 
-load "GatewayService.rb"
+require_relative "../GatewayService.rb"
 
 request = RocketGate::GatewayRequest.new
 response = RocketGate::GatewayResponse.new
 service = RocketGate::GatewayService.new
 
 #
-#	Setup the Purchase request.
+#	Setup the Cancel request.
 #
 request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
 request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
-request.Set(RocketGate::GatewayRequest::CARDNO, "4111-1111-1111-1111");
-
 request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, "Customer-1");
-
-request.Set(RocketGate::GatewayRequest::BILLING_ADDRESS, "317 Clydesdale Drive");
-request.Set(RocketGate::GatewayRequest::BILLING_CITY, "Stephens City");
-request.Set(RocketGate::GatewayRequest::BILLING_STATE, "Virginia");
-request.Set(RocketGate::GatewayRequest::BILLING_ZIPCODE, "22655");
-request.Set(RocketGate::GatewayRequest::BILLING_COUNTRY, "US");
-
-request.Set(RocketGate::GatewayRequest::EMAIL, "example@fakedomain.com");
+request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, "Invoice-1");
 
 #
 #      Setup test parameters in the service.
@@ -51,20 +42,17 @@ request.Set(RocketGate::GatewayRequest::EMAIL, "example@fakedomain.com");
 service.SetTestMode(true);
 
 #
-#      Perform the scrub transaction.
+#      Perform the Purchase transaction.
 #
-status = service.PerformCardScrub(request, response)
+status = service.PerformRebillCancel(request, response)
 if (status)
-  puts "CardScrub succeeded";
+  puts "Cancel succeeded";
   puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-  puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
-
 else 
-  puts "CardScrub failed\n"
+  puts "Cancel failed\n"
   puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-  puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
   puts "Exception: " << response.Get(RocketGate::GatewayResponse::EXCEPTION)
 end
 

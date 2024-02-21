@@ -22,9 +22,7 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 #
 
-load "GatewayService.rb"
-require "date";
-
+require_relative "../GatewayService.rb"
 
 request = RocketGate::GatewayRequest.new
 response = RocketGate::GatewayResponse.new
@@ -35,43 +33,23 @@ service = RocketGate::GatewayService.new
 #
 request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
 request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
-
-# For example/testing, we set the order id and customer as the unix timestamp as a convienent sequencing value
-# appending a test name to the order id to facilitate some clarity when reviewing the tests
-time = DateTime.now.to_time.to_i.to_s;
-invoice_id = time + ".AuthTicketTest";
-
-request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, time + ".RubyTest");
-request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, invoice_id);
-
-request.Set(RocketGate::GatewayRequest::CURRENCY, "USD");
-request.Set(RocketGate::GatewayRequest::AMOUNT, 9.99);
-
 request.Set(RocketGate::GatewayRequest::CARDNO, "4111-1111-1111-1111");
 request.Set(RocketGate::GatewayRequest::EXPIRE_MONTH, "02");
-request.Set(RocketGate::GatewayRequest::EXPIRE_YEAR, "2010");
-request.Set(RocketGate::GatewayRequest::CVV2, "999");
-
-request.Set(RocketGate::GatewayRequest::CUSTOMER_FIRSTNAME, "Joe");
-request.Set(RocketGate::GatewayRequest::CUSTOMER_LASTNAME, "RubyTester");
-request.Set(RocketGate::GatewayRequest::EMAIL, "rubytest@fakedomain.com");
-request.Set(RocketGate::GatewayRequest::IPADDRESS, "68.224.133.117");
-
-request.Set(RocketGate::GatewayRequest::BILLING_ADDRESS, "123 Main St.");
-request.Set(RocketGate::GatewayRequest::BILLING_CITY, "Las Vegas");
-request.Set(RocketGate::GatewayRequest::BILLING_STATE, "NV");
-request.Set(RocketGate::GatewayRequest::BILLING_ZIPCODE, "89141");
-request.Set(RocketGate::GatewayRequest::BILLING_COUNTRY, "US");
-
-# Risk/Scrub Request Setting
+request.Set(RocketGate::GatewayRequest::EXPIRE_YEAR, "2030");
+request.Set(RocketGate::GatewayRequest::AMOUNT, 10.97);
 request.Set(RocketGate::GatewayRequest::AVS_CHECK, "IGNORE");
+request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, "Customer-1");
+request.Set(RocketGate::GatewayRequest::BILLING_ADDRESS, "317 Clydesdale Drive");
+request.Set(RocketGate::GatewayRequest::BILLING_CITY, "Stephens City");
+request.Set(RocketGate::GatewayRequest::BILLING_STATE, "Virginia");
+request.Set(RocketGate::GatewayRequest::BILLING_ZIPCODE, "22655");
+request.Set(RocketGate::GatewayRequest::BILLING_COUNTRY, "US");
 request.Set(RocketGate::GatewayRequest::CVV2_CHECK, "IGNORE");
-request.Set(RocketGate::GatewayRequest::SCRUB, "IGNORE");
+request.Set(RocketGate::GatewayRequest::CVV2, "999");
+request.Set(RocketGate::GatewayRequest::EMAIL, "example@fakedomain.com");
 
-#
-#      Setup test parameters in the service.
-#
 service.SetTestMode(true);
+
 
 #
 #      Perform the Auth-Only transaction.
@@ -96,31 +74,5 @@ else
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
 #  puts "Exception: " << response.Get(RocketGate::GatewayResponse::EXCEPTION)
   puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
-  exit
-end
-
-#
-#	Setup the Lookup request
-#
-request = RocketGate::GatewayRequest.new
-request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
-request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
-request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, invoice_id);
-
-#
-#	Perform the lookup transaction.
-#
-status = service.PerformLookup(request, response)
-if (status)
-  puts "Lookup succeeded";
-  puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
-  puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
-  puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-  puts "AuthNo: " << response.Get(RocketGate::GatewayResponse::AUTH_NO)
-else 
-  puts "Lookup failed\n"
-  puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
-  puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
-  puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
 end
 

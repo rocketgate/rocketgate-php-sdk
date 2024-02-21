@@ -22,7 +22,7 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 #
 
-load "GatewayService.rb"
+require_relative "../GatewayService.rb"
 
 # Date class is not required but used in this example.
 require "date";
