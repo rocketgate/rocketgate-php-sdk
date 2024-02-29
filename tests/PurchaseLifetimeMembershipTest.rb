@@ -1,6 +1,6 @@
 #
 # Copyright notice:
-# (c) Copyright 2020 RocketGate
+# (c) Copyright 2018 RocketGate
 # All rights reserved.
 #
 # The copyright notice must not be removed without specific, prior
@@ -20,39 +20,40 @@
 # whatsoever arising out of or in connection with the use or performance of this software,
 # including, without limitation, damages resulting from loss of use, data or profits, and
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
-#
+# 
 
-load "GatewayService.rb"
+require_relative 'BaseTestCase'
+module RocketGate
 
-request = RocketGate::GatewayRequest.new
-response = RocketGate::GatewayResponse.new
-service = RocketGate::GatewayService.new
+
+class PurchaseLifetimeMembershipTest < BaseTestCase
+    def get_test_name
+        "LifeTest"
+    end
+
+    def test_success
+# 9.99 Lifetime Membership
+        @request.Set(GatewayRequest::CURRENCY, "USD")
+        @request.Set(GatewayRequest::AMOUNT, "99.99");    # bill 99.99 trial now
+        @request.Set(GatewayRequest::REBILL_FREQUENCY, "LIFE"); # Lifetime membership
+
+        @request.Set(GatewayRequest::BILLING_ADDRESS, "123 Main St")
+        @request.Set(GatewayRequest::BILLING_CITY, "Las Vegas")
+        @request.Set(GatewayRequest::BILLING_STATE, "NV")
+        @request.Set(GatewayRequest::BILLING_ZIPCODE, "89141")
+        @request.Set(GatewayRequest::BILLING_COUNTRY, "US")
+
+        @request.Set(GatewayRequest::SCRUB, "IGNORE")
+        @request.Set(GatewayRequest::CVV2_CHECK, "IGNORE")
+        @request.Set(GatewayRequest::AVS_CHECK, "IGNORE")
 
 #
-#	Setup the Cancel request.
+#	Perform the Purchase transaction.
 #
-request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
-request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
-request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, "Customer-1");
-request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, "Invoice-1");
-
-#
-#      Setup test parameters in the service.
-#
-service.SetTestMode(true);
-
-#
-#      Perform the Purchase transaction.
-#
-status = service.PerformRebillCancel(request, response)
-if (status)
-  puts "Cancel succeeded";
-  puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
-  puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-else 
-  puts "Cancel failed\n"
-  puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
-  puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-  puts "Exception: " << response.Get(RocketGate::GatewayResponse::EXCEPTION)
+        assert_equal(true, 
+            @service.PerformPurchase(@request, @response),
+            "Perform Purchase"
+        )
+    end
 end
-
+end

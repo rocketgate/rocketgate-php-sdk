@@ -25,14 +25,14 @@
 module RocketGate
   class GatewayRequest
 
-######################################################################
-#
-#	Define constant hash values.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	Define constant hash values.
+    #
+    ######################################################################
+    #
     VERSION_INDICATOR = "version"
-    VERSION_NUMBER = "R3.4"
+    VERSION_NUMBER = "R3.5"
 
     AFFILIATE = "affiliate"
     AMOUNT = "amount"
@@ -101,10 +101,10 @@ module RocketGate
     XSELL_MERCHANT_ID = "xsellMerchantID"
     XSELL_CUSTOMER_ID = "xsellCustomerID"
     XSELL_REFERENCE_XACT = "xsellReferenceXact"
-    _3D_CHECK = "ThreeDCheck"
-    _3D_ECI = "ThreeDECI"
-    _3D_CAVV_UCAF = "ThreeDCavvUcaf"
-    _3D_XID = "ThreeDXID"
+    THREED_CHECK = "ThreeDCheck"
+    THREED_ECI = "ThreeDECI"
+    THREED_CAVV_UCAF = "ThreeDCavvUcaf"
+    THREED_XID = "ThreeDXID"
     FAILED_SERVER = "failedServer"
     FAILED_GUID = "failedGUID"
     FAILED_RESPONSE_CODE = "failedResponseCode"
@@ -113,105 +113,116 @@ module RocketGate
     GATEWAY_CONNECT_TIMEOUT = "gatewayConnectTimeout"
     GATEWAY_READ_TIMEOUT = "gatewayReadTimeout"
 
+    ROUTING_NO = "routingNo"
+    SAVINGS_ACCOUNT = "savingsAccount"
+    ACCOUNT_NO = "accountNo"
+    SS_NUMBER = "ssNumber"
 
-######################################################################
-#
-#	initialize() - Constructor for class.
-#
-######################################################################
-#
+    THREEDSECURE_DF_REFERENCE_ID = "_3DSECURE_DF_REFERENCE_ID"
+
+    THREEDSECURE_REDIRECT_URL = "_3DSECURE_REDIRECT_URL"
+
+    BROWSER_JAVA_ENABLED = "BrowserJavaEnabled"
+    BROWSER_LANGUAGE = "BrowserLanguage"
+    BROWSER_COLOR_DEPTH = "BrowserColorDepth"
+    BROWSER_SCREEN_HEIGHT = "BrowserScreenHeight"
+    BROWSER_SCREEN_WIDTH = "BrowserScreenWidth"
+    BROWSER_TIME_ZONE = "BrowserTimeZone"
+
+    ######################################################################
+    #
+    #	initialize() - Constructor for class.
+    #
+    ######################################################################
+    #
     def initialize
-      @parameterList = Hash.new			# Create empty hash
+      @parameterList = Hash.new # Create empty hash
       self.Set(VERSION_INDICATOR, VERSION_NUMBER)
-      super					# Call superclass
+      super # Call superclass
     end
 
-
-######################################################################
-#
-#	Set() - Set a value in the parameter list.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	Set() - Set a value in the parameter list.
+    #
+    ######################################################################
+    #
     def Set(key, value)
-      @parameterList.delete key			# Delete existing key
-      if value != nil				# Have a value?
-        @parameterList[key] = value		# Save new value
+      @parameterList.delete key # Delete existing key
+      if value != nil # Have a value?
+        @parameterList[key] = value # Save new value
       end
     end
 
-
-######################################################################
-#
-#	Clear() - Clear a value in the parameter list.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	Clear() - Clear a value in the parameter list.
+    #
+    ######################################################################
+    #
     def Clear(key)
-      @parameterList.delete key			# Delete existing key
+      @parameterList.delete key # Delete existing key
     end
 
-
-######################################################################
-#
-#	Get() - Get a value from the parameter list.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	Get() - Get a value from the parameter list.
+    #
+    ######################################################################
+    #
     def Get(key)
-      return @parameterList[key]		# Return desired element
+      @parameterList[key] # Return desired element
     end
 
-
-######################################################################
-#
-#	ToXML() - Create an XML document from the hash list.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	ToXML() - Create an XML document from the hash list.
+    #
+    ######################################################################
+    #
     def ToXML
 
-#
-#	Build the document header.
-#
+      #
+      #	Build the document header.
+      #
       xmlDocument = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
       xmlDocument.concat("<gatewayRequest>")
 
-#
-#	Loop over each key-value pairs.
-#
-      @parameterList.each_pair do | key, value |
-	key = key.to_s
-	value = value.to_s
-#
-#	Open a tag for the key.
-#
-	xmlDocument.concat("<");
-	xmlDocument.concat(key)
-	xmlDocument.concat(">");
+      #
+      #	Loop over each key-value pairs.
+      #
+      @parameterList.each_pair do |key, value|
+        key = key.to_s
+        value = value.to_s
+        #
+        #	Open a tag for the key.
+        #
+        xmlDocument.concat("<")
+        xmlDocument.concat(key)
+        xmlDocument.concat(">")
 
-#
-#	Clean up the value and add it to the tag.
-#
-	value = value.gsub("&", "&amp;")	# Replace &
-	value = value.gsub("<", "&lt;")		# Replace <
-	value = value.gsub(">", "&gt;")		# Replace >
-	xmlDocument.concat(value)
+        #
+        #	Clean up the value and add it to the tag.
+        #
+        value = value.gsub("&", "&amp;") # Replace &
+        value = value.gsub("<", "&lt;") # Replace <
+        value = value.gsub(">", "&gt;") # Replace >
+        xmlDocument.concat(value)
 
-#
-#
-#	Add the closing tag for this element.
-#
-	xmlDocument.concat("</");
-	xmlDocument.concat(key)
-	xmlDocument.concat(">");
+        #
+        #
+        #	Add the closing tag for this element.
+        #
+        xmlDocument.concat("</")
+        xmlDocument.concat(key)
+        xmlDocument.concat(">")
       end
 
-#
-#	Close and return the document.
-#
-      xmlDocument.concat("</gatewayRequest>")	# Close document
-      return xmlDocument			# Final document
+      #
+      #	Close and return the document.
+      #
+      xmlDocument.concat("</gatewayRequest>") # Close document
+      xmlDocument # Final document
     end
   end
 end

@@ -27,12 +27,12 @@ require "rexml/document"
 module RocketGate
   class GatewayResponse
 
-######################################################################
-#
-#	Define constant hash values.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	Define constant hash values.
+    #
+    ######################################################################
+    #
     VERSION_INDICATOR = "version"
     ACS_URL = "acsURL"
     AUTH_NO = "authNo"
@@ -59,7 +59,7 @@ module RocketGate
     CARD_ISSUER_URL = "cardIssuerURL"
     CAVV_RESPONSE = "cavvResponse"
     CUSTOMER_FIRSTNAME = "customerFirstName"
-    CUSTOMER_LASTNAME = "customerLastName" 
+    CUSTOMER_LASTNAME = "customerLastName"
     CVV2_CODE = "cvv2Code"
     EXCEPTION = "exception"
     ECI = "ECI"
@@ -99,92 +99,87 @@ module RocketGate
     SETTLED_AMOUNT = "approvedAmount"
     SETTLED_CURRENCY = "approvedCurrency"
 
-
-######################################################################
-#
-#	initialize() - Constructor for class.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	initialize() - Constructor for class.
+    #
+    ######################################################################
+    #
     def initialize
-      @parameterList = Hash.new			# Create empty hash
-      super					# Call superclass
+      @parameterList = Hash.new # Create empty hash
+      super # Call superclass
     end
 
-
-######################################################################
-#
-#	Set() - Set a value in the parameter list.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	Set() - Set a value in the parameter list.
+    #
+    ######################################################################
+    #
     def Set(key, value)
-      @parameterList.delete key			# Delete existing key
-      @parameterList[key] = value		# Save new value
+      @parameterList.delete key # Delete existing key
+      @parameterList[key] = value # Save new value
     end
 
-
-######################################################################
-#
-#	Reset() - Clear all elements in a response.
-#
-######################################################################
-#	
+    ######################################################################
+    #
+    #	Reset() - Clear all elements in a response.
+    #
+    ######################################################################
+    #
     def Reset
-      @parameterList = Hash.new			# Create empty hash
+      @parameterList = Hash.new # Create empty hash
     end
 
-
-######################################################################
-#
-#	SetFromXML() - Set values in a response object
-#		       using an XML document.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	SetFromXML() - Set values in a response object
+    #		       using an XML document.
+    #
+    ######################################################################
+    #
     def SetFromXML(xmlDocument)
 
-#
-#	Parse the elements from the XML document.
-#
+      #
+      #	Parse the elements from the XML document.
+      #
       begin
-	xml = REXML::Document.new(xmlDocument)
-	if root = REXML::XPath.first(xml, "/gatewayResponse")
-	  root.elements.to_a.each do |node|
-	    if (node.text != nil)
-	      Set(node.name, node.text.strip)
-	    end
-	  end
-	else
+        xml = REXML::Document.new(xmlDocument)
+        if root = REXML::XPath.first(xml, "/gatewayResponse")
+          root.elements.to_a.each do |node|
+            if (node.text != nil)
+              Set(node.name, node.text.strip)
+            end
+          end
+        else
 
-#
-#	If there was a parsing error, set the error
-#	codes and quit.
-#
-	  Set(EXCEPTION, xmlDocument)		# Return the XML
-	  Set(RESPONSE_CODE, "3")		# Set system error
-	  Set(REASON_CODE, "400")		# Invalid XML
-	end
+          #
+          #	If there was a parsing error, set the error
+          #	codes and quit.
+          #
+          Set(EXCEPTION, xmlDocument) # Return the XML
+          Set(RESPONSE_CODE, "3") # Set system error
+          Set(REASON_CODE, "400") # Invalid XML
+        end
 
-#
-#	Catch parsing errors.
-#
+        #
+        #	Catch parsing errors.
+        #
       rescue => ex
-	Set(EXCEPTION, ex.message)		# Return error message
-	Set(RESPONSE_CODE, "3")			# Set system error
-	Set(REASON_CODE, "307")			# Bugcheck
+        Set(EXCEPTION, ex.message) # Return error message
+        Set(RESPONSE_CODE, "3") # Set system error
+        Set(REASON_CODE, "307") # Bugcheck
       end
     end
 
-
-######################################################################
-#
-#	Get() - Get a value from the parameter list.
-#
-######################################################################
-#
+    ######################################################################
+    #
+    #	Get() - Get a value from the parameter list.
+    #
+    ######################################################################
+    #
     def Get(key)
-      return @parameterList[key].to_s		# Return desired element
+      @parameterList[key].to_s # Return desired element
     end
   end
 end

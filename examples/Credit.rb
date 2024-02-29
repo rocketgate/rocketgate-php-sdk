@@ -22,57 +22,52 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 #
 
-load "GatewayService.rb"
+require_relative "../GatewayService.rb"
 
 request = RocketGate::GatewayRequest.new
 response = RocketGate::GatewayResponse.new
 service = RocketGate::GatewayService.new
 
 #
-#	Setup the Auth-Only request.
+#	Setup the Purchase request.
 #
 request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
 request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
-request.Set(RocketGate::GatewayRequest::CARDNO, "4111-1111-1111-1111");
-request.Set(RocketGate::GatewayRequest::EXPIRE_MONTH, "02");
-request.Set(RocketGate::GatewayRequest::EXPIRE_YEAR, "2030");
-request.Set(RocketGate::GatewayRequest::AMOUNT, 10.97);
-request.Set(RocketGate::GatewayRequest::AVS_CHECK, "IGNORE");
-request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, "Customer-1");
-request.Set(RocketGate::GatewayRequest::BILLING_ADDRESS, "317 Clydesdale Drive");
-request.Set(RocketGate::GatewayRequest::BILLING_CITY, "Stephens City");
-request.Set(RocketGate::GatewayRequest::BILLING_STATE, "Virginia");
-request.Set(RocketGate::GatewayRequest::BILLING_ZIPCODE, "22655");
-request.Set(RocketGate::GatewayRequest::BILLING_COUNTRY, "US");
-request.Set(RocketGate::GatewayRequest::CVV2_CHECK, "IGNORE");
-request.Set(RocketGate::GatewayRequest::CVV2, "999");
-request.Set(RocketGate::GatewayRequest::EMAIL, "example@fakedomain.com");
+#request.Set(RocketGate::GatewayRequest::CARDNO, "4111-1111-1111-1111");
+#request.Set(RocketGate::GatewayRequest::EXPIRE_MONTH, "02");
+#request.Set(RocketGate::GatewayRequest::EXPIRE_YEAR, "2030");
+#request.Set(RocketGate::GatewayRequest::AMOUNT, 10.97);
+#request.Set(RocketGate::GatewayRequest::AVS_CHECK, "IGNORE");
+#request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, "Customer-1");
+#request.Set(RocketGate::GatewayRequest::BILLING_ADDRESS, "317 Clydesdale Drive");
+#request.Set(RocketGate::GatewayRequest::BILLING_CITY, "Stephens City");
+#request.Set(RocketGate::GatewayRequest::BILLING_STATE, "Virginia");
+#request.Set(RocketGate::GatewayRequest::BILLING_ZIPCODE, "22655");
+#request.Set(RocketGate::GatewayRequest::BILLING_COUNTRY, "US");
+#request.Set(RocketGate::GatewayRequest::CVV2_CHECK, "IGNORE");
+#request.Set(RocketGate::GatewayRequest::CVV2, "999");
 
+request.Set(RocketGate::GatewayRequest::TRANSACT_ID, "20001224D3DC4D8");
+
+#
+#      Setup test parameters in the service.
+#
 service.SetTestMode(true);
 
-
 #
-#      Perform the Auth-Only transaction.
+#      Perform the Credit transaction.
 #
-status = service.PerformAuthOnly(request, response)
+status = service.PerformCredit(request, response)
 if (status)
-  puts "Auth-Only succeeded";
+  puts "Credit succeeded";
   puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
   puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-  puts "AuthNo: " << response.Get(RocketGate::GatewayResponse::AUTH_NO)
-  puts "AVS: " << response.Get(RocketGate::GatewayResponse::AVS_RESPONSE)
-  puts "CVV2: " << response.Get(RocketGate::GatewayResponse::CVV2_CODE)
-  puts "CardHash: " << response.Get(RocketGate::GatewayResponse::CARD_HASH)
-  puts "Account: " << response.Get(RocketGate::GatewayResponse::MERCHANT_ACCOUNT)
-  puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
 
 else 
-  puts "Auth-Only failed\n"
+  puts "Credit failed\n"
   puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
   puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-#  puts "Exception: " << response.Get(RocketGate::GatewayResponse::EXCEPTION)
-  puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
 end
 

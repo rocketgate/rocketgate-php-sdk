@@ -26,7 +26,7 @@
 # Subsequently, Check the status of the subscription
 #
 
-load "GatewayService.rb"
+require_relative "../GatewayService.rb"
 # Date class is not required but used in this example.
 require "date";
 

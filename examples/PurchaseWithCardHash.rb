@@ -22,7 +22,7 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 #
 
-load "GatewayService.rb"
+require_relative "../GatewayService.rb"
 require "date";
 
 # Setup a couple required and testing variables
@@ -31,7 +31,7 @@ require "date";
 # appending a test name to the order id to facilitate some clarity when reviewing the tests
 time = DateTime.now.to_time.to_i.to_s;
 cust_id = time << '.RubyTest';
-inv_id = time <<'.CardHashTest';
+inv_id = time << '.CardHashTest';
 merchant_id = "1";
 merchant_password = "testpassword";
 

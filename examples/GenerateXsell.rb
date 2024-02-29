@@ -21,22 +21,9 @@
 # including, without limitation, damages resulting from loss of use, data or profits, and
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 #
-#
-# Example $9.99 USD monthly subscription purchase.
-# Subsequently, for example as a cancel promo, the subscription
-# is modified to a USD $25.95 quarterly effective on it's next rebill date.
-#
 
-load "GatewayService.rb"
-# Date class is not required but used in this example.
+require_relative "../GatewayService.rb"
 require "date";
-
-# Setup a couple required and testing variables
-time = DateTime.now.to_time.to_i.to_s;
-cust_id = time + '.RubyTest';
-inv_id = time +'.CancelPromoTest';
-merchant_id = "1";
-merchant_password = "testpassword";
 
 
 request = RocketGate::GatewayRequest.new
@@ -44,20 +31,22 @@ response = RocketGate::GatewayResponse.new
 service = RocketGate::GatewayService.new
 
 #
-#	Setup the Auth-Only request.
+#	Setup the Purchase request.
 #
-request.Set(RocketGate::GatewayRequest::MERCHANT_ID, merchant_id);
-request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, merchant_password);
+request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
+request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
 
 # For example/testing, we set the order id and customer as the unix timestamp as a convienent sequencing value
 # appending a test name to the order id to facilitate some clarity when reviewing the tests
-request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, cust_id);
-request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, inv_id);
+time = DateTime.now.to_time.to_i.to_s;
+invoice_id = time + ".TestGenerateXsell";
+cust_id = time + ".RubyTest";
 
-# $9.99/month subscription
+request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, cust_id);
+request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, invoice_id);
+
 request.Set(RocketGate::GatewayRequest::CURRENCY, "USD");
-request.Set(RocketGate::GatewayRequest::AMOUNT, 9.99);
-request.Set(RocketGate::GatewayRequest::REBILL_FREQUENCY, "MONTHLY"); # ongoing renewals monthly
+request.Set(RocketGate::GatewayRequest::AMOUNT, 1.00);
 
 request.Set(RocketGate::GatewayRequest::CARDNO, "4111-1111-1111-1111");
 request.Set(RocketGate::GatewayRequest::EXPIRE_MONTH, "02");
@@ -94,48 +83,43 @@ if (status)
   puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
   puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-  puts "AuthNo: " << response.Get(RocketGate::GatewayResponse::AUTH_NO)
-  puts "AVS: " << response.Get(RocketGate::GatewayResponse::AVS_RESPONSE)
-  puts "CVV2: " << response.Get(RocketGate::GatewayResponse::CVV2_CODE)
-  puts "CardHash: " << response.Get(RocketGate::GatewayResponse::CARD_HASH)
   puts "Account: " << response.Get(RocketGate::GatewayResponse::MERCHANT_ACCOUNT)
-  puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
-
-#
-#	UPGRADE MEMBERSHIP
-#
-# 	This would normally be two separate processes,
-#   but for example's sake is in one process (thus we clear and set a new GatewayRequest object)
-#   The key values required are MERCHANT_CUSTOMER_ID and MERCHANT_INVOICE_ID.
-#   
-#   Modify from 9.99/month to 29.95/quarter
-#
-  request = RocketGate::GatewayRequest.new
-  request.Set(RocketGate::GatewayRequest::MERCHANT_ID, merchant_id);
-  request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, merchant_password);
-
-  request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, cust_id);
-  request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, inv_id);
-
-  request.Set(RocketGate::GatewayRequest::REBILL_AMOUNT, 25.95);
-
-  status = service.PerformRebillUpdate(request, response)
-  if (status)
-    puts "Upgrade succeeded";
-  else 
-    puts "Upgrade failed\n"
-    puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
-    puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-  end
 
 else 
   puts "Purchase failed\n"
   puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
   puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-#  puts "Exception: " << response.Get(RocketGate::GatewayResponse::EXCEPTION)
-  puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
+  puts "Exception: " << response.Get(RocketGate::GatewayResponse::EXCEPTION)
   exit
 end
 
+#
+#	Setup the GenerateXsell transaction
+#
+request = RocketGate::GatewayRequest.new
+request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
+request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
+request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, cust_id);
+
+# Different invoice id for xsell.
+invoice_id = time + ".xs" + ".TestGenerateXsell";
+request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, invoice_id);
+
+# $1 4 day trial, rebills 9.99 monthly
+request.Set(RocketGate::GatewayRequest::AMOUNT, "1.00");
+request.Set(RocketGate::GatewayRequest::REBILL_START, "4");
+request.Set(RocketGate::GatewayRequest::REBILL_AMOUNT, "9.99");
+request.Set(RocketGate::GatewayRequest::REBILL_FREQUENCY, "MONTHLY");
+
+#
+#	Perform the GenerateXsell transaction.
+#
+status = service.GenerateXsell(request, response)
+if (status)
+  puts "GenerateXsell succeeded";
+else 
+  puts "GenerateXsell failed\n"
+  puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
+end
 

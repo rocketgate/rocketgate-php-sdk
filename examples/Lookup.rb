@@ -22,7 +22,7 @@
 # whether or not advised of the possibility of damage, regardless of the theory of liability.
 #
 
-load "GatewayService.rb"
+require_relative "../GatewayService.rb"
 require "date";
 
 
@@ -31,7 +31,7 @@ response = RocketGate::GatewayResponse.new
 service = RocketGate::GatewayService.new
 
 #
-#	Setup the Purchase request.
+#	Setup the Auth-Only request.
 #
 request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
 request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
@@ -39,14 +39,13 @@ request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
 # For example/testing, we set the order id and customer as the unix timestamp as a convienent sequencing value
 # appending a test name to the order id to facilitate some clarity when reviewing the tests
 time = DateTime.now.to_time.to_i.to_s;
-invoice_id = time + ".TestGenerateXsell";
-cust_id = time + ".RubyTest";
+invoice_id = time + ".AuthTicketTest";
 
-request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, cust_id);
+request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, time + ".RubyTest");
 request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, invoice_id);
 
 request.Set(RocketGate::GatewayRequest::CURRENCY, "USD");
-request.Set(RocketGate::GatewayRequest::AMOUNT, 1.00);
+request.Set(RocketGate::GatewayRequest::AMOUNT, 9.99);
 
 request.Set(RocketGate::GatewayRequest::CARDNO, "4111-1111-1111-1111");
 request.Set(RocketGate::GatewayRequest::EXPIRE_MONTH, "02");
@@ -75,51 +74,53 @@ request.Set(RocketGate::GatewayRequest::SCRUB, "IGNORE");
 service.SetTestMode(true);
 
 #
-#      Perform the Purchase transaction.
+#      Perform the Auth-Only transaction.
 #
-status = service.PerformPurchase(request, response)
+status = service.PerformAuthOnly(request, response)
 if (status)
-  puts "Purchase succeeded";
+  puts "Auth-Only succeeded";
   puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
   puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
+  puts "AuthNo: " << response.Get(RocketGate::GatewayResponse::AUTH_NO)
+  puts "AVS: " << response.Get(RocketGate::GatewayResponse::AVS_RESPONSE)
+  puts "CVV2: " << response.Get(RocketGate::GatewayResponse::CVV2_CODE)
+  puts "CardHash: " << response.Get(RocketGate::GatewayResponse::CARD_HASH)
   puts "Account: " << response.Get(RocketGate::GatewayResponse::MERCHANT_ACCOUNT)
+  puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
 
 else 
-  puts "Purchase failed\n"
+  puts "Auth-Only failed\n"
   puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
   puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
-  puts "Exception: " << response.Get(RocketGate::GatewayResponse::EXCEPTION)
+#  puts "Exception: " << response.Get(RocketGate::GatewayResponse::EXCEPTION)
+  puts "Scrub: " << response.Get(RocketGate::GatewayResponse::SCRUB_RESULTS)
   exit
 end
 
 #
-#	Setup the GenerateXsell transaction
+#	Setup the Lookup request
 #
 request = RocketGate::GatewayRequest.new
 request.Set(RocketGate::GatewayRequest::MERCHANT_ID, 1);
 request.Set(RocketGate::GatewayRequest::MERCHANT_PASSWORD, "testpassword");
-request.Set(RocketGate::GatewayRequest::MERCHANT_CUSTOMER_ID, cust_id);
-
-# Different invoice id for xsell.
-invoice_id = time + ".xs" + ".TestGenerateXsell";
 request.Set(RocketGate::GatewayRequest::MERCHANT_INVOICE_ID, invoice_id);
 
-# $1 4 day trial, rebills 9.99 monthly
-request.Set(RocketGate::GatewayRequest::AMOUNT, "1.00");
-request.Set(RocketGate::GatewayRequest::REBILL_START, "4");
-request.Set(RocketGate::GatewayRequest::REBILL_AMOUNT, "9.99");
-request.Set(RocketGate::GatewayRequest::REBILL_FREQUENCY, "MONTHLY");
-
 #
-#	Perform the GenerateXsell transaction.
+#	Perform the lookup transaction.
 #
-status = service.GenerateXsell(request, response)
+status = service.PerformLookup(request, response)
 if (status)
-  puts "GenerateXsell succeeded";
+  puts "Lookup succeeded";
+  puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
+  puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
+  puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
+  puts "AuthNo: " << response.Get(RocketGate::GatewayResponse::AUTH_NO)
 else 
-  puts "GenerateXsell failed\n"
+  puts "Lookup failed\n"
+  puts "GUID: " << response.Get(RocketGate::GatewayResponse::TRANSACT_ID)
+  puts "Response Code: " << response.Get(RocketGate::GatewayResponse::RESPONSE_CODE)
   puts "Reason Code: " << response.Get(RocketGate::GatewayResponse::REASON_CODE)
 end
 
