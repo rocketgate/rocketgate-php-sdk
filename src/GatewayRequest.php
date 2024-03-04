@@ -792,7 +792,7 @@ class GatewayRequest extends GatewayParameterList
 
     static function USE_PRIMARY_SCHEMEID()
     {
-        return "USEPRIMARYSCHEMEID";
+        return "usePrimarySchemeID";
     }
 
 }
