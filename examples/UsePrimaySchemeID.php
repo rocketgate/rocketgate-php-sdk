@@ -47,7 +47,7 @@ $request->Set(GatewayRequest::MERCHANT_PASSWORD(), "testpassword");
 // For example/testing, we set the order id and customer as the unix timestamp as a convienent sequencing value
 // appending a test name to the order id to facilitate some clarity when reviewing the tests
 $time = time();
-$inv_id = $time . '.GenerateXSellFromOrig';
+$inv_id = $time . '.UsePrySchemeID';
 $request->Set(GatewayRequest::MERCHANT_CUSTOMER_ID(), $time . '.PHPTest');
 $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $inv_id);
 
@@ -122,7 +122,7 @@ if ($service->PerformAuthOnly($request, $response)) {
         $request->Set(GatewayRequest::MERCHANT_CUSTOMER_ID(), $time . '.PHPTest');
 
         $time += 1;
-        $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $time . '.GenerateXSellFromOrig');
+        $request->Set(GatewayRequest::MERCHANT_INVOICE_ID(), $time . '.UsePrySchemeID');
 
         $request->Set(GatewayRequest::AMOUNT(), "3.00");
         $request->Set(GatewayRequest::CURRENCY(), "USD");
