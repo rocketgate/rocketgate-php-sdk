@@ -12,7 +12,7 @@ class GatewayChecksum
 {
     private const VERSION = "P8.17";
     public static $checksum = "";
-    public static $baseChecksum = "623ad62a562e5bfbb953c2b680cb2604";
+    public static $baseChecksum = "8319bb8eaf745fdea06fa133f81d3483";
     public static $versionNo = GatewayChecksum::VERSION;
 
 //////////////////////////////////////////////////////////////////////
