@@ -426,6 +426,10 @@ class GatewayResponse extends GatewayParameterList
         return "rebillStatus";
     }
 
+    static function REBILL_CURRENCY() {
+        return "rebillCurrency";
+    }
+
     static function RESPONSE_CODE()
     {
         return "responseCode";
