@@ -67,7 +67,7 @@ $request->Set(GatewayRequest::BILLING_COUNTRY(), "US");
 $service->SetTestMode(TRUE);
 
 //
-//	Perform the Purchase transaction.
+//	Perform Card Upload
 //
 if ($service->PerformCardUpload($request, $response)) {
   print "Upload succeeded\n";
