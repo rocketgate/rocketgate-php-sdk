@@ -141,7 +141,7 @@ if ($service->PerformPurchase($request, $response)) {
 	  $request->Set(GatewayRequest::REBILL_FREQUENCY(), "MONTHLY");
 	  
 	  if ($service->PerformPurchase($request, $response)) {
-        print "1Click Purchase succeeded\n";print_r($response);
+        print "1Click Purchase succeeded\n";
 	  } else {
  	    print "1Click Purchase failed\n";
   		print "Reason Code: " .  $response->Get(GatewayResponse::REASON_CODE()) . "\n";
