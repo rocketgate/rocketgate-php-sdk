@@ -41,7 +41,7 @@ use RocketGate\Sdk\GatewayService;
 // Setup a couple required and testing variables
 $time = time();
 $cust_id = $time . '.PHPTest';
-$inv_id = $time .'.CardHashTest';
+$inv_id = $time . '.CardHashTest';
 
 $merchant_id = "1";
 $merchant_password = "testpassword";
