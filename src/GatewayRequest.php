@@ -790,4 +790,9 @@ class GatewayRequest extends GatewayParameterList
         return "referrerURL";
     }
 
+    static function USE_PRIMARY_SCHEMEID()
+    {
+        return "usePrimarySchemeID";
+    }
+
 }

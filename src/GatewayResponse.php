@@ -426,6 +426,10 @@ class GatewayResponse extends GatewayParameterList
         return "rebillStatus";
     }
 
+    static function REBILL_CURRENCY() {
+        return "rebillCurrency";
+    }
+
     static function RESPONSE_CODE()
     {
         return "responseCode";
@@ -551,4 +555,8 @@ class GatewayResponse extends GatewayParameterList
         return "_3DSECURE_LOOKUP_REFERENCE_GUID";
     }
 
+    static function PAN_TOKEN()
+    {
+        return "panToken";
+    }
 }
