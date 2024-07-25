@@ -795,4 +795,9 @@ class GatewayRequest extends GatewayParameterList
         return "usePrimarySchemeID";
     }
 
+    static function NETWORK_TOKENIZATION_DISABLED()
+    {
+        return "NETWORKTOKENIZATIONDISABLED";
+    }
+
 }
