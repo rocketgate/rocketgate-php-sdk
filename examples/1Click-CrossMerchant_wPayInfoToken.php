@@ -41,7 +41,7 @@ use RocketGate\Sdk\GatewayService;
 // Setup a couple required and testing variables
 $time = time();
 $cust_id = $time . '.PHPTest';
-$inv_id = $time .'.CardHashTest';
+$inv_id = $time . '.PayInfoTest';
 
 $merchant_id = "1";
 $merchant_password = "testpassword";
@@ -141,7 +141,7 @@ if ($service->PerformPurchase($request, $response)) {
 	  $request->Set(GatewayRequest::REBILL_FREQUENCY(), "MONTHLY");
 	  
 	  if ($service->PerformPurchase($request, $response)) {
-        print "1Click Purchase succeeded\n";print_r($response);
+        print "1Click Purchase succeeded\n";
 	  } else {
  	    print "1Click Purchase failed\n";
   		print "Reason Code: " .  $response->Get(GatewayResponse::REASON_CODE()) . "\n";

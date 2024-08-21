@@ -93,7 +93,7 @@ $service->SetTestMode(TRUE);
 if ($service->PerformAuthOnly($request, $response)) {
   print "\nAuth-Only succeeded\n";
 
-  // Run additional purchase using  MERCHANT_INVOICE_ID
+  // Prepare new gateway request for lookup
   //
   //  This would normally be two separate processes,
   //  but for example's sake is in one process (thus we clear and set a new GatewayRequest object)
@@ -117,7 +117,6 @@ if ($service->PerformAuthOnly($request, $response)) {
     print "GUID: " . $response->Get(GatewayResponse::TRANSACT_ID()) . "\n";
     print "Account: " .  $response->Get(GatewayResponse::MERCHANT_ACCOUNT()) . "\n";
     print "Scrub: " .  $response->Get(GatewayResponse::SCRUB_RESULTS()) . "\n";
-print_r($response);
 
   } else {
     print "\nLookup failed\n";
