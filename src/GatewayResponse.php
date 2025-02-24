@@ -559,4 +559,9 @@ class GatewayResponse extends GatewayParameterList
     {
         return "panToken";
     }
+
+    static function CARD_UPDATED()
+    {
+        return "cardUpdated";
+    }
 }
