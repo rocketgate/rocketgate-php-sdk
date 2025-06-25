@@ -770,6 +770,11 @@ class GatewayRequest extends GatewayParameterList
         return "GOOGLEPAYTOKEN";
     }
 
+    static function APPLE_PAY_TOKEN()
+    {
+        return "APPLEPAYTOKEN";
+    }
+
     static function LANGUAGE()
     {
         return "LANGUAGE";
