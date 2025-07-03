@@ -94,6 +94,7 @@ class GatewayCodes {
     const REASON_BANK_INVALID_TRANSACTION    = 165;
     const REASON_CVV2_REQUIRED               = 167;
     const REASON_INVALID_TAX_ID              = 169;
+    const REASON_INVALID_SCHEME_TRANSACTION_ID    = 170;
 
     const REASON_RISK_FAIL                        = 200;
     const REASON_CUSTOMER_BLOCKED                 = 201;
@@ -215,4 +216,9 @@ class GatewayCodes {
     const REASON_INVALID_CUSTOMER_ADDRESS    = 460;
     const REASON_INVALID_BUILD_PAYMENT_LINK_REQUEST = 462;
     const REASON_INVALID_SS_NUMBER          = 463;
+    const REASON_INVALID_CUSTOMER_EMAIL     = 465;
+    const REASON_MISSING_CUSTOMER_EMAIL     = 466;
+    const REASON_MISSING_CUSTOMER_PHONE     = 467;
+    const REASON_INVALID_CUSTOMER_IP        = 468;
+    const REASON_MISSING_CUSTOMER_IP        = 469;
 }

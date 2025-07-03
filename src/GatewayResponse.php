@@ -430,6 +430,10 @@ class GatewayResponse extends GatewayParameterList
         return "rebillCurrency";
     }
 
+    static function REBILL_CYCLE() {
+        return "rebillCycle";
+    }
+
     static function RESPONSE_CODE()
     {
         return "responseCode";
@@ -558,5 +562,10 @@ class GatewayResponse extends GatewayParameterList
     static function PAN_TOKEN()
     {
         return "panToken";
+    }
+
+    static function CARD_UPDATED()
+    {
+        return "cardUpdated";
     }
 }

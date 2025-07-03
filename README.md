@@ -152,7 +152,7 @@ fail, as shown below:
 ```
 1) RocketGate\Sdk\Tests\GatewayChecksumTest::testComplianceModifications
 Modified version. Current checksum 0646c7f28688c3f2ad0c37499e7113d6 does not match base 4b086e326a9d6cb310079994896792c1.
-Failed asserting that 'P7.1m' does not contain "m".
+Failed asserting that 'P7.2m' does not contain "m".
 
 /var/client/tests/GatewayChecksumTest.php:17
 ``` 
