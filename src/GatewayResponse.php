@@ -556,7 +556,7 @@ class GatewayResponse extends GatewayParameterList
 
     static function _3DSECURE_LOOKUP_REFERENCE_GUID()
     {
-        return "_3DSECURE_LOOKUP_REFERENCE_GUID";
+        return "_3D_LOOKUP_REFERENCE_GUID";
     }
 
     static function PAN_TOKEN()
