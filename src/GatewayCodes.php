@@ -130,6 +130,9 @@ class GatewayCodes {
     const REASON_3DSECURE_INVALID_TRANSACTION     = 232;
     const REASON_3DSECURE_ACS_TECHNICAL_ISSUE     = 233;
     const REASON_3DSECURE_EXCEEDS_MAX_CHALLENGES  = 234;
+	const REASON_3DSECURE_EXPIRED_CARD            = 235;
+	const REASON_3DSECURE_STOLEN_CARD             = 236;
+	
     const REASON_DNS_FAILURE               = 300;
     const REASON_UNABLE_TO_CONNECT         = 301;
     const REASON_REQUEST_XMIT_ERROR        = 302;
