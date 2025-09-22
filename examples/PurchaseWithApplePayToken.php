@@ -38,6 +38,7 @@ $request = new GatewayRequest();
 $response = new GatewayResponse();
 $service = new GatewayService();
 
+// This apple pay token should be changed with the one generated using the Apple Pay merchant identifier of the merchant
 $applePayToken = "{" .
     "  \"paymentData\": {\n" .
     "    \"data\": \"Y1tMUe1bca4SZvqEEdbix5hk/z7V3xzaE+BAQAfE5U+R4rC43ADYHKkOlamr+H68p80d3TzqKWRxRo7jyNSxUwQcQEkV9d2T6dlGR/pSQK1KlFqdinDdf18b3AUswa2iFTwNeAGt8eVOTRU0mNM25p3/+u+qgjT5VW2+0UA06hEVcUjOAIss6tFJ6vspPBMDip3ZfiIXM5YwTbrJd86htbFiubPLMkgs8/EpuhgRFglfNeAVKHwDKtGmpdbhJPu9if3NCb00PbTxU3jaQJB9WMyvRHnhKF4BiRxSYzdEGfUfMQgmd71yeT6LcYCCnB4IJU9oHan0orny2bgkb/kJJz2qLxpJvE8HZ6qu/klQ5harD15PA1WDED53OB14Ew8LTYerZTGWKECiQIfyFPjeE0NvYXkTEY2QjygIabMP0Q==\",\n" .
