@@ -99,11 +99,9 @@ if ($service->PerformPurchase($request, $response)) {
   print "Reason Code: " .  $response->Get(GatewayResponse::REASON_CODE()) . "\n";
   print "Auth No: " . $response->Get(GatewayResponse::AUTH_NO()) . "\n";
   print "AVS: " . $response->Get(GatewayResponse::AVS_RESPONSE()) . "\n";
-  print "CVV2: " . $response->Get(GatewayResponse::CVV2_CODE()) . "\n";
   print "GUID: " . $response->Get(GatewayResponse::TRANSACT_ID()) . "\n";
-  print "Card Issuer: " . $response->Get(GatewayResponse::CARD_ISSUER_NAME()) . "\n";
   print "Account: " .  $response->Get(GatewayResponse::MERCHANT_ACCOUNT()) . "\n";
-  print "Scrub: " .  $response->Get(GatewayResponse::SCRUB_RESULTS()) . "\n";
+  print "Apple Pay Merchant Token Id: " .  $response->Get(GatewayResponse::APPLE_PAY_MERCHANT_TOKEN_ID()) . "\n";
 
 } else {
   print "Purchase failed\n";
@@ -114,7 +112,5 @@ if ($service->PerformPurchase($request, $response)) {
 	$response->Get(GatewayResponse::REASON_CODE()) . "\n";
   print "Exception: " .
 	$response->Get(GatewayResponse::EXCEPTION()) . "\n";
-  print "Scrub: " .
-	$response->Get(GatewayResponse::SCRUB_RESULTS()) . "\n";
 }
 
