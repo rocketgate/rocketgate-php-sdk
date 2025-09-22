@@ -25,14 +25,7 @@
  */
 namespace RocketGate\examples;
 
-//require '../vendor/autoload.php';
-
-require "../src/GatewayChecksum.php";
-require "../src/GatewayCodes.php";
-require "../src/GatewayParameterList.php";
-require "../src/GatewayRequest.php";
-require "../src/GatewayResponse.php";
-require "../src/GatewayService.php";
+require '../vendor/autoload.php';
 
 use RocketGate\Sdk\GatewayRequest;
 use RocketGate\Sdk\GatewayResponse;
