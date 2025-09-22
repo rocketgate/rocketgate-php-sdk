@@ -795,6 +795,16 @@ class GatewayRequest extends GatewayParameterList
         return "referrerURL";
     }
 
+    static function FAILURE_POSTBACK_URL()
+    {
+        return "FAILUREPOSTBACKURL";
+    }
+
+    static function SUCCESS_POSTBACK_URL()
+    {
+        return "SUCCESSPOSTBACKURL";
+    }
+
     static function USE_PRIMARY_SCHEMEID()
     {
         return "usePrimarySchemeID";
