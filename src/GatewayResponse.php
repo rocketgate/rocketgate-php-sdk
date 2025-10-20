@@ -391,6 +391,11 @@ class GatewayResponse extends GatewayParameterList
         return "PAREQ";
     }
 
+	static function PARTIAL_AUTH()
+	{
+		return "partialAuth";
+	}
+
     static function PROCESSOR_3DS()
     {
         return "PROCESSOR3DS";
