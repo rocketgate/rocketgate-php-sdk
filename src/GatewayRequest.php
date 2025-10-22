@@ -775,6 +775,47 @@ class GatewayRequest extends GatewayParameterList
         return "APPLEPAYTOKEN";
     }
 
+    static function PAY_TOKEN()
+    {
+        return "PAYTOKEN";
+    }
+
+    static function PAY_TOKEN_TYPE()
+    {
+        return "PAYTOKENTYPE";
+    }
+
+    static function PAY_TOKEN_EXPIRY_MONTH()
+    {
+        return "PAYTOKENEXPIRYMONTH";
+    }
+
+    static function PAY_TOKEN_EXPIRY_YEAR()
+    {
+        return "PAYTOKENEXPIRYYEAR";
+    }
+
+    static function PAY_CRYPTOGRAM()
+    {
+        return "PAYCRYPTOGRAM";
+    }
+
+    static function PAY_CRYPTOGRAM_ECI()
+    {
+        return "PAYCRYPTOGRAMECI";
+    }
+
+    static function CARD_LAST_FOUR()
+    {
+        return "CARDLASTFOUR";
+    }
+
+    static function BANK_CARD_DEBIT_CREDIT()
+    {
+        return "BANK_CARD_DEBIT_CREDIT";
+    }
+
+
     static function LANGUAGE()
     {
         return "LANGUAGE";
