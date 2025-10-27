@@ -815,6 +815,16 @@ class GatewayRequest extends GatewayParameterList
         return "BANK_CARD_DEBIT_CREDIT";
     }
 
+    static function PAY_TOKEN_ID()
+    {
+        return "PAYTOKENID";
+    }
+
+    static function PAY_TOKEN_DEVICE_MANUFACTURER_ID()
+    {
+        return "PAYTOKENDEVICEMANUFACTURERID";
+    }
+
 
     static function LANGUAGE()
     {
