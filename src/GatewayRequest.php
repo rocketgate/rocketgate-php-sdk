@@ -777,7 +777,7 @@ class GatewayRequest extends GatewayParameterList
 
     static function PAY_TOKEN()
     {
-        return "PAYTOKEN";
+        return "payToken";
     }
 
     static function PAY_TOKEN_TYPE()
@@ -787,32 +787,32 @@ class GatewayRequest extends GatewayParameterList
 
     static function PAY_TOKEN_EXPIRY_MONTH()
     {
-        return "PAYTOKENEXPIRYMONTH";
+        return "payTokenExpiryMonth";
     }
 
     static function PAY_TOKEN_EXPIRY_YEAR()
     {
-        return "PAYTOKENEXPIRYYEAR";
+        return "payTokenExpiryYear";
     }
 
     static function PAY_CRYPTOGRAM()
     {
-        return "PAYCRYPTOGRAM";
+        return "payCryptogram";
     }
 
     static function PAY_CRYPTOGRAM_ECI()
     {
-        return "PAYCRYPTOGRAMECI";
+        return "payCryptogramEci";
     }
 
     static function CARD_LAST_FOUR()
     {
-        return "CARDLASTFOUR";
+        return "cardLastFour";
     }
 
     static function BANK_CARD_DEBIT_CREDIT()
     {
-        return "BANK_CARD_DEBIT_CREDIT";
+        return "bankCardDebitCredit";
     }
 
     static function PAY_TOKEN_ID()
