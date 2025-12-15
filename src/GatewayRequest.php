@@ -74,7 +74,7 @@ class GatewayRequest extends GatewayParameterList
 //
         foreach ($this->params as $key => $value) {
             $xmlString .= "<" . $key . ">";// Add opening of element
-            $xmlString .= $this->TranslateXML($value);
+            $xmlString .= is_null($value) ? '' : $this->TranslateXML($value);
             $xmlString .= "</" . $key . ">";// Add closing of element
         }
 
