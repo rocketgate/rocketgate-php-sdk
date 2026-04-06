@@ -95,6 +95,8 @@ class GatewayCodes {
     const REASON_CVV2_REQUIRED               = 167;
     const REASON_INVALID_TAX_ID              = 169;
     const REASON_INVALID_SCHEME_TRANSACTION_ID    = 170;
+    const REASON_CARD_BLOCK                       = 171;
+    const REASON_CARD_RESTRICTION                 = 172;
 
     const REASON_RISK_FAIL                        = 200;
     const REASON_CUSTOMER_BLOCKED                 = 201;
