@@ -577,4 +577,8 @@ class GatewayResponse extends GatewayParameterList
         return "applePayMerchantTokenId";
     }
 
+    static function _3D_MPI() {
+        return "_3D_MPI";
+    }
+
 }
