@@ -775,6 +775,21 @@ class GatewayRequest extends GatewayParameterList
         return "APPLEPAYTOKEN";
     }
 
+    static function PAY_TYPE()
+    {
+        return "payType";
+    }
+
+    static function PAY_VALIDITY()
+    {
+        return "payValidity";
+    }
+
+    static function PAY_DESCRIPTION()
+    {
+        return "payDescription";
+    }
+
     static function PAY_TOKEN()
     {
         return "payToken";
