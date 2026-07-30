@@ -144,6 +144,25 @@ class GatewayService
         return $this->PerformConfirmation($request, $response);
     }
 
+//////////////////////////////////////////////////////////////////////
+//	PerformPayInit() - Perform an asynchronous payment initiation
+//                     where the final response comes later.
+//////////////////////////////////////////////////////////////////////
+//
+    function PerformPayInit(GatewayRequest $request, GatewayResponse $response)
+    {
+        $request->Set(GatewayRequest::TRANSACTION_TYPE(), "PAY_INIT");
+        if ($request->Get(GatewayRequest::REFERENCE_GUID()) != null) {
+            if (!($this->PerformTargetedTransaction($request, $response))) {
+                return false;
+            }
+        } else {
+            if (!($this->PerformTransaction($request, $response))) {
+                return false;
+            }
+        }
+        return $this->PerformConfirmation($request, $response);
+    }
 
 //////////////////////////////////////////////////////////////////////
 //
@@ -482,6 +501,11 @@ class GatewayService
             $request->Set("gatewayServlet", $urlBits['path'] . "?" . $urlBits['query']);
         }
 
+    // echo "\ngatewayServer=" . $request->Get("gatewayServer");
+    // echo "\ngatewayProtocol=" . $request->Get("gatewayProtocol");
+    // echo "\ngatewayPortNo=" . $request->Get("gatewayPortNo");
+    // echo "\ngatewayServlet=" . $request->Get("gatewayServlet");
+
 //
 //	If the request specifies a server name, use it.
 //	Otherwise, use the default for the service.
@@ -775,6 +799,12 @@ class GatewayService
             $urlPortNo = $this->rocketGatePortNo;
         }
 
+        if (substr($urlServlet, 0, 1)  == "/") {
+
+                    $urlServlet = substr($urlServlet, 1);
+
+            }
+
 //
 //	Build the URL for the gateway service.
 //
@@ -831,7 +861,7 @@ class GatewayService
 //    curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, FALSE);
 //
 //////////////////////////////////////////////////////////////////////
-
+        // echo "URL=" . $url;
 //
 //	Setup the call to the URL.
 //
