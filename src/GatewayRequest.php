@@ -479,6 +479,11 @@ class GatewayRequest extends GatewayParameterList
         return "ssNumber";
     }
 
+    static function SS_NUMBER_TYPE()
+    {
+        return "ssNumberType";
+    }
+
     static function SUB_MERCHANT_ID()
     {
         return "subMerchantID";
