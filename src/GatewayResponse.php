@@ -494,6 +494,26 @@ class GatewayResponse extends GatewayParameterList
         return "merchantAdviceCode";
     }
 
+    static function PAY_TYPE()
+    {
+        return "payType";
+    }
+
+    static function PAY_STATUS()
+    {
+        return "payStatus";
+    }
+
+    static function PAY_CODE()
+    {
+        return "payCode";
+    }
+
+    static function PAY_QR_CODE()
+    {
+        return "payQrCode";
+    }
+
 	static function PAYMENT_LINK_URL() 
 	{ 
 		return "PAYMENT_LINK_URL"; 
