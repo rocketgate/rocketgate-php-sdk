@@ -501,11 +501,6 @@ class GatewayService
             $request->Set("gatewayServlet", $urlBits['path'] . "?" . $urlBits['query']);
         }
 
-    // echo "\ngatewayServer=" . $request->Get("gatewayServer");
-    // echo "\ngatewayProtocol=" . $request->Get("gatewayProtocol");
-    // echo "\ngatewayPortNo=" . $request->Get("gatewayPortNo");
-    // echo "\ngatewayServlet=" . $request->Get("gatewayServlet");
-
 //
 //	If the request specifies a server name, use it.
 //	Otherwise, use the default for the service.
@@ -798,13 +793,9 @@ class GatewayService
         if ($urlPortNo == null) {
             $urlPortNo = $this->rocketGatePortNo;
         }
-
-        if (substr($urlServlet, 0, 1)  == "/") {
-
-                    $urlServlet = substr($urlServlet, 1);
-
-            }
-
+        if ($urlServlet !== null && strlen($urlServlet) > 1 && substr($urlServlet, 0, 1) === "/") {
+            $urlServlet = substr($urlServlet, 1);
+        }
 //
 //	Build the URL for the gateway service.
 //
@@ -861,7 +852,7 @@ class GatewayService
 //    curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, FALSE);
 //
 //////////////////////////////////////////////////////////////////////
-        // echo "URL=" . $url;
+
 //
 //	Setup the call to the URL.
 //
