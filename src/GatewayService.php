@@ -793,9 +793,7 @@ class GatewayService
         if ($urlPortNo == null) {
             $urlPortNo = $this->rocketGatePortNo;
         }
-        if ($urlServlet !== null && strlen($urlServlet) > 1 && substr($urlServlet, 0, 1) === "/") {
-            $urlServlet = substr($urlServlet, 1);
-        }
+
 //
 //	Build the URL for the gateway service.
 //
