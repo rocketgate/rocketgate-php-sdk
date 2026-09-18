@@ -144,6 +144,25 @@ class GatewayService
         return $this->PerformConfirmation($request, $response);
     }
 
+//////////////////////////////////////////////////////////////////////
+//	PerformPayInit() - Perform an asynchronous payment initiation
+//                     where the final response comes later.
+//////////////////////////////////////////////////////////////////////
+//
+    function PerformPayInit(GatewayRequest $request, GatewayResponse $response)
+    {
+        $request->Set(GatewayRequest::TRANSACTION_TYPE(), "PAY_INIT");
+        if ($request->Get(GatewayRequest::REFERENCE_GUID()) != null) {
+            if (!($this->PerformTargetedTransaction($request, $response))) {
+                return false;
+            }
+        } else {
+            if (!($this->PerformTransaction($request, $response))) {
+                return false;
+            }
+        }
+        return $this->PerformConfirmation($request, $response);
+    }
 
 //////////////////////////////////////////////////////////////////////
 //
