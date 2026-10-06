@@ -886,4 +886,9 @@ class GatewayRequest extends GatewayParameterList
         return "NETWORKTOKENIZATIONDISABLED";
     }
 
+    static function REFERENCE_TRANSACTION_LINK_ID()
+    {
+        return "referenceTransactionLinkID";
+    }
+
 }

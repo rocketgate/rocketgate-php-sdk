@@ -227,4 +227,5 @@ class GatewayCodes {
     const REASON_INVALID_CUSTOMER_IP        = 468;
     const REASON_MISSING_CUSTOMER_IP        = 469;
     const REASON_INVALID_APPLE_PAY_TOKEN    = 470;
+    const REASON_INVALID_TLID               = 471;
 }

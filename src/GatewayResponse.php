@@ -597,4 +597,9 @@ class GatewayResponse extends GatewayParameterList
         return "applePayMerchantTokenId";
     }
 
+    static function TRANSACTION_LINK_ID()
+    {
+        return "transactionLinkID";
+    }
+
 }
