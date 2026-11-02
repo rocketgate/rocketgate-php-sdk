@@ -593,8 +593,13 @@ class GatewayResponse extends GatewayParameterList
     {
         return "cardUpdated";
     }
+	
     static function APPLE_PAY_MERCHANT_TOKEN_ID() {
         return "applePayMerchantTokenId";
     }
+	
+	static function APPLE_PAY_DEVICE_MANUFACTURER_ID() {
+		return "applePayDeviceManufacturerId";
+	}
 
 }
